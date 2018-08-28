@@ -3,14 +3,12 @@
  */
 
 declare namespace NodeJS {
-    import BrowserWindow = Electron.BrowserWindow;
-
-
 
     export interface Global {
         __static: string,
         version: string,
-        mainWindow: BrowserWindow,
         container: any,
     }
 }
+
+declare var __static: string;

@@ -46,8 +46,7 @@ export default Vue.extend({
             });
         }
     },
-
-    mounted() {
+    beforeMount() {
         const authService = this.$container.get<AuthService>(AuthService.name);
 
         if (authService.isAuthenticated()) {

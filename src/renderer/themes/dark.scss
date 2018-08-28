@@ -1,4 +1,6 @@
-@import "~bulma/sass/utilities/_all";
+@import "fontawesome/css/all";
+@import "~bulma/sass/utilities/all";
+
 
 $primary: #7289DA;
 $primary-invert: findColorInvert($primary);
@@ -6,6 +8,7 @@ $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
 
 $dark: #36393e;
+$middle-dark: #303236;
 $more-dark: #202225;
 
 $colors: (
@@ -14,6 +17,7 @@ $colors: (
         "light": ($light, $light-invert),
         "dark": ($dark, $dark-invert),
         "more-dark": ($more-dark, $dark-invert),
+        "middle-dark": ($middle-dark, $dark-invert),
         "primary": ($primary, $primary-invert),
         "info": ($info, $info-invert),
         "success": ($success, $success-invert),
@@ -28,6 +32,18 @@ $link-focus-border: $primary;
 
 
 $family-sans-serif: "Roboto";
+
+.is-dark {
+  background: $dark;
+}
+
+.is-more-dark {
+  background: $more-dark;
+}
+
+.is-middle-dark {
+  background: $middle-dark;
+}
 
 @import "~bulma";
 @import "~buefy/src/scss/buefy";

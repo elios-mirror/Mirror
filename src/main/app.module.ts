@@ -6,6 +6,7 @@ import CookieService from "./services/utils/cookie.service";
 import LocalModuleService from "./services/module/local.module.service";
 import Api from './services/api/api.module';
 import ConfigService from "./services/utils/config.service";
+import SocketService from "./services/utils/socket.service";
 
 /**
  * List of classes what you want to be autoInjectable
@@ -16,6 +17,7 @@ import ConfigService from "./services/utils/config.service";
 export default [
     Api,
     LoggerService,
+    SocketService,
     LocalModuleService,
     GitService,
     AppService,

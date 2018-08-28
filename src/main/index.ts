@@ -12,6 +12,15 @@ import Di from "./di";
 const container = new Container();
 const di = new Di();
 
+
+/**
+ * Set __static path
+ */
+if (process.env.NODE_ENV !== 'development') {
+    global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+}
+
+
 /**
  * Bind all entities into the Dependencies Injection Container
  */
@@ -46,7 +55,6 @@ loadDependenciesModules(modules, true).then(() => {
 
     });
 });
-
 
 /**
  * Entry point of your app

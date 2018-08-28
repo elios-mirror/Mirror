@@ -1,7 +1,6 @@
 import {injectable} from "inversify";
 import {IModuleRepository} from "./module.service";
 import CookieService from "../utils/cookie.service";
-import GitService from "./git.service";
 
 const os = require('os');
 const path = require('path');
@@ -21,6 +20,13 @@ export default class LocalModuleService {
         if (cookieService.has('modules')) {
             this.modules = cookieService.get('modules')
         }
+
+        const ezgamesFolder = path.resolve(os.homedir(), '.ezgames');
+
+        if (!fs.existsSync(ezgamesFolder)){
+            fs.mkdirSync(ezgamesFolder);
+        }
+
     }
 
     /**
@@ -94,17 +100,17 @@ export default class LocalModuleService {
      *
      * @param {string} path
      */
-    deleteFolderRecursive(path: string) {
-        if (fs.existsSync(path)) {
-            fs.readdirSync(path).forEach((file: any, index: any) => {
-                var curPath = path + "/" + file;
+    deleteFolderRecursive(_path: string) {
+        if (fs.existsSync(_path)) {
+            fs.readdirSync(_path).forEach((file: any, index: any) => {
+                const curPath = path.resolve(_path, file);
                 if (fs.lstatSync(curPath).isDirectory()) { // recurse
                     this.deleteFolderRecursive(curPath);
                 } else { // delete file
                     fs.unlinkSync(curPath);
                 }
             });
-            fs.rmdirSync(path);
+            fs.rmdirSync(_path);
         }
     };
 

@@ -3,10 +3,12 @@ export interface ModuleDTO {
     repository: string;
     title: string;
     version: string;
+    name: string;
 }
 
 export interface ServerDTO {
     module: ModuleDTO;
+    name: string;
 }
 
 export interface CommunityDTO {

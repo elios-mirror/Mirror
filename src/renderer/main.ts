@@ -1,12 +1,13 @@
 import "reflect-metadata";
 import {remote} from 'electron';
-import App from "./App.vue";
 import Vue from "vue";
+
+import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import Buefy from 'buefy';
-
 import './themes/dark.scss';
+
+const Buefy  = require('buefy');
 
 const container = remote.getGlobal('container');
 
@@ -15,24 +16,29 @@ Vue.config.productionTip = false;
 
 Object.defineProperties(Vue.prototype, {
     $container: {
-      get: () => {
-        return container;
-      }
+        get: () => {
+            return container;
+        }
     }
 });
 
-Vue.use(Buefy);
+Vue.use(Buefy.default, { defaultIconPack: 'far' });
 
 /* eslint-disable no-new */
-new Vue({
-  components: { App },
-  router,
-  store,
-  render(createElement: any) {
-    return createElement(App);
-  }
-} as any).$mount("#app");
+const vm = new Vue({
+    components: {App},
+    router,
+    store,
+    render(createElement: any) {
+        return createElement(App);
+    }
+} as any);
 
+
+vm.$mount("#app");
+/**
+ * Prevent drop file on window
+ */
 document.addEventListener('dragover', event => event.preventDefault());
 document.addEventListener('drop', event => event.preventDefault());
 

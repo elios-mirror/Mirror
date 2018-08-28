@@ -9,7 +9,7 @@ const https = require('https');
  * Api core of App
  */
 @injectable()
-export default class ApiCoreService {
+export default class ApiService {
     constructor(private configService: ConfigService, private cookieService: CookieService) {
         axios.defaults.baseURL = this.configService.get().api.address;
         axios.defaults.timeout = 4000;

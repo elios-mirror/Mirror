@@ -1,29 +1,24 @@
 import {injectable} from "inversify";
-import {app, BrowserWindow, webFrame} from 'electron';
-import ModuleService, {IModuleRepository} from './module/module.service';
+import {app, BrowserWindow, webFrame, globalShortcut} from 'electron';
+import ModuleService from './module/module.service';
 import LoggerService from "./utils/logger.service";
 import AuthService from "./api/auth/auth.service";
 import UserService from "./api/account/user/user.service";
-
-/**
- * We need to find alternative
- * I think is not beautiful
- *
- * @type {string}
- */
-const winUrl = process.env.NODE_ENV === 'development'
-    ? `http://localhost:9080`
-    : `file://${__dirname}/index.html`;
+import SocketService from "./utils/socket.service";
 
 global.version = require('../../../package.json').version;
 
 @injectable()
 export default class AppService {
 
+    private winUrl: string = process.env.NODE_ENV === 'development'
+        ? `http://localhost:9080`
+        : `file://${__dirname}/index.html`;
+
     private mainWindow: any;
 
     constructor(private moduleService: ModuleService, private loggerService: LoggerService, private authService: AuthService,
-                private userService: UserService) {
+                private userService: UserService, private socketService: SocketService) {
         this.loggerService.debug('Starting App in version: ' + global.version);
     }
 
@@ -33,6 +28,7 @@ export default class AppService {
     start() {
         app.on('ready', () => {
             this.createWindow();
+            this.registerShortcuts();
         });
 
         app.on('window-all-closed', () => {
@@ -44,6 +40,16 @@ export default class AppService {
         app.on('activate', () => {
             if (this.mainWindow === null) {
                 this.createWindow();
+            }
+        });
+
+        this.socketService.on('loadModules').subscribe(() => {
+            if (this.authService.canReload()) {
+                this.authService.loadModules().then(() => {
+                    this.startApp();
+                }).catch(() => {
+                    this.startApp();
+                });
             }
         });
 
@@ -73,45 +79,52 @@ export default class AppService {
             webContents.setLayoutZoomLevelLimits(0, 0);
         });
 
-        //this.mainWindow.openDevTools();
-
-        global.mainWindow = this.mainWindow;
-
-        this.mainWindow.loadURL(winUrl);
+        this.mainWindow.loadURL(this.winUrl);
 
         this.mainWindow.once('ready-to-show', () => {
 
             this.mainWindow.show();
 
-            this.authService.loadModules().then(() => {
-                this.startApp();
-            }).catch(() => {
-                this.startApp();
-            });
+            this.initApp();
         });
 
         this.mainWindow.on('closed', () => {
             this.mainWindow = null;
         });
-
-
     }
 
-    startApp() {
+    initApp() {
         this.mainWindow.setSize(1000, 600);
         this.mainWindow.center();
         this.mainWindow.setMinimumSize(1000, 600);
         this.mainWindow.setResizable(true);
         this.mainWindow.setFullScreenable(true);
 
-        this.mainWindow.webContents.send('loading_message', {message: 'Starting...'});
+        this.startApp();
+    }
+
+    startApp() {
+        this.socketService.send('loading', {action: 'message', message: 'Starting...'});
         if (this.authService.isAuthenticated()) {
             this.userService.get().then(res => {
-                this.mainWindow.webContents.send('loading_message', {message: 'Welcome back <font color="#FF8A65"> ' + res.name + ' </font>'})
+                this.socketService.send('loading', {action: 'message', message: 'Welcome back <font color="#FF8A65"> ' + res.name + ' </font>'});
             });
         }
         setTimeout(() => {
-            this.mainWindow.webContents.send('loading_finished', {});
-        }, 3000);
+            this.socketService.send('loading', {action: 'finished'});
+        }, 2000);
+    }
+
+    registerShortcuts() {
+
+        globalShortcut.register('CommandOrControl+R', () => {
+            this.socketService.send('reload');
+        });
+
+        globalShortcut.register('CommandOrControl+T', () => {
+            this.mainWindow.openDevTools();
+        });
+
+
     }
 }

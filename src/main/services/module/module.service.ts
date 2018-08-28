@@ -1,8 +1,7 @@
 import {injectable} from "inversify";
 import GitService from "./git.service";
 import LocalModuleService from "./local.module.service";
-
-
+import SocketService from "../utils/socket.service";
 
 const path = require('path');
 
@@ -17,7 +16,6 @@ if (process.env.NODE_ENV !== 'testing') {
         pluginsPath: modulesPath
     });
 }
-
 
 export interface IModuleRepository {
     repository: string;
@@ -45,9 +43,9 @@ export default class ModuleService {
      *
      * @param {GitService} gitService
      * @param {LocalModuleService} localModuleService
+     * @param {SocketService} socketService
      */
-    constructor(private gitService: GitService, private localModuleService: LocalModuleService) {
-
+    constructor(private gitService: GitService, private localModuleService: LocalModuleService, private socketService: SocketService) {
     }
 
     /**
@@ -57,7 +55,7 @@ export default class ModuleService {
      * @param {string} b
      * @returns {any}
      */
-    private cmpVersions(a: string, b: string) {
+    private static cmpVersions(a: string, b: string) {
         let i, diff;
         const regExStrip0 = /(\.0+)+$/
         const segmentsA = a.replace(regExStrip0, '').split('.');
@@ -81,40 +79,39 @@ export default class ModuleService {
      */
     private loadModule(module: IModuleRepository) {
         const moduleName = path.basename(module.repository);
-        return PluginManager.uninstall(modulesPath + '/' + moduleName + '-' + module.version).then(() => {
-            return PluginManager.installFromPath(modulesPath + '/' + moduleName + '-' + module.version, {force: true}).then(async (m: any) => {
-                const moduleInfos = m;
-                m = PluginManager.require(moduleName);
+        return PluginManager.installFromPath(path.resolve(modulesPath, moduleName + '-' + module.version), {force: true}).then(async (m: any) => {
+            const moduleInfos = m;
+            m = PluginManager.require(moduleName);
 
-                if (m.default) {
-                    m = new m.default();
+            if (m.default) {
+                m = new m.default();
+            }
+
+            m.version = moduleInfos.version;
+            m.name = moduleInfos.name;
+            m.repository = module.repository;
+
+            if (m.requireVersion) {
+                console.log('Check Launcher version for module ' + moduleName + ' - Minimum version:  ' + m.requireVersion + ' - Current version: ' + global.version);
+                if (ModuleService.cmpVersions(global.version, m.requireVersion) >= 0) {
+                    console.log('Version is ok!');
+                } else {
+                    console.log('Version is incorrect. Skip module: ' + moduleName);
+                    return;
                 }
+            }
 
-                m.version = moduleInfos.version;
-                m.name = moduleInfos.name;
-                m.repository = module.repository;
-
-                if (m.requireVersion) {
-                    console.log('Check Launcher version for module ' + moduleName + ' - Minimum version:  ' + m.requireVersion + ' - Current version: ' + global.version);
-                    if (this.cmpVersions(global.version, m.requireVersion) >= 0) {
-                        console.log('Version is ok!');
-                    } else {
-                        console.log('Version is incorrect. Skip module: ' + moduleName);
-                        return;
-                    }
-                }
-
-                if (m.showOnStart) {
-                    global.mainWindow.webContents.send('init_module', {module: m.title})
-                }
-                await m.init(null, () => {
-                    console.log(m.name + ' module initialized !');
-                });
-                this.initializedModules[moduleName + '-' + module.version] = m;
-                return (m);
-            }).catch((res: any) => {
-                console.error(res);
+            if (m.showOnStart) {
+                this.socketService.send('loading', {action: 'init_module', module: m.title ? m.title : m.name});
+            }
+            await m.init(null, () => {
+                console.log(m.name + ' module initialized !');
             });
+            this.initializedModules[moduleName + '-' + module.version] = m;
+            return (m);
+        }).catch((res: any) => {
+            console.error(res);
+            return;
         });
     }
 
@@ -128,16 +125,22 @@ export default class ModuleService {
         return new Promise(async (resolve, reject) => {
 
             if (this.localModuleService.has(module)) {
-                console.log('local');
                 if (this.localModuleService.get(module).commit != module.commit) {
                     await this.gitService.pull(module).then(() => {
                         this.localModuleService.set(module);
                     }).catch(() => {
+                        console.log('error pull');
+                        reject();
+                        return;
                     });
                 }
             } else {
-                console.log('clone');
-                await this.gitService.clone(module).then(() => {});
+                await this.gitService.clone(module).then(() => {
+                }).catch((err) => {
+                    console.log('error clone', err);
+                    reject();
+                    return;
+                });
             }
 
             this.loadModule(module).then((m: any) => {
@@ -149,8 +152,6 @@ export default class ModuleService {
                 console.log(m.name + ' initialized.');
                 resolve(m);
             });
-
-
         });
     }
 
@@ -168,7 +169,10 @@ export default class ModuleService {
             let loadNextModule = () => {
                 if (this.modules.length > 0) {
                     let nextModule = this.modules[0];
-                    global.mainWindow.webContents.send('loading_message', {message: 'Download module: ' + path.basename(nextModule.repository) + ' v'+ nextModule.version +' <br>' + ((totalOfModules - this.modules.length) + 1) + '/' + totalOfModules});
+                    this.socketService.send('loading', {
+                        action: 'message',
+                        message: 'Download module: ' + path.basename(nextModule.repository) + ' v' + nextModule.version + ' <br>' + ((totalOfModules - this.modules.length) + 1) + '/' + totalOfModules
+                    });
                     this.check(nextModule).then(() => {
                         this.modules = this.modules.slice(1);
                         loadNextModule();

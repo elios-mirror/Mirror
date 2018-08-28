@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import ApiCoreService from "../api-core.service";
+import ApiService from "../api.service";
 import LoginDto from "./login.dto";
 import ConfigService from "../../utils/config.service";
 import CookieService from "../../utils/cookie.service";
@@ -10,9 +10,10 @@ import UserDTO from "../account/user/user.dto";
 @injectable()
 export default class AuthService {
   private isAuth: boolean = false;
+  private isReload: boolean = false;
 
   constructor(
-    private apiCoreService: ApiCoreService,
+    private apiService: ApiService,
     private configService: ConfigService,
     private cookieService: CookieService,
     private userService: UserService,
@@ -26,7 +27,7 @@ export default class AuthService {
   }
 
   login(login: string, password: string) {
-    return this.apiCoreService
+    return this.apiService
       .post<LoginDto>("/oauth/token", {
         grant_type: "password",
         client_id: this.configService.get().api.client_id,
@@ -51,6 +52,7 @@ export default class AuthService {
   }
 
   loadModules() {
+    this.isReload = true;
     return new Promise((resolve, reject) => {
       this.userService
         .get()
@@ -71,11 +73,13 @@ export default class AuthService {
           }
 
           this.moduleService.loadAll().then(() => {
+            this.isReload = false;
             resolve();
           });
         })
         .catch(err => {
-          reject(err);
+            this.isReload = false;
+            reject(err);
         });
     });
   }
@@ -83,4 +87,10 @@ export default class AuthService {
   isAuthenticated(): boolean {
     return this.isAuth;
   }
+
+  canReload(): boolean {
+    return this.isReload === false;
+  }
+
+
 }

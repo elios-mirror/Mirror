@@ -1,12 +1,12 @@
 import {injectable} from "inversify";
-import ApiCoreService from "../../api-core.service";
+import ApiService from "../../api.service";
 import UserDTO from "./user.dto";
 
 @injectable()
 export default class UserService {
-    constructor(private apiCoreService: ApiCoreService) {}
+    constructor(private apiService: ApiService) {}
 
     get() {
-        return this.apiCoreService.get<UserDTO>('/api/user');
+        return this.apiService.get<UserDTO>('/api/user');
     }
 }
