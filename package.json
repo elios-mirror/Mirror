@@ -1,8 +1,8 @@
 {
-  "name": "launcher-ezgames.eu",
+  "name": "elios-mirror",
   "version": "0.0.1",
   "author": "Leo HUBERT <leohub@live.fr>",
-  "description": "Launcher EZGames",
+  "description": "Elios Mirror",
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "unit": "karma start test/unit/karma.conf.js"
   },
   "build": {
-    "productName": "launcher-ezgames-eu",
+    "productName": "elios-mirror-com",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"
@@ -54,6 +54,7 @@
     }
   },
   "dependencies": {
+    "@xkeshi/vue-qrcode": "^1.0.0",
     "axios": "^0.18.0",
     "buefy": "^0.6.6",
     "inversify": "^4.13.0",

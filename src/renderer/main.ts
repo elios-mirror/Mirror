@@ -8,6 +8,7 @@ import store from "./store";
 import './themes/dark.scss';
 
 const Buefy  = require('buefy');
+const VueQrcode = require('@xkeshi/vue-qrcode');
 
 const container = remote.getGlobal('container');
 
@@ -23,6 +24,10 @@ Object.defineProperties(Vue.prototype, {
 });
 
 Vue.use(Buefy.default, { defaultIconPack: 'far' });
+
+
+Vue.component(VueQrcode.name, VueQrcode);
+
 
 /* eslint-disable no-new */
 const vm = new Vue({
