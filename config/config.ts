@@ -2,8 +2,8 @@
 
 export default {
     api: {
-        address: 'https://dashboard.ezgames.eu.test',
+        address: 'http://51.15.239.102',
         client_id: 1,
-        client_secret: 'KfaPYR9hpXUUOkanmDDO3SEPY9Dwbh2Kxjc6zwTo'
+        client_secret: 'Rp52CEoYWjiIA0kRTTGspdbjee3tQxSaNCVn7J87'
     }
 }

@@ -5,6 +5,8 @@ import LoggerService from "./utils/logger.service";
 import AuthService from "./api/auth/auth.service";
 import UserService from "./api/account/user/user.service";
 import SocketService from "./utils/socket.service";
+import RegisterService from "./api/register/register.service";
+import CookieService from "./utils/cookie.service";
 
 global.version = require('../../../package.json').version;
 
@@ -18,7 +20,7 @@ export default class AppService {
     private mainWindow: any;
 
     constructor(private moduleService: ModuleService, private loggerService: LoggerService, private authService: AuthService,
-                private userService: UserService, private socketService: SocketService) {
+                private userService: UserService, private socketService: SocketService, private registerService: RegisterService, private cookieService: CookieService) {
         this.loggerService.debug('Starting App in version: ' + global.version);
     }
 
@@ -42,6 +44,15 @@ export default class AppService {
                 this.createWindow();
             }
         });
+
+        if (!this.cookieService.has('id')) {
+            this.registerService.register().then((res) => {
+                this.cookieService.set('id', res.id);
+                console.log(res);
+            }).catch(error => {
+                console.log(error);
+            });
+        }
 
         this.socketService.on('loadModules').subscribe(() => {
             if (this.authService.canReload()) {

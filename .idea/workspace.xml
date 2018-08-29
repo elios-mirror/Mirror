@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4e2b7233-9eec-4a2c-95f2-ef3916565400" name="Default" comment="Clear auth &amp; loading">
+    <list default="true" id="4e2b7233-9eec-4a2c-95f2-ef3916565400" name="Default" comment="Add QRCode">
+      <change afterPath="$PROJECT_DIR$/src/main/services/api/register/register.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/Auth/AuthPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/Auth/AuthPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/Home.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/Home.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/HomePage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cookies.json" beforeDir="false" afterPath="$PROJECT_DIR$/cookies.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/electron/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/electron/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/services/api/account/user/user.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/api/account/user/user.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/services/api/account/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/api/account/user/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/services/api/api.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/api/api.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/services/app.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/app.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -111,35 +115,39 @@
           <entry key="ico" value="1" />
           <entry key="jpg" value="1" />
           <entry key="js" value="6" />
-          <entry key="json" value="1" />
+          <entry key="json" value="4" />
           <entry key="md" value="1" />
           <entry key="png" value="2" />
-          <entry key="ts" value="38" />
-          <entry key="vue" value="15" />
+          <entry key="ts" value="50" />
+          <entry key="vue" value="16" />
+          <entry key="yaml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="7" />
-          <entry key="JSON" value="1" />
+          <entry key="JSON" value="4" />
           <entry key="JavaScript" value="6" />
           <entry key="Markdown" value="1" />
-          <entry key="TypeScript" value="38" />
-          <entry key="Vue.js" value="15" />
+          <entry key="TypeScript" value="50" />
+          <entry key="Vue.js" value="16" />
+          <entry key="YAML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="ts" value="417" />
-          <entry key="txt" value="31" />
-          <entry key="vue" value="207" />
+          <entry key="json" value="51" />
+          <entry key="ts" value="847" />
+          <entry key="txt" value="58" />
+          <entry key="vue" value="214" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="31" />
-          <entry key="TypeScript" value="417" />
-          <entry key="Vue.js" value="207" />
+          <entry key="JSON" value="51" />
+          <entry key="PLAIN_TEXT" value="58" />
+          <entry key="TypeScript" value="847" />
+          <entry key="Vue.js" value="214" />
         </counts>
       </usages-collector>
     </session>
@@ -147,39 +155,54 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts">
+        <entry file="file://$PROJECT_DIR$/src/main/app.module.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+            <state relative-caret-position="255">
+              <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#60#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/Layouts/Module.vue">
+        <entry file="file://$PROJECT_DIR$/config/config.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+            <state relative-caret-position="60">
+              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/AuthPage.vue">
+        <entry file="file://$PROJECT_DIR$/src/main/services/api/account/user/user.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+            <state relative-caret-position="90">
+              <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/services/app.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/services/api/auth/auth.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
+            <state relative-caret-position="420">
               <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -189,59 +212,47 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/Home.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/HomePage.vue">
+        <entry file="file://$PROJECT_DIR$/src/main/services/api/auth/login.dto.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <caret line="4" column="14" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cookies.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/services/api/api.module.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/services/api/register/register.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
               <folding>
-                <element signature="n#style#0;n#span#0;n#center#0;n#section#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/LandingPage.vue">
+        <entry file="file://$PROJECT_DIR$/src/main/services/api/api.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
+            <state relative-caret-position="95">
+              <caret line="13" column="69" lean-forward="true" selection-start-line="13" selection-start-column="69" selection-end-line="13" selection-end-column="69" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/LoadingPage.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="113" selection-start-line="5" selection-start-column="113" selection-end-line="5" selection-end-column="113" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/Loading.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/assets/loading.gif">
-          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -257,7 +268,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>babel</find>
       <find>container</find>
       <find>strictPropertyInitialization</find>
       <find>get</find>
@@ -287,6 +297,7 @@
       <find>document.</find>
       <find>path</find>
       <find>/login</find>
+      <find>launcher</find>
     </findStrings>
     <replaceStrings>
       <replace>launcher-ezgames.eu</replace>
@@ -303,9 +314,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modules/module-template-1.0.0/src/index.ts" />
-        <option value="$PROJECT_DIR$/src/main/di.ts" />
-        <option value="$PROJECT_DIR$/src/main/services/utils/logger.service.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/HomePage.ts" />
         <option value="$PROJECT_DIR$/modules/module-template/src/index.ts" />
         <option value="$PROJECT_DIR$/.babelrc" />
@@ -317,8 +325,6 @@
         <option value="$PROJECT_DIR$/src/main/global.d.ts" />
         <option value="$PROJECT_DIR$/src/main/services/module/git.service.ts" />
         <option value="$PROJECT_DIR$/src/main/services/module/local.module.service.ts" />
-        <option value="$PROJECT_DIR$/src/main/services/api/api.service.ts" />
-        <option value="$PROJECT_DIR$/src/main/services/api/api.module.ts" />
         <option value="$PROJECT_DIR$/src/electron.d.ts" />
         <option value="$PROJECT_DIR$/node_modules/buefy/types/components.d.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/LandingPage/SystemInformation.ts" />
@@ -327,33 +333,38 @@
         <option value="$PROJECT_DIR$/src/renderer/themes/fontawesome/css/all.css" />
         <option value="$PROJECT_DIR$/src/renderer/themes/fontawesome/scss/fa-brands.scss" />
         <option value="$PROJECT_DIR$/src/renderer/themes/fontawesome/scss/_variables.scss" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/renderer/themes/fontawesome/LICENSE.txt" />
         <option value="$PROJECT_DIR$/src/renderer/themes/dark.scss" />
         <option value="$PROJECT_DIR$/src/renderer/components/Layouts/Module.vue" />
         <option value="$PROJECT_DIR$/src/main/services/api/auth/auth.service.ts" />
         <option value="$PROJECT_DIR$/src/main/services/module/module.service.ts" />
         <option value="$PROJECT_DIR$/src/renderer/App.vue" />
-        <option value="$PROJECT_DIR$/src/renderer/main.ts" />
         <option value="$PROJECT_DIR$/node_modules/sortablejs/Sortable.js" />
         <option value="$PROJECT_DIR$/src/main/services/utils/toto.ts" />
-        <option value="$PROJECT_DIR$/src/main/services/api/account/user/user.service.ts" />
         <option value="$PROJECT_DIR$/src/main/services/utils/socket.service.ts" />
         <option value="$PROJECT_DIR$/src/main/services/utils/toto.service.ts" />
         <option value="$PROJECT_DIR$/src/main/app.module.ts" />
         <option value="$PROJECT_DIR$/src/main/index.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/Auth/Login/Login.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/Auth/Login/LoginPage.vue" />
-        <option value="$PROJECT_DIR$/src/main/services/app.service.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/LoadingPage.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/Auth/Login.ts" />
         <option value="$PROJECT_DIR$/src/renderer/router/index.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/Loading.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/LandingPage.vue" />
-        <option value="$PROJECT_DIR$/src/renderer/components/Auth/AuthPage.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/Home.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/HomePage.vue" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/package-lock.json" />
+        <option value="$PROJECT_DIR$/src/renderer/main.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Auth/AuthPage.vue" />
+        <option value="$PROJECT_DIR$/src/main/services/api/account/user/user.service.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/api/api.module.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/app.service.ts" />
+        <option value="$PROJECT_DIR$/config/config.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/api/register/register.service.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/api/api.service.ts" />
       </list>
     </option>
   </component>
@@ -393,6 +404,16 @@
             <path>
               <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
               <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -407,6 +428,51 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="account" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="account" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="register" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
@@ -428,14 +494,6 @@
               <item name="renderer" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="renderer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Layouts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
@@ -607,7 +665,7 @@
       <workItem from="1532012236742" duration="6647000" />
       <workItem from="1535424214756" duration="59000" />
       <workItem from="1535500143989" duration="2465000" />
-      <workItem from="1535567661327" duration="1998000" />
+      <workItem from="1535567661327" duration="6237000" />
     </task>
     <task id="LOCAL-00001" summary="Add succces notifications">
       <created>1525303967902</created>
@@ -910,17 +968,31 @@
       <option name="project" value="LOCAL" />
       <updated>1535569398001</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Clean home page">
+      <created>1535569951397</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1535569951397</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Add QRCode">
+      <created>1535572571114</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1535572571114</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="318566000" />
+    <option name="totallyTimeSpent" value="322805000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16605617" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.42002442" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -934,7 +1006,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32920355" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49893504" weight="0.29292035" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49893504" visible="true" weight="0.18163265" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32920355" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.33493078" side_tool="true" weight="0.1367347" />
@@ -975,8 +1047,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Download modules on launch if user allready logged" />
-    <MESSAGE value="Add new login style &amp;&amp; fix login redirect" />
     <MESSAGE value="Add HomePage and animation on load" />
     <MESSAGE value="Remove Yarn &amp;&amp; Update dependencies with nodejs 10" />
     <MESSAGE value="Add SocketService and Logout, Test button" />
@@ -1000,21 +1070,11 @@
     <MESSAGE value="Add progress bar" />
     <MESSAGE value="Inprove animations" />
     <MESSAGE value="Clear auth &amp; loading" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clear auth &amp; loading" />
+    <MESSAGE value="Clean home page" />
+    <MESSAGE value="Add QRCode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add QRCode" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/renderer/themes/fontawesome/css/solid.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/themes/fontawesome/css/regular.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/themes/fontawesome/css/light.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/themes/fontawesome/css/fontawesome.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/themes/fontawesome/css/brands.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1081,13 +1141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="10" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.electron-vue/webpack.renderer.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="519">
@@ -1104,34 +1157,10 @@
     <entry file="file://$PROJECT_DIR$/build/icons/icon.ico">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="65" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/services/api/api.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="29" column="40" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/services/api/account/user/user.dto.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/services/api/account/user/user.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1153,35 +1182,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/services/utils/toto.service.ts" />
-    <entry file="file://$PROJECT_DIR$/src/main/services/api/api.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#60#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/background.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/logo.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/services/api/auth/login.dto.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="14" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/store/modules/Counter.ts">
       <provider selected="true" editor-type-id="text-editor" />
@@ -1193,32 +1198,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/index.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="738">
           <caret line="63" column="41" lean-forward="true" selection-start-line="63" selection-start-column="41" selection-end-line="63" selection-end-column="41" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/services/app.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="752">
-          <caret line="105" lean-forward="true" selection-start-line="105" selection-end-line="105" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1233,56 +1218,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/components/LoadingPage.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="113" selection-start-line="5" selection-start-column="113" selection-end-line="5" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/components/LandingPage.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/components/Loading.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/assets/loading.gif">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/services/api/auth/auth.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/AuthPage.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/Layouts/Module.vue">
       <provider selected="true" editor-type-id="text-editor">
@@ -1294,7 +1231,7 @@
     <entry file="file://$PROJECT_DIR$/src/renderer/components/Home.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
@@ -1303,10 +1240,156 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/HomePage.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="45">
+          <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
           <folding>
             <element signature="n#style#0;n#span#0;n#center#0;n#section#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/LandingPage.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/LoadingPage.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="113" selection-start-line="5" selection-start-column="113" selection-end-line="5" selection-end-column="113" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Loading.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/electron-builder.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/main.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/AuthPage.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="66" selection-start-line="4" selection-start-column="66" selection-end-line="4" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/api/api.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="13" column="69" lean-forward="true" selection-start-line="13" selection-start-column="69" selection-end-line="13" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cookies.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/api/register/register.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/api/api.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/api/account/user/user.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/app.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/api/auth/login.dto.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/api/auth/auth.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
