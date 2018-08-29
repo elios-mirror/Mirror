@@ -48,7 +48,7 @@ export default Vue.extend({
         logout() {
             const authService = this.$container.get<AuthService>(AuthService.name);
             authService.logout();
-            this.$router.push("/login");
+            this.$router.push("/auth");
         },
         loading() {
             this.$router.push("/loading");

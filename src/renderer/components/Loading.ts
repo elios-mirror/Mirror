@@ -10,8 +10,7 @@ export default Vue.extend({
 
     data() {
         return {
-            loadingImg: path.join(__static, 'loadings', 'default.gif'),
-            title: 'DEPLACEMENT DES SATELLITES',
+            title: 'Chargement des modules...',
             message: 'Chargement..',
             loadingsImg: [],
             socketService: this.$container.get<SocketService>(SocketService.name),
@@ -25,13 +24,6 @@ export default Vue.extend({
             this.loadingsImg.push(file);
         });
 
-        // Set loadingImg randomly
-        if (process.env.NODE_ENV === 'development') {
-            this.loadingImg = 'static/loadings/' + this.loadingsImg[Math.floor(Math.random() * this.loadingsImg.length)]
-        } else {
-            this.loadingImg = path.join(__static, '/loadings/' + this.loadingsImg[Math.floor(Math.random() * this.loadingsImg.length)])
-        }
-
         this.socketService.send('loadModules');
 
         const sub = this.socketService.on('loading').subscribe((data) => {
@@ -44,7 +36,7 @@ export default Vue.extend({
                     break;
                 case 'finished':
                     sub.unsubscribe();
-                    this.$router.push('/login');
+                    this.$router.push('/auth');
                     break;
             }
         });

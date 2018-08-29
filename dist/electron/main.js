@@ -3545,14 +3545,13 @@ var AppService = /** @class */ (function () {
     AppService.prototype.createWindow = function () {
         var _this = this;
         this.mainWindow = new __WEBPACK_IMPORTED_MODULE_1_electron__["BrowserWindow"]({
-            width: 350,
-            height: 400,
+            fullscreen: true,
             show: false,
             frame: false,
             resizable: false,
             backgroundColor: '#2C2F33',
             center: true,
-            fullscreenable: false
+            fullscreenable: true
         });
         // Disable zoom feature on window
         var webContents = this.mainWindow.webContents;
@@ -3564,19 +3563,11 @@ var AppService = /** @class */ (function () {
         this.mainWindow.loadURL(this.winUrl);
         this.mainWindow.once('ready-to-show', function () {
             _this.mainWindow.show();
-            _this.initApp();
+            _this.startApp();
         });
         this.mainWindow.on('closed', function () {
             _this.mainWindow = null;
         });
-    };
-    AppService.prototype.initApp = function () {
-        this.mainWindow.setSize(1000, 600);
-        this.mainWindow.center();
-        this.mainWindow.setMinimumSize(1000, 600);
-        this.mainWindow.setResizable(true);
-        this.mainWindow.setFullScreenable(true);
-        this.startApp();
     };
     AppService.prototype.startApp = function () {
         var _this = this;

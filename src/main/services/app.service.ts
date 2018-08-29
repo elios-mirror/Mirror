@@ -61,14 +61,13 @@ export default class AppService {
     createWindow() {
 
         this.mainWindow = new BrowserWindow({
-            width: 350,
-            height: 400,
+            fullscreen: true,
             show: false,
             frame: false,
             resizable: false,
             backgroundColor: '#2C2F33',
             center: true,
-            fullscreenable: false
+            fullscreenable: true
         }) as BrowserWindow;
 
         // Disable zoom feature on window
@@ -85,22 +84,12 @@ export default class AppService {
 
             this.mainWindow.show();
 
-            this.initApp();
+            this.startApp();
         });
 
         this.mainWindow.on('closed', () => {
             this.mainWindow = null;
         });
-    }
-
-    initApp() {
-        this.mainWindow.setSize(1000, 600);
-        this.mainWindow.center();
-        this.mainWindow.setMinimumSize(1000, 600);
-        this.mainWindow.setResizable(true);
-        this.mainWindow.setFullScreenable(true);
-
-        this.startApp();
     }
 
     startApp() {

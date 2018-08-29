@@ -16,9 +16,9 @@ export default new Router({
             component: require('@/components/HomePage').default
         },
         {
-            path: '/login',
-            name: 'login',
-            component: require('@/components/Auth/Login/LoginPage').default
+            path: '/auth',
+            name: 'auth',
+            component: require('@/components/Auth/AuthPage').default
         },
         {
             path: '*',
