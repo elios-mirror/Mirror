@@ -1,6 +1,6 @@
 <template>
     <section class="hero is-fullheight">
-        cc
+        <button @click="login">LOGIN</button>
     </section>
 </template>
 

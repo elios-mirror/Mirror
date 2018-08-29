@@ -10,6 +10,10 @@ export default Vue.extend({
     },
     methods: {
 
+        login: function () {
+            this.$router.push('/home');
+        }
+
     },
     beforeMount() {
         const authService = this.$container.get<AuthService>(AuthService.name);
