@@ -1,8 +1,7 @@
 <template>
     <section class="hero is-fullheight">
+        <qrcode :options="{ foreground:'white', backgroundAlpha: 0, value: mirrorId, size:300 }" class="qrcode"></qrcode>
         <button @click="login">LOGIN</button>
-
-        <qrcode value="Hello, World!" :options="{ size: 200 }"></qrcode>
     </section>
 </template>
 
@@ -13,5 +12,10 @@
 </script>
 
 <style scoped>
+
+.qrcode {
+    height: 50%;
+    width: 50%;
+}
 
 </style>

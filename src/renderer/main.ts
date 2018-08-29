@@ -12,6 +12,8 @@ const VueQrcode = require('@xkeshi/vue-qrcode');
 
 const container = remote.getGlobal('container');
 
+Vue.component(VueQrcode.name, VueQrcode);
+
 if (!process.env.IS_WEB) Vue.use(require("vue-electron"));
 Vue.config.productionTip = false;
 
