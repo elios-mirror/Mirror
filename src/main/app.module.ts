@@ -7,6 +7,7 @@ import LocalModuleService from "./services/module/local.module.service";
 import Api from './services/api/api.module';
 import ConfigService from "./services/utils/config.service";
 import SocketService from "./services/utils/socket.service";
+import SocketIoService from "./services/utils/socket-io.service";
 
 /**
  * List of classes what you want to be autoInjectable
@@ -16,6 +17,7 @@ import SocketService from "./services/utils/socket.service";
  */
 export default [
     Api,
+    SocketIoService,
     LoggerService,
     SocketService,
     LocalModuleService,

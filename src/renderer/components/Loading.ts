@@ -10,19 +10,13 @@ export default Vue.extend({
 
     data() {
         return {
-            title: 'Chargement des modules...',
             message: 'Chargement..',
-            loadingsImg: [],
             socketService: this.$container.get<SocketService>(SocketService.name),
         }
     },
 
     mounted() {
 
-        // List all loadingImg in /static/loadings
-        fs.readdirSync(path.join(__static, '/loadings')).forEach((file: never) => {
-            this.loadingsImg.push(file);
-        });
 
         this.socketService.send('loadModules');
 

@@ -45,12 +45,10 @@ export default class AppService {
             }
         });
 
+
         if (!this.cookieService.has('id')) {
-            this.registerService.register().then((res) => {
-                this.cookieService.set('id', res.id);
-                console.log(res);
-            }).catch(error => {
-                console.log(error);
+            this.registerMirror().then(() => {
+
             });
         }
 
@@ -63,7 +61,17 @@ export default class AppService {
                 });
             }
         });
+    }
 
+    registerMirror() {
+        return new Promise(resolve => {
+            this.registerService.register().then((res) => {
+                this.cookieService.set('id', res.id);
+                console.log(res);
+            }).catch(error => {
+                console.log(error);
+            });
+        });
     }
 
     /**
@@ -104,15 +112,18 @@ export default class AppService {
     }
 
     startApp() {
-        this.socketService.send('loading', {action: 'message', message: 'Starting...'});
+        this.socketService.send('loading', {action: 'message', message: 'DEMARAGE'});
         if (this.authService.isAuthenticated()) {
             this.userService.get().then(res => {
-                this.socketService.send('loading', {action: 'message', message: 'Welcome back <font color="#FF8A65"> ' + res.name + ' </font>'});
+                this.socketService.send('loading', {
+                    action: 'message',
+                    message: 'Bienvenue <font color="#FF8A65"> ' + res.name + ' </font>'
+                });
             });
         }
         setTimeout(() => {
             this.socketService.send('loading', {action: 'finished'});
-        }, 2000);
+        }, 1500);
     }
 
     registerShortcuts() {

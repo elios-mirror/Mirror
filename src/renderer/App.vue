@@ -24,6 +24,6 @@
     }
 
     html {
-        background: #36393e !important;
+        background: #000000 !important;
     }
 </style>

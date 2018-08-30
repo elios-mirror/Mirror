@@ -1,7 +1,17 @@
 <template>
     <section class="hero is-fullheight">
-        <qrcode :options="{ foreground:'white', backgroundAlpha: 0, value: mirrorId, size:300 }" class="qrcode"></qrcode>
-        <button @click="login">LOGIN</button>
+        <qrcode :options="{ foreground:'white', backgroundAlpha: 0, value: mirrorId, size:300 }"
+                class="qrcode"></qrcode>
+
+        <div class="text-qrcode">
+            Lancez l'application Elios pour associer le miroir à votre compte<br>
+            Si vous rencontrez des problèmes vous pouvez entrer manuellement l'identifiant du miroir ci-dessous<br>
+            <br>
+            <div class="mirror-id">
+                {{ mirrorId }}
+            </div>
+        </div>
+
     </section>
 </template>
 
@@ -13,9 +23,26 @@
 
 <style scoped>
 
-.qrcode {
-    height: 50%;
-    width: 50%;
-}
+    .hero {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .qrcode {
+        height: 25%;
+        width: 25%;
+    }
+
+    .text-qrcode {
+        color: white;
+        padding-top: 100px;
+        font-size: 20px;
+    }
+
+    .mirror-id {
+        font-size: 25px;
+        font-weight: bold;
+    }
 </style>

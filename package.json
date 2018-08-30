@@ -64,6 +64,7 @@
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.1",
     "sass-loader": "^7.0.3",
+    "socket.io-client": "^2.1.1",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-qrcode": "0.0.2",
