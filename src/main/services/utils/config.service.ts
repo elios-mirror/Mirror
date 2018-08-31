@@ -6,8 +6,14 @@ interface ApiConfigDTO {
     client_secret: string
 }
 
+interface SocketsConfigDTO {
+    address: string;
+    port: string;
+}
+
 interface ConfigDTO {
-    api: ApiConfigDTO
+    api: ApiConfigDTO,
+    sockets: SocketsConfigDTO
 }
 
 /**
