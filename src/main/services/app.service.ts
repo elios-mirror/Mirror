@@ -83,7 +83,7 @@ export default class AppService {
             fullscreen: true,
             show: false,
             frame: false,
-            resizable: false,
+            resizable: true,
             backgroundColor: '#2C2F33',
             center: true,
             fullscreenable: true
