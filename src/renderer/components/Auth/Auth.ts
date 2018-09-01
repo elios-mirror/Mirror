@@ -35,7 +35,10 @@ export default Vue.extend({
 
         socketIoService.socket.on(`linked_${this.mirrorId}`, () => {
             this.$router.push('/home');
-        })
+        });
+
+        this.$router.push('/home');
+
     }
 
 });

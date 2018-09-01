@@ -1,9 +1,9 @@
 <template>
-    <section class="hero is-full-height">
-        <center>
-            <span style="color: red">HOME PAGE</span>
-        </center>
-    </section>
+    <div>
+        <div v-for="module in modules">
+            <component :name="module.name" v-bind:is="module"></component>
+        </div>
+    </div>
 </template>
 
 <script lang="ts">

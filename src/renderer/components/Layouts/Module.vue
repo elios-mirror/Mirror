@@ -1,6 +1,6 @@
 <template>
     <section class="has-text-white">
-        {{ server.name }}
+        {{ server }}
 
         <button class="button is-primary" @click="progress = 100">
             More

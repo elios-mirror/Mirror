@@ -84,7 +84,7 @@ export default class AppService {
             show: false,
             frame: false,
             resizable: true,
-            backgroundColor: '#2C2F33',
+            backgroundColor: '#000000',
             center: true,
             fullscreenable: true
         }) as BrowserWindow;

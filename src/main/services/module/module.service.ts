@@ -30,6 +30,7 @@ export interface IModule {
     version: string;
     requireVersion: number;
     showOnStart: boolean;
+    main: any;
     start: () => {};
     init: () => {};
 }
@@ -53,8 +54,8 @@ export default class ModuleService {
             this.loadFromPath(path.resolve('./modules', moduleName), {
                 repository: 'dev/' + moduleName,
                 commit: null,
-                version: '1.0.0'
-            }).then(() => {
+                version: 'dev'
+            }).then((m: any) => {
                 console.log('Local module loaded', moduleName)
             }).catch(() => {
                 console.log('Local module error loaded', moduleName)
