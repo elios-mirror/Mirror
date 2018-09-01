@@ -126,6 +126,8 @@ export default class AppService {
         }, 1500);
     }
 
+
+
     registerShortcuts() {
 
         globalShortcut.register('CommandOrControl+R', () => {

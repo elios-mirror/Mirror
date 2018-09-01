@@ -66,13 +66,18 @@ export default class GitService {
             const moduleName = path.basename(module.repository);
             NodeGit.Clone('https://github.com/' + module.repository + '.git', this.localModuleService.getLocal() + moduleName + '-' + module.version).then((repository: any) => {
                 console.log('Cloned ' + moduleName + ' to ' + repository.workdir());
-                this.checkOut(repository, module.commit).then(() => {
+                if (module.commit) {
+                    this.checkOut(repository, module.commit).then(() => {
+                        repository.free();
+                        resolve();
+                    }).catch((err: any) => {
+                        repository.free();
+                        reject(err);
+                    });
+                } else {
                     repository.free();
                     resolve();
-                }).catch((err: any) => {
-                    repository.free();
-                    reject(err);
-                });
+                }
             }).catch((err: any) => {
                 reject(err);
             });

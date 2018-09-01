@@ -9,7 +9,7 @@ const fs = require('fs');
 @injectable()
 export default class LocalModuleService {
 
-    local = path.resolve(os.homedir(), '.ezgames', 'modules') + '/';
+    local = path.resolve(os.homedir(), '.elios', 'modules') + '/';
     modules: any = {};
 
     /**
@@ -21,10 +21,10 @@ export default class LocalModuleService {
             this.modules = cookieService.get('modules')
         }
 
-        const ezgamesFolder = path.resolve(os.homedir(), '.ezgames');
+        const modulesFolder = path.resolve(os.homedir(), '.elios');
 
-        if (!fs.existsSync(ezgamesFolder)){
-            fs.mkdirSync(ezgamesFolder);
+        if (!fs.existsSync(modulesFolder)){
+            fs.mkdirSync(modulesFolder);
         }
 
     }

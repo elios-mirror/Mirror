@@ -6,7 +6,8 @@ import SocketService from "../utils/socket.service";
 const path = require('path');
 
 const os = require('os');
-const modulesPath = path.resolve(os.homedir(), '.ezgames', 'modules');
+const fs = require('fs');
+const modulesPath = path.resolve(os.homedir(), '.elios', 'modules');
 
 let PluginManager: any;
 
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV !== 'testing') {
 export interface IModuleRepository {
     repository: string;
     version: string;
-    commit: string;
+    commit: string | null;
 }
 
 export interface IModule {
@@ -46,6 +47,20 @@ export default class ModuleService {
      * @param {SocketService} socketService
      */
     constructor(private gitService: GitService, private localModuleService: LocalModuleService, private socketService: SocketService) {
+        const localModules = this.getDirectories(path.resolve('./modules'));
+
+        localModules.forEach((moduleName: string) => {
+            this.loadFromPath(path.resolve('./modules', moduleName), {
+                repository: 'dev/' + moduleName,
+                commit: null,
+                version: '1.0.0'
+            }).then(() => {
+                console.log('Local module loaded', moduleName)
+            }).catch(() => {
+                console.log('Local module error loaded', moduleName)
+            });
+        })
+
     }
 
     /**
@@ -57,10 +72,10 @@ export default class ModuleService {
      */
     private static cmpVersions(a: string, b: string) {
         let i, diff;
-        const regExStrip0 = /(\.0+)+$/
+        const regExStrip0 = /(\.0+)+$/;
         const segmentsA = a.replace(regExStrip0, '').split('.');
         const segmentsB = b.replace(regExStrip0, '').split('.');
-        const l = Math.min(segmentsA.length, segmentsB.length)
+        const l = Math.min(segmentsA.length, segmentsB.length);
 
         for (i = 0; i < l; i++) {
             diff = parseInt(segmentsA[i], 10) - parseInt(segmentsB[i], 10);
@@ -71,15 +86,17 @@ export default class ModuleService {
         return segmentsA.length - segmentsB.length;
     }
 
-    /**
-     * Load module and init it
-     *
-     * @param {string} module
-     * @returns {Promise<any>}
-     */
-    private loadModule(module: IModuleRepository) {
+
+    private getDirectories(path: string) {
+        return fs.readdirSync(path).filter(function (file: string) {
+            return fs.statSync(path + '/' + file).isDirectory();
+        });
+    }
+
+
+    private loadFromPath(modulePath: string, module: IModuleRepository) {
         const moduleName = path.basename(module.repository);
-        return PluginManager.installFromPath(path.resolve(modulesPath, moduleName + '-' + module.version), {force: true}).then(async (m: any) => {
+        return PluginManager.installFromPath(modulePath, {force: true}).then(async (m: any) => {
             const moduleInfos = m;
             m = PluginManager.require(moduleName);
 
@@ -113,6 +130,16 @@ export default class ModuleService {
             console.error(res);
             return;
         });
+    }
+
+    /**
+     * Load module and init it
+     *
+     * @param {string} module
+     * @returns {Promise<any>}
+     */
+    private loadModule(module: IModuleRepository) {
+        return this.loadFromPath(path.resolve(modulesPath, path.basename(module.repository) + '-' + module.version), module)
     }
 
     /**

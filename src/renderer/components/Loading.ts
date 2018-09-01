@@ -1,6 +1,7 @@
 import Vue from "vue";
 import SocketService from "../../main/services/utils/socket.service";
 import {remote} from 'electron';
+import ModuleService from "../../main/services/module/module.service";
 
 const fs = require('fs');
 const path = require('path');
@@ -12,6 +13,7 @@ export default Vue.extend({
         return {
             message: 'Chargement..',
             socketService: this.$container.get<SocketService>(SocketService.name),
+            moduleService: this.$container.get<ModuleService>(ModuleService.name),
         }
     },
 
@@ -34,5 +36,9 @@ export default Vue.extend({
                     break;
             }
         });
+
+
+
+
     }
 });
