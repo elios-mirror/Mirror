@@ -12,3 +12,10 @@ thumbs.db
 cookies.json
 
 dist/
+
+
+*.log
+.idea
+.vscode
+package-lock.json
+yarn.lock
