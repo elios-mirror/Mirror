@@ -30,7 +30,7 @@ export interface IModule {
     version: string;
     requireVersion: number;
     showOnStart: boolean;
-    main: any;
+    vue: any;
     start: () => {};
     init: () => {};
 }

@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4e2b7233-9eec-4a2c-95f2-ef3916565400" name="Default" comment="Add local load modules system">
-      <change afterPath="$PROJECT_DIR$/modules/module-template/src/main.vue" afterDir="false" />
+    <list default="true" id="4e2b7233-9eec-4a2c-95f2-ef3916565400" name="Default" comment="Add module loaded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/module-template/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/dist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/module-template/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/module-template/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/module-template/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/app.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/app.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/services/module/module.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/module/module.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/components/Home.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/Home.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/HomePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/Layouts/Module.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/Layouts/Module.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -99,17 +92,17 @@
     <session id="1754088240">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.8" value="2" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.9" value="2" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="TypeScriptServerServiceImpl" value="5" />
+          <entry key="TypeScriptServerServiceImpl" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -146,8 +139,8 @@
         <counts>
           <entry key="js" value="29" />
           <entry key="json" value="51" />
-          <entry key="ts" value="3106" />
-          <entry key="txt" value="134" />
+          <entry key="ts" value="3320" />
+          <entry key="txt" value="152" />
           <entry key="vue" value="1358" />
         </counts>
       </usages-collector>
@@ -155,22 +148,22 @@
         <counts>
           <entry key="JSON" value="51" />
           <entry key="JavaScript" value="29" />
-          <entry key="PLAIN_TEXT" value="134" />
-          <entry key="TypeScript" value="3106" />
+          <entry key="PLAIN_TEXT" value="152" />
+          <entry key="TypeScript" value="3320" />
           <entry key="Vue.js" value="1358" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5308642">
+    <splitter split-orientation="horizontal" split-proportion="0.70742357">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.ts">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="90">
-                  <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+                  <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
                 </state>
               </provider>
             </entry>
@@ -178,7 +171,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/modules/module-template/dist/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="568">
+                <state relative-caret-position="638">
                   <caret line="136" column="28" selection-start-line="136" selection-start-column="28" selection-end-line="136" selection-end-column="28" />
                 </state>
               </provider>
@@ -196,11 +189,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/services/module/module.service.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="414">
-                  <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+                <state relative-caret-position="390">
+                  <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
                   <folding>
                     <element signature="e#0#37#0" expanded="true" />
                   </folding>
@@ -220,20 +213,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/modules/module-template/webpack.config.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="480">
-                  <caret line="32" column="6" lean-forward="true" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/renderer/components/Home.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="375">
-                  <caret line="25" selection-start-line="25" selection-end-line="25" />
-                  <folding>
-                    <element signature="e#0#22#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="465">
+                  <caret line="31" column="49" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="49" />
                 </state>
               </provider>
             </entry>
@@ -241,8 +222,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="600">
-                  <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+                <state relative-caret-position="555">
+                  <caret line="40" selection-start-line="40" selection-end-line="40" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                   </folding>
@@ -271,12 +252,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/renderer/components/HomePage.vue">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="45">
-                  <caret line="3" column="45" lean-forward="true" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+                  <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
                 </state>
               </provider>
             </entry>
@@ -385,14 +366,14 @@
         <option value="$PROJECT_DIR$/src/main/services/module/local.module.service.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/Loading.ts" />
         <option value="$PROJECT_DIR$/src/main/services/app.service.ts" />
-        <option value="$PROJECT_DIR$/src/main/services/module/module.service.ts" />
         <option value="$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts" />
-        <option value="$PROJECT_DIR$/modules/module-template/src/index.ts" />
         <option value="$PROJECT_DIR$/modules/module-template/src/main.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/HomePage.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/Layouts/Module.vue" />
         <option value="$PROJECT_DIR$/modules/module-template/webpack.config.js" />
         <option value="$PROJECT_DIR$/src/renderer/components/Home.ts" />
+        <option value="$PROJECT_DIR$/modules/module-template/src/index.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/module/module.service.ts" />
       </list>
     </option>
   </component>
@@ -426,7 +407,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -552,6 +532,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -692,14 +673,8 @@
       <workItem from="1535500143989" duration="2465000" />
       <workItem from="1535567661327" duration="6858000" />
       <workItem from="1535641620424" duration="5346000" />
-      <workItem from="1535724025299" duration="10020000" />
-    </task>
-    <task id="LOCAL-00001" summary="Add succces notifications">
-      <created>1525303967902</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1525303967902</updated>
+      <workItem from="1535724025299" duration="10122000" />
+      <workItem from="1535914220900" duration="820000" />
     </task>
     <task id="LOCAL-00002" summary="Remove success webhoook">
       <created>1525304254631</created>
@@ -1037,11 +1012,18 @@
       <option name="project" value="LOCAL" />
       <updated>1535830060231</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Add module loaded">
+      <created>1535836246951</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1535836246952</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="338792000" />
+    <option name="totallyTimeSpent" value="339714000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1056,24 +1038,24 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15934066" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16117217" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3283186" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6642247" weight="0.2387755" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6642247" visible="true" weight="0.2387755" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8046398" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32959184" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32857144" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.87973136" visible="true" weight="0.23163265" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.8791209" weight="0.23163265" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32857144" />
       <window_info anchor="bottom" id="Messages" order="12" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.12026862" side_tool="true" visible="true" weight="0.23163265" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.1953602" side_tool="true" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -1087,7 +1069,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Remove element-theme &amp;&amp; fix windows module path" />
     <MESSAGE value="Fix windows" />
     <MESSAGE value="Fix delete path for windows" />
     <MESSAGE value="Try to fix Windows NodeGIt" />
@@ -1112,7 +1093,8 @@
     <MESSAGE value="Add socket-io" />
     <MESSAGE value="Add socket linked" />
     <MESSAGE value="Add local load modules system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add local load modules system" />
+    <MESSAGE value="Add module loaded" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add module loaded" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/services/api/account/user/user.dto.ts">
@@ -1222,13 +1204,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/store/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/services/api/api.service.ts">
       <provider selected="true" editor-type-id="text-editor">
@@ -1386,27 +1362,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/app.module.ts">
+    <entry file="file://$PROJECT_DIR$/modules/module-template/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+        <state relative-caret-position="450">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
           <folding>
-            <element signature="e#0#60#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/module-template/dist/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="136" column="28" selection-start-line="136" selection-start-column="28" selection-end-line="136" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -1427,50 +1396,57 @@
     <entry file="file://$PROJECT_DIR$/src/renderer/components/HomePage.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="3" column="45" lean-forward="true" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/services/module/module.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/module-template/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/module-template/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="6" lean-forward="true" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="465">
+          <caret line="31" column="49" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/Home.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="345">
+          <caret line="23" column="46" lean-forward="true" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/dist/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="136" column="28" selection-start-line="136" selection-start-column="28" selection-end-line="136" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/module/module.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>

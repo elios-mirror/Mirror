@@ -22,6 +22,6 @@ export default Vue.extend({
         console.log(moduleService.getAll());
 
         this.modules.push(require('./Layouts/Module').default);
-        this.modules.push(require('./../../../modules/module-template/src/main').default);
+        this.modules.push(moduleService.get('module-template', 'dev').vue);
     }
 });
