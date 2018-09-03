@@ -80,7 +80,7 @@ export default class AppService {
     createWindow() {
 
         this.mainWindow = new BrowserWindow({
-            fullscreen: true,
+            fullscreen: false,
             show: false,
             frame: false,
             resizable: true,

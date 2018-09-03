@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-for="module in modules">
-            <component :name="module.name" v-bind:is="module"></component>
+            <div v-html="module"></div>
         </div>
     </div>
 </template>

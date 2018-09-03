@@ -1,6 +1,8 @@
 import Vue from "vue";
 import SocketService from "../../main/services/utils/socket.service";
-import ModuleService from "../../main/services/module/module.service";
+import ModuleService, {IModule} from "../../main/services/module/module.service";
+
+const Handlebars = require('handlebars');
 
 export default Vue.extend({
     name: "home-page",
@@ -10,7 +12,7 @@ export default Vue.extend({
         };
     },
     methods: {},
-    created() {
+    mounted() {
         const socketService = this.$container.get<SocketService>(SocketService.name);
         const moduleService = this.$container.get<ModuleService>(ModuleService.name);
 
@@ -19,9 +21,26 @@ export default Vue.extend({
             this.$router.push('/loading');
         });
 
-        console.log(moduleService.getAll());
+        const modules = moduleService.getAll();
+        for (let moduleName in modules) {
+            const module = modules[moduleName] as IModule;
+            module.start();
+        }
 
-        this.modules.push(require('./Layouts/Module').default);
-        this.modules.push(moduleService.get('module-template', 'dev').vue);
+        setInterval(() => {
+            this.modules = [];
+            const modules = moduleService.getAll();
+            for (let moduleName in modules) {
+                const module = modules[moduleName] as IModule;
+                const template = Handlebars.compile(module.template);
+                this.modules.push(template(module.data));
+            }
+        }, 100);
+
+
+
+
+
+
     }
 });

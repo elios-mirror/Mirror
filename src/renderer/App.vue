@@ -21,6 +21,7 @@
 
     #app {
         font-family: 'Roboto', sans-serif;
+        color: white;
     }
 
     html {

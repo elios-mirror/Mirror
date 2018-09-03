@@ -30,9 +30,11 @@ export interface IModule {
     version: string;
     requireVersion: number;
     showOnStart: boolean;
-    vue: any;
-    start: () => {};
-    init: () => {};
+    template: any;
+    data: any;
+    computed: any;
+    start: () => any;
+    init: () => any;
 }
 
 @injectable()
@@ -60,8 +62,7 @@ export default class ModuleService {
             }).catch(() => {
                 console.log('Local module error loaded', moduleName)
             });
-        })
-
+        });
     }
 
     /**

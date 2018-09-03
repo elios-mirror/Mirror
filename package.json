@@ -57,6 +57,7 @@
     "@xkeshi/vue-qrcode": "^1.0.0",
     "axios": "^0.18.0",
     "buefy": "^0.6.6",
+    "handlebars": "^4.0.11",
     "inversify": "^4.13.0",
     "live-plugin-manager": "^0.12.0",
     "node-sass": "^4.9.3",
