@@ -50,19 +50,7 @@ export default class ModuleService {
      * @param {SocketService} socketService
      */
     constructor(private gitService: GitService, private localModuleService: LocalModuleService, private socketService: SocketService) {
-        const localModules = this.getDirectories(path.resolve('./modules'));
 
-        localModules.forEach((moduleName: string) => {
-            this.loadFromPath(path.resolve('./modules', moduleName), {
-                repository: 'dev/' + moduleName,
-                commit: null,
-                version: 'dev'
-            }).then((m: any) => {
-                console.log('Local module loaded', moduleName)
-            }).catch(() => {
-                console.log('Local module error loaded', moduleName)
-            });
-        });
     }
 
     /**
@@ -103,7 +91,7 @@ export default class ModuleService {
             m = PluginManager.require(moduleName);
 
             if (m.default) {
-                m = new m.default();
+                m = new m.default(global.container);
             }
 
             m.version = moduleInfos.version;
@@ -215,6 +203,22 @@ export default class ModuleService {
                 }
             };
             loadNextModule();
+        });
+    }
+
+    loadOrReloadDevModules () {
+        const localModules = this.getDirectories(path.resolve('./modules'));
+
+        localModules.forEach((moduleName: string) => {
+            this.loadFromPath(path.resolve('./modules', moduleName), {
+                repository: 'dev/' + moduleName,
+                commit: null,
+                version: 'dev'
+            }).then((m: any) => {
+                console.log('Local module loaded', moduleName)
+            }).catch(() => {
+                console.log('Local module error loaded', moduleName)
+            });
         });
     }
 

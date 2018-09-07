@@ -16,9 +16,6 @@
 </script>
 
 <style>
-    @import "//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css";
-    @import url('https://fonts.googleapis.com/css?family=Roboto');
-
     #app {
         font-family: 'Roboto', sans-serif;
         color: white;

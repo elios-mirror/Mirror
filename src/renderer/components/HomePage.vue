@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="home">
         <div v-for="module in modules">
             <div v-html="module"></div>
         </div>
@@ -13,5 +13,7 @@
 </script>
 
 <style scoped>
-
+    .home {
+        padding: 10px;
+    }
 </style>

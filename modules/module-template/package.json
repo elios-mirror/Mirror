@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MrDarkSkil/module-template#readme",
   "dependencies": {
+    "fs": "0.0.1-security",
     "vue": "^2.5.17"
   },
   "devDependencies": {

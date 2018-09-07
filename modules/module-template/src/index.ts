@@ -1,21 +1,47 @@
-export default class  {
+export default class {
+    name: string = 'test';
+
     moduleInfos: any = require('../package.json');
     type: string = 'game';
     requireVersion: string = '0.0.1';
     showOnStart: boolean = true;
 
-    vue: any = require('./main').default;
+    template: any = require('./index.html');
 
-    constructor() {
-        console.log('Construtor');
+    data: any = {
+        title: 'Chargement...',
+        body: '00 : 00 : 00'
     }
 
-    public init() {
+    constructor(private container: any) {
+        console.log('Construtor');
+        console.log(container);
+    }
+
+    init() {
         console.log('MODULE DEV LOADED BITCH');
         console.log('module version of ' + this.moduleInfos.name + ' - ' + this.moduleInfos.version);
+        setInterval(() => {
+            const date = new Date();
+            this.data.body = date.getHours() + ' - ' + date.getMinutes() + ' - ' + date.getSeconds()
+            setTimeout(() => {
+                const date = new Date();
+                this.data.body = date.getHours() + ' : ' + date.getMinutes() + ' : ' + date.getSeconds()
+            }, 500);
+        }, 1000);
+
     }
 
     start() {
         console.log('MODULE STARTED');
+
+
+
+        const userService = this.container.get('UserService');
+        userService.get().then((res: any) => {
+            this.data.title = `L'horloge de - ${res.name}`;
+        })
     }
+
+
 }

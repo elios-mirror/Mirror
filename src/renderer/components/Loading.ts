@@ -38,7 +38,5 @@ export default Vue.extend({
         });
 
 
-
-
     }
 });

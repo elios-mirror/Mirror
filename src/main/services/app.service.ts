@@ -53,6 +53,8 @@ export default class AppService {
         }
 
         this.socketService.on('loadModules').subscribe(() => {
+            this.moduleService.clear();
+            this.moduleService.loadOrReloadDevModules();
             if (this.authService.canReload()) {
                 this.authService.loadModules().then(() => {
                     this.startApp();

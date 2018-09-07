@@ -1,8 +1,7 @@
 <template>
     <section class="hero is-fullheight">
         <div class="pulse-loading"></div>
-        <div class="text-loading">
-           {{ message }}
+        <div class="text-loading" v-html="message">
         </div>
 
     </section>

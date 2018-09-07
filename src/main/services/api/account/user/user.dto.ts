@@ -21,5 +21,8 @@ export interface CommunityDTO {
 export default interface UserDTO {
     email: string;
     name: string;
+    id: string;
+    confirmed: boolean;
     communities: CommunityDTO[];
+
 }

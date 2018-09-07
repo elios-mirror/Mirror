@@ -2,6 +2,13 @@ import Vue from 'vue'
 import AuthService from "../../../main/services/api/auth/auth.service";
 import CookieService from '../../../main/services/utils/cookie.service';
 import SocketIoService from "../../../main/services/utils/socket-io.service";
+import UserDTO from "../../../main/services/api/account/user/user.dto";
+
+
+interface LinkedDTO {
+    access_token: string;
+    user: UserDTO;
+}
 
 export default Vue.extend({
     data() {
@@ -31,13 +38,12 @@ export default Vue.extend({
             this.mirrorId = cookieService.get('id')
         }
 
-
-
-        socketIoService.socket.on(`linked_${this.mirrorId}`, () => {
+        socketIoService.socket.on(`linked_${this.mirrorId}`, (data: LinkedDTO) => {
+            authService.login(data.access_token);
             this.$router.push('/home');
         });
 
-        this.$router.push('/home');
+        //this.$router.push('/home');
 
     }
 

@@ -36,11 +36,7 @@ export default Vue.extend({
                 this.modules.push(template(module.data));
             }
         }, 100);
-
-
-
-
-
+        console.log(modules);
 
     }
 });
