@@ -1,6 +1,6 @@
 <template>
-    <div class="home">
-        <div v-for="module in modules">
+    <div class="modules">
+        <div v-for="module in modules" class="module">
             <div v-html="module"></div>
         </div>
     </div>
@@ -13,7 +13,12 @@
 </script>
 
 <style scoped>
-    .home {
+    .modules {
         padding: 10px;
+        display: block;
+        overflow: auto;
+    }
+    .module {
+        display: block;
     }
 </style>

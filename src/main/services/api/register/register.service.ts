@@ -16,7 +16,7 @@ export default class RegisterService {
 
     register(): Promise<RegisterDTO> {
         return this.apiService.post('/api/mirrors', {
-            name: 'toto'
+            name: 'Miroir de test'
         });
     }
 
