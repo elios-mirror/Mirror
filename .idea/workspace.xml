@@ -1,25 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4e2b7233-9eec-4a2c-95f2-ef3916565400" name="Default" comment="Add module loaded">
-      <change afterPath="$PROJECT_DIR$/modules/module-youtube/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/module-youtube/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/module-youtube/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/module-youtube/src/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/module-youtube/src/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/module-youtube/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/module-youtube/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.electron-vue/webpack.web.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/.electron-vue/webpack.web.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/module-news/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/module-news/test" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/module-template/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/module-template/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/module-template/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/api/register/register.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/api/register/register.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/components/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/components/HomePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vue.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue.d.ts" afterDir="false" />
+    <list default="true" id="4e2b7233-9eec-4a2c-95f2-ef3916565400" name="Default" comment="Add another module &amp; custom webpack loader">
+      <change beforePath="$PROJECT_DIR$/modules/module-template/test" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -105,20 +88,20 @@
     <session id="1754088240">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="20" />
+          <entry key="project.closed" value="21" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.open.time.7" value="5" />
+          <entry key="project.open.time.7" value="6" />
           <entry key="project.open.time.8" value="6" />
           <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="19" />
+          <entry key="project.opened" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="TypeScriptServerServiceImpl" value="19" />
+          <entry key="TypeScriptServerServiceImpl" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -167,7 +150,7 @@
           <entry key="js" value="434" />
           <entry key="json" value="102" />
           <entry key="ts" value="8963" />
-          <entry key="txt" value="169" />
+          <entry key="txt" value="213" />
           <entry key="vue" value="1923" />
         </counts>
       </usages-collector>
@@ -177,7 +160,7 @@
           <entry key="HTML" value="764" />
           <entry key="JSON" value="61" />
           <entry key="JavaScript" value="434" />
-          <entry key="PLAIN_TEXT" value="172" />
+          <entry key="PLAIN_TEXT" value="216" />
           <entry key="TypeScript" value="8963" />
           <entry key="Vue.js" value="1923" />
           <entry key="tsconfig" value="41" />
@@ -187,20 +170,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="10" selection-start-line="1" selection-start-column="3" selection-end-line="5" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modules/module-youtube/src/index.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="255">
+              <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -328,13 +302,13 @@
   </component>
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/modules/module-template/node_modules" />
-    <handled-path value="$PROJECT_DIR$/modules/module-youtube/node_modules" />
+    <handled-path value="$PROJECT_DIR$/modules/module-test/node_modules" />
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
       <path value="$PROJECT_DIR$/build/mac/elios-mirror-com.app/Contents/Resources/app.asar.unpacked/node_modules/nodegit/package.json" />
       <path value="$PROJECT_DIR$/modules/module-template/package.json" />
-      <path value="$PROJECT_DIR$/modules/module-youtube/package.json" />
+      <path value="$PROJECT_DIR$/modules/module-test/package.json" />
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
@@ -567,13 +541,7 @@
       <workItem from="1536763965330" duration="150000" />
       <workItem from="1536777785544" duration="16000" />
       <workItem from="1536793287684" duration="2921000" />
-    </task>
-    <task id="LOCAL-00006" summary="Add cookies.json in .gitignore">
-      <created>1526329798017</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1526329798017</updated>
+      <workItem from="1536814816363" duration="348000" />
     </task>
     <task id="LOCAL-00007" summary="Remove mocha test travis">
       <created>1526330232149</created>
@@ -911,11 +879,18 @@
       <option name="project" value="LOCAL" />
       <updated>1536352726603</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Add another module &amp; custom webpack loader">
+      <created>1536814887609</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1536814887610</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="398120000" />
+    <option name="totallyTimeSpent" value="398468000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -929,7 +904,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21733822" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21978022" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -969,7 +944,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix delete path for windows" />
     <MESSAGE value="Try to fix Windows NodeGIt" />
     <MESSAGE value="Fix folder not created WIndows" />
     <MESSAGE value="Fix le fix" />
@@ -994,7 +968,8 @@
     <MESSAGE value="Add local load modules system" />
     <MESSAGE value="Add module loaded" />
     <MESSAGE value="Add first module" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add first module" />
+    <MESSAGE value="Add another module &amp; custom webpack loader" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add another module &amp; custom webpack loader" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/global.d.ts">
@@ -1285,9 +1260,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="45" column="11" lean-forward="true" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1295,19 +1267,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#0#60#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.vue" />
     <entry file="file://$PROJECT_DIR$/src/main/services/api/register/register.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1322,17 +1285,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="10" selection-start-line="1" selection-start-column="3" selection-end-line="5" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/module-youtube/src/index.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
         </state>
       </provider>
     </entry>
