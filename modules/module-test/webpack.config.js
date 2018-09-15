@@ -11,11 +11,7 @@ module.exports = {
             },
             {
                 test: /\.html/,
-                use: [
-                    {
-                        loader: path.resolve('module.js')
-                    }
-                ]
+                loader: 'html-css-obfuscator'
             },
             {
                 test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,

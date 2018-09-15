@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e2b7233-9eec-4a2c-95f2-ef3916565400" name="Default" comment="Add another module &amp; custom webpack loader">
-      <change beforePath="$PROJECT_DIR$/modules/module-template/test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/module-template/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/module-template/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/module-test/module.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/module-test/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-test/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/module-test/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-test/webpack.config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -93,10 +97,10 @@
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.open.time.7" value="6" />
+          <entry key="project.open.time.7" value="7" />
           <entry key="project.open.time.8" value="6" />
           <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="20" />
+          <entry key="project.opened" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -146,7 +150,7 @@
         <counts>
           <entry key="css" value="94" />
           <entry key="gitignore" value="3" />
-          <entry key="html" value="764" />
+          <entry key="html" value="771" />
           <entry key="js" value="434" />
           <entry key="json" value="102" />
           <entry key="ts" value="8963" />
@@ -157,7 +161,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="94" />
-          <entry key="HTML" value="764" />
+          <entry key="HTML" value="771" />
           <entry key="JSON" value="61" />
           <entry key="JavaScript" value="434" />
           <entry key="PLAIN_TEXT" value="216" />
@@ -173,8 +177,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+            <state relative-caret-position="120">
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -289,8 +293,8 @@
         <option value="$PROJECT_DIR$/.electron-vue/webpack.web.config.js" />
         <option value="$PROJECT_DIR$/modules/module-template/src/index.ts" />
         <option value="$PROJECT_DIR$/src/main/services/api/register/register.service.ts" />
-        <option value="$PROJECT_DIR$/modules/module-template/src/index.html" />
         <option value="$PROJECT_DIR$/modules/module-youtube/src/index.ts" />
+        <option value="$PROJECT_DIR$/modules/module-template/src/index.html" />
       </list>
     </option>
   </component>
@@ -542,6 +546,7 @@
       <workItem from="1536777785544" duration="16000" />
       <workItem from="1536793287684" duration="2921000" />
       <workItem from="1536814816363" duration="348000" />
+      <workItem from="1537047581968" duration="24000" />
     </task>
     <task id="LOCAL-00007" summary="Remove mocha test travis">
       <created>1526330232149</created>
@@ -890,7 +895,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="398468000" />
+    <option name="totallyTimeSpent" value="398492000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -903,8 +908,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21978022" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22222222" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -1285,17 +1291,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/module-youtube/src/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-youtube/src/index.ts" />
     <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+        <state relative-caret-position="120">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
         </state>
       </provider>
     </entry>
