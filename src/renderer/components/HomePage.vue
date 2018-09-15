@@ -1,6 +1,6 @@
 <template>
     <div class="modules">
-        <div v-for="module in modules" class="module">
+        <div v-for="module in modules" class="module" :key="module.id">
             <div v-html="module"></div>
         </div>
     </div>
