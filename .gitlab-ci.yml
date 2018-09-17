@@ -1,6 +1,11 @@
 image: node:8
 
 all_tests:
+  artifacts:
+    paths:
+    - build/
+    expire_in: 1 week
   script:
    - npm install
-   - npm run test
+   - npm run build
+   
