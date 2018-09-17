@@ -1,4 +1,4 @@
-import {injectable} from 'inversify';
+import { injectable } from 'inversify';
 import io from 'socket.io-client';
 import ConfigService from "./config.service";
 
@@ -9,5 +9,8 @@ export default class SocketIoService {
 
     constructor(private configService: ConfigService) {
         this.socket = io(configService.get().sockets.address + ':' + configService.get().sockets.port);
+        this.socket.on('connect', function () {
+            console.log('connected');
+        });
     }
 }
