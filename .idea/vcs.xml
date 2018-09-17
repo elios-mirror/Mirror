@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/module-arma3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/module-arma3-1.0.0" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/module-template" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/module-template-1.0.0" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/module-template-2.0.0" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/module-template-3.0.0" vcs="Git" />
+  </component>
+</project>

@@ -1,0 +1,1303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4e2b7233-9eec-4a2c-95f2-ef3916565400" name="Default" comment="Add another module &amp; custom webpack loader">
+      <change beforePath="$PROJECT_DIR$/modules/module-template/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/module-template/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-template/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/module-test/module.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/module-test/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-test/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/module-test/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/module-test/webpack.config.js" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-415542748">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="18" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.10" value="4" />
+          <entry key="project.open.time.11" value="4" />
+          <entry key="project.open.time.12" value="4" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.2" value="2" />
+          <entry key="project.open.time.3" value="2" />
+          <entry key="project.opened" value="18" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="babelrc" value="5" />
+          <entry key="js" value="141" />
+          <entry key="json" value="168" />
+          <entry key="scss" value="405" />
+          <entry key="ts" value="12448" />
+          <entry key="txt" value="688" />
+          <entry key="vue" value="7052" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JSON" value="166" />
+          <entry key="JavaScript" value="141" />
+          <entry key="PLAIN_TEXT" value="688" />
+          <entry key="SCSS" value="405" />
+          <entry key="TypeScript" value="12448" />
+          <entry key="Vue.js" value="7052" />
+          <entry key="tsconfig" value="7" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="babelrc" value="1" />
+          <entry key="css" value="10" />
+          <entry key="d" value="1" />
+          <entry key="ejs" value="5" />
+          <entry key="gitignore" value="1" />
+          <entry key="js" value="16" />
+          <entry key="json" value="10" />
+          <entry key="scss" value="11" />
+          <entry key="svg" value="5" />
+          <entry key="ts" value="168" />
+          <entry key="txt" value="1" />
+          <entry key="vue" value="47" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="10" />
+          <entry key="JSON" value="9" />
+          <entry key="JavaScript" value="16" />
+          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="SCSS" value="11" />
+          <entry key="SVG" value="5" />
+          <entry key="TypeScript" value="168" />
+          <entry key="Vue.js" value="47" />
+          <entry key="tsconfig" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="TypeScriptServerServiceImpl" value="12" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="1754088240">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="21" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.3" value="2" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.7" value="7" />
+          <entry key="project.open.time.8" value="6" />
+          <entry key="project.open.time.9" value="3" />
+          <entry key="project.opened" value="21" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="TypeScriptServerServiceImpl" value="20" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="css" value="8" />
+          <entry key="ejs" value="2" />
+          <entry key="gif" value="2" />
+          <entry key="gitignore" value="3" />
+          <entry key="html" value="12" />
+          <entry key="icns" value="1" />
+          <entry key="ico" value="1" />
+          <entry key="jpg" value="1" />
+          <entry key="js" value="56" />
+          <entry key="json" value="25" />
+          <entry key="md" value="2" />
+          <entry key="png" value="2" />
+          <entry key="scss" value="1" />
+          <entry key="test" value="1" />
+          <entry key="ts" value="144" />
+          <entry key="vue" value="45" />
+          <entry key="yaml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="8" />
+          <entry key="HTML" value="12" />
+          <entry key="Image" value="7" />
+          <entry key="JSON" value="20" />
+          <entry key="JavaScript" value="56" />
+          <entry key="Markdown" value="2" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="SCSS" value="1" />
+          <entry key="TypeScript" value="142" />
+          <entry key="UML" value="2" />
+          <entry key="Vue.js" value="45" />
+          <entry key="YAML" value="1" />
+          <entry key="tsconfig" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="css" value="94" />
+          <entry key="gitignore" value="3" />
+          <entry key="html" value="771" />
+          <entry key="js" value="434" />
+          <entry key="json" value="102" />
+          <entry key="ts" value="8963" />
+          <entry key="txt" value="213" />
+          <entry key="vue" value="1923" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CSS" value="94" />
+          <entry key="HTML" value="771" />
+          <entry key="JSON" value="61" />
+          <entry key="JavaScript" value="434" />
+          <entry key="PLAIN_TEXT" value="216" />
+          <entry key="TypeScript" value="8963" />
+          <entry key="Vue.js" value="1923" />
+          <entry key="tsconfig" value="41" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
+        <option value="Vue Single File Component" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>../node_modules/bulma</find>
+      <find>scss</find>
+      <find>node-</find>
+      <find>setZoomLevelLimits</find>
+      <find>nodegit</find>
+      <find>node</find>
+      <find>/ap</find>
+      <find>#{$fa-font-path}</find>
+      <find>../webfonts/</find>
+      <find>sprites</find>
+      <find>over</find>
+      <find>dra</find>
+      <find>abso</find>
+      <find>move</find>
+      <find>on-drag</find>
+      <find>document.</find>
+      <find>path</find>
+      <find>/login</find>
+      <find>launcher</find>
+      <find>loadModules</find>
+      <find>.ezgames</find>
+      <find>bitch</find>
+      <find>hello</find>
+      <find>cs</find>
+      <find>css</find>
+      <find>.css</find>
+      <find>.card</find>
+      <find>u2KDxpUuIgVFE5Rabbl8z</find>
+      <find>card</find>
+      <find>Vue.use</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>launcher-ezgames.eu</replace>
+      <replace>test</replace>
+      <replace>:</replace>
+      <replace>moduleName</replace>
+      <replace>fontawesome/webfonts/</replace>
+      <replace>fontawesome/webfonts</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/services/utils/toto.service.ts" />
+        <option value="$PROJECT_DIR$/src/main/index.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Auth/Login/Login.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Auth/Login/LoginPage.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Auth/Login.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/router/index.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/components/LandingPage.vue" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/package-lock.json" />
+        <option value="$PROJECT_DIR$/src/main/services/api/account/user/user.service.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/api/api.module.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/api/api.service.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Auth/AuthPage.vue" />
+        <option value="$PROJECT_DIR$/src/main/app.module.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/utils/config.service.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/utils/socket-io.service.ts" />
+        <option value="$PROJECT_DIR$/config/config.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/module/git.service.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/module/local.module.service.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Layouts/Module.vue" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/modules/module-template/dist/index.js" />
+        <option value="$PROJECT_DIR$/modules/module-template/src/main.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/App.vue" />
+        <option value="$PROJECT_DIR$/src/main/global.d.ts" />
+        <option value="$PROJECT_DIR$/modules/module-template/tsconfig.json" />
+        <option value="$PROJECT_DIR$/src/main/services/api/account/user/user.dto.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/components/LoadingPage.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Loading.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/app.service.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/api/auth/auth.service.ts" />
+        <option value="$PROJECT_DIR$/cookies.json" />
+        <option value="$PROJECT_DIR$/modules/module-news/package.json" />
+        <option value="$PROJECT_DIR$/modules/module-news/src/index.ts" />
+        <option value="$PROJECT_DIR$/modules/module-news/src/index.html" />
+        <option value="$PROJECT_DIR$/modules/module-news/webpack.config.js" />
+        <option value="$PROJECT_DIR$/modules/module-template/src/style.css" />
+        <option value="$PROJECT_DIR$/modules/module-template/webpack.config.js" />
+        <option value="$PROJECT_DIR$/modules/module-template/src/index.vue" />
+        <option value="$PROJECT_DIR$/src/renderer/components/Home.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/module/module.service.ts" />
+        <option value="$PROJECT_DIR$/src/vue.d.ts" />
+        <option value="$PROJECT_DIR$/src/renderer/components/HomePage.vue" />
+        <option value="$PROJECT_DIR$/.electron-vue/webpack.renderer.config.js" />
+        <option value="$PROJECT_DIR$/src/renderer/main.ts" />
+        <option value="$PROJECT_DIR$/.electron-vue/webpack.web.config.js" />
+        <option value="$PROJECT_DIR$/modules/module-template/src/index.ts" />
+        <option value="$PROJECT_DIR$/src/main/services/api/register/register.service.ts" />
+        <option value="$PROJECT_DIR$/modules/module-youtube/src/index.ts" />
+        <option value="$PROJECT_DIR$/modules/module-template/src/index.html" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/modules/module-template/node_modules" />
+    <handled-path value="$PROJECT_DIR$/modules/module-test/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/build/mac/elios-mirror-com.app/Contents/Resources/app.asar.unpacked/node_modules/nodegit/package.json" />
+      <path value="$PROJECT_DIR$/modules/module-template/package.json" />
+      <path value="$PROJECT_DIR$/modules/module-test/package.json" />
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mirror" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mirror" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="register" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/hubert_i/EIP/Mirror/src/main/services/module/module.service.ts&#10;S&#9;FILE&#9;file:///Users/hubert_i/Emodyz/launcher-ezgames.eu/src/renderer/components/LandingPage/SystemInformation.vue" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536764181998" />
+    <property name="js.last.introduce.type" value="CONST" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="typescript-compiler-editor-notification" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modules" />
+      <recent name="$PROJECT_DIR$/modules/module-template" />
+      <recent name="$PROJECT_DIR$/node_modules/nodegit/build/Debug" />
+      <recent name="$PROJECT_DIR$/src/renderer/components" />
+      <recent name="$PROJECT_DIR$/src/renderer/components/Auth/Login" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/renderer/components/Auth" />
+      <recent name="$PROJECT_DIR$/src/renderer/assets" />
+      <recent name="$PROJECT_DIR$/src/renderer/themes" />
+      <recent name="$PROJECT_DIR$/src/renderer" />
+      <recent name="$PROJECT_DIR$/static/loadings" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="npm.dev">
+    <configuration name="build" type="js.build_tools.npm" factoryName="npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <package-manager value="npm" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.build" />
+      <item itemvalue="npm.dev" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4e2b7233-9eec-4a2c-95f2-ef3916565400" name="Default" comment="" />
+      <created>1525121239495</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1525121239495</updated>
+      <workItem from="1525121241987" duration="4090000" />
+      <workItem from="1525260114483" duration="13000" />
+      <workItem from="1525335718160" duration="142000" />
+      <workItem from="1525377086556" duration="3380000" />
+      <workItem from="1525681012222" duration="3223000" />
+      <workItem from="1525864111507" duration="1125000" />
+      <workItem from="1526139403304" duration="3117000" />
+      <workItem from="1526296576867" duration="3679000" />
+      <workItem from="1526315589688" duration="19361000" />
+      <workItem from="1526467630546" duration="4016000" />
+      <workItem from="1527072822818" duration="261000" />
+      <workItem from="1527796463769" duration="16256000" />
+      <workItem from="1528101604224" duration="8309000" />
+      <workItem from="1528129638555" duration="3989000" />
+      <workItem from="1528229928682" duration="985000" />
+      <workItem from="1528273639535" duration="6267000" />
+      <workItem from="1528408641164" duration="1164000" />
+      <workItem from="1528474058074" duration="678000" />
+      <workItem from="1528551930072" duration="16643000" />
+      <workItem from="1528670897773" duration="17669000" />
+      <workItem from="1528725346150" duration="74000" />
+      <workItem from="1528732667713" duration="136000" />
+      <workItem from="1528744436841" duration="10783000" />
+      <workItem from="1528790567566" duration="6792000" />
+      <workItem from="1528810776462" duration="81000" />
+      <workItem from="1528833647100" duration="5121000" />
+      <workItem from="1528922182606" duration="4215000" />
+      <workItem from="1528968219982" duration="443000" />
+      <workItem from="1529048232236" duration="659000" />
+      <workItem from="1530990741748" duration="13054000" />
+      <workItem from="1531124992696" duration="1026000" />
+      <workItem from="1531139716347" duration="3535000" />
+      <workItem from="1531207601923" duration="17814000" />
+      <workItem from="1531239825962" duration="662000" />
+      <workItem from="1531248050091" duration="739000" />
+      <workItem from="1531395159989" duration="1353000" />
+      <workItem from="1531396828130" duration="2588000" />
+      <workItem from="1531428068519" duration="1730000" />
+      <workItem from="1531468152298" duration="568000" />
+      <workItem from="1531472870950" duration="493000" />
+      <workItem from="1531482257924" duration="4961000" />
+      <workItem from="1531740710486" duration="6287000" />
+      <workItem from="1531756888651" duration="2871000" />
+      <workItem from="1531814092045" duration="2178000" />
+      <workItem from="1531821790203" duration="26646000" />
+      <workItem from="1531991479732" duration="10937000" />
+      <workItem from="1532012236742" duration="6647000" />
+      <workItem from="1535424214756" duration="59000" />
+      <workItem from="1535500143989" duration="2465000" />
+      <workItem from="1535567661327" duration="6858000" />
+      <workItem from="1535641620424" duration="5346000" />
+      <workItem from="1535724025299" duration="10122000" />
+      <workItem from="1535914220900" duration="8115000" />
+      <workItem from="1535937873199" duration="3929000" />
+      <workItem from="1535983730722" duration="13696000" />
+      <workItem from="1536069762568" duration="3890000" />
+      <workItem from="1536187582268" duration="4436000" />
+      <workItem from="1536351880033" duration="2661000" />
+      <workItem from="1536516605001" duration="2725000" />
+      <workItem from="1536602085558" duration="8680000" />
+      <workItem from="1536617158571" duration="2790000" />
+      <workItem from="1536679881647" duration="4343000" />
+      <workItem from="1536755444674" duration="801000" />
+      <workItem from="1536763965330" duration="150000" />
+      <workItem from="1536777785544" duration="16000" />
+      <workItem from="1536793287684" duration="2921000" />
+      <workItem from="1536814816363" duration="348000" />
+      <workItem from="1537047581968" duration="24000" />
+    </task>
+    <task id="LOCAL-00007" summary="Remove mocha test travis">
+      <created>1526330232149</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1526330232149</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add global DI #31">
+      <created>1526430192239</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1526430192240</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Remove Babili plugin from renderer">
+      <created>1526468051207</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1526468051207</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fix unit test with nodegit">
+      <created>1527800683916</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1527800683920</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fix unit test with nodegit">
+      <created>1527801813041</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1527801813041</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Add api-core Service &amp; Login Service">
+      <created>1528038369093</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1528038369093</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Prepare download modules by account">
+      <created>1528059401400</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1528059401400</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Add login page &amp; download modules testes">
+      <created>1528120035364</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1528120035364</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Add support of modules versions">
+      <created>1528278373526</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1528278373527</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Finish login system, now download module about account communities">
+      <created>1528561827379</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1528561827379</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Finish login system, now download module about account communities">
+      <created>1528562025335</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1528562025335</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Upgrade modulemanager and add logout function">
+      <created>1528651993269</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1528651993269</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Download modules on launch if user allready logged">
+      <created>1528656246555</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1528656246555</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Add new login style &amp;&amp; fix login redirect">
+      <created>1528711129021</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1528711129022</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Add HomePage and animation on load">
+      <created>1528810841396</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1528810841396</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Remove Yarn &amp;&amp; Update dependencies with nodejs 10">
+      <created>1530991893652</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1530991893653</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Add SocketService and Logout, Test button">
+      <created>1531125314863</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1531125314863</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Fix SocketService &amp;&amp; add unsubscribe to Observable&#10;Fix __Static">
+      <created>1531226828910</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1531226828910</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Remove element-theme &amp;&amp; fix windows module path">
+      <created>1531229546892</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1531229546892</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Fix windows">
+      <created>1531231062259</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1531231062259</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Fix delete path for windows">
+      <created>1531231517875</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1531231517875</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Try to fix Windows NodeGIt">
+      <created>1531234114610</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1531234114610</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Fix folder not created WIndows">
+      <created>1531234514488</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1531234514488</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Fix le fix">
+      <created>1531234625972</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1531234625972</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Fix some bugs, remove vue-class-componant &amp; more">
+      <created>1531430028073</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1531430028074</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Fix install script &amp; upgrade nodegit.&#10;Prepare download">
+      <created>1531759761352</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1531759761352</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Remove Tooltip &amp; fix css colors">
+      <created>1531819108396</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1531819108396</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Add tooltip">
+      <created>1531832819780</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1531832819780</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Improve launcher load system">
+      <created>1531837980493</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1531837980493</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Add topbar &amp;&amp; prepare body">
+      <created>1531904145067</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1531904145067</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Add fontawesome pro &amp;&amp; topbar">
+      <created>1531918226487</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1531918226487</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Fix css">
+      <created>1531932211764</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1531932211764</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Fix drag and drop css &amp; more">
+      <created>1531991565316</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1531991565316</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Add drag and drop">
+      <created>1532006962080</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1532006962080</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Add progress bar">
+      <created>1532014549205</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1532014549205</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Inprove animations">
+      <created>1532031064675</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1532031064675</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Clear auth &amp; loading">
+      <created>1535569398001</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1535569398001</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Clean home page">
+      <created>1535569951397</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1535569951397</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Add QRCode">
+      <created>1535572571114</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1535572571114</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Add register">
+      <created>1535576040266</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1535576040266</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Add socket-io">
+      <created>1535724247766</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1535724247766</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Add socket linked">
+      <created>1535725606733</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1535725606733</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Add local load modules system">
+      <created>1535830060231</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1535830060231</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Add module loaded">
+      <created>1535836246951</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1535836246952</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Add module loaded">
+      <created>1535915269562</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1535915269563</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Add module loaded">
+      <created>1535917520813</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1535917520813</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Add module loaded">
+      <created>1536003480650</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1536003480651</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Add first module">
+      <created>1536352726602</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1536352726603</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Add another module &amp; custom webpack loader">
+      <created>1536814887609</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1536814887610</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="398492000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22222222" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Designer" order="4" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="UI Designer" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.327551" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.84737486" weight="0.34183672" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8040293" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32959184" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32857144" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.86630034" weight="0.38265306" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32857144" />
+      <window_info anchor="bottom" id="Messages" order="12" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.15262516" side_tool="true" visible="true" weight="0.34183672" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Maven Projects" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Try to fix Windows NodeGIt" />
+    <MESSAGE value="Fix folder not created WIndows" />
+    <MESSAGE value="Fix le fix" />
+    <MESSAGE value="Fix some bugs, remove vue-class-componant &amp; more" />
+    <MESSAGE value="Fix install script &amp; upgrade nodegit.&#10;Prepare download" />
+    <MESSAGE value="Remove Tooltip &amp; fix css colors" />
+    <MESSAGE value="Add tooltip" />
+    <MESSAGE value="Improve launcher load system" />
+    <MESSAGE value="Add topbar &amp;&amp; prepare body" />
+    <MESSAGE value="Add fontawesome pro &amp;&amp; topbar" />
+    <MESSAGE value="Fix css" />
+    <MESSAGE value="Fix drag and drop css &amp; more" />
+    <MESSAGE value="Add drag and drop" />
+    <MESSAGE value="Add progress bar" />
+    <MESSAGE value="Inprove animations" />
+    <MESSAGE value="Clear auth &amp; loading" />
+    <MESSAGE value="Clean home page" />
+    <MESSAGE value="Add QRCode" />
+    <MESSAGE value="Add register" />
+    <MESSAGE value="Add socket-io" />
+    <MESSAGE value="Add socket linked" />
+    <MESSAGE value="Add local load modules system" />
+    <MESSAGE value="Add module loaded" />
+    <MESSAGE value="Add first module" />
+    <MESSAGE value="Add another module &amp; custom webpack loader" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add another module &amp; custom webpack loader" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/global.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/api/account/user/user.dto.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/AuthPage.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/utils/socket.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Loading.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Auth/Auth.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/LoadingPage.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/api/auth/auth.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="37" column="27" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-news/package.json" />
+    <entry file="file://$PROJECT_DIR$/src/main/services/module/git.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="753">
+          <caret line="79" column="17" selection-start-line="79" selection-start-column="17" selection-end-line="79" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/module/local.module.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cookies.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-news/src/index.ts" />
+    <entry file="file://$PROJECT_DIR$/modules/module-news/webpack.config.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/extract-text-webpack-plugin/dist/cjs.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/electron/renderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="5" column="377159" selection-start-line="5" selection-start-column="377159" selection-end-line="5" selection-end-column="377159" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/electron/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1260">
+          <caret line="5203" column="3" lean-forward="true" selection-start-line="5203" selection-start-column="3" selection-end-line="5203" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/electron/styles.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-news/src/index.html" />
+    <entry file="file://$PROJECT_DIR$/modules/module-template/src/style.css" />
+    <entry file="file://$USER_HOME$/.elios/modules/module-template/dist/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/test" />
+    <entry file="file://$PROJECT_DIR$/modules/module-template/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/dist/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.ejs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.electron-vue/dev-client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret line="3" column="5" lean-forward="true" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.electron-vue/webpack.web.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1470">
+          <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/module/module.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3105">
+          <caret line="210" selection-start-line="210" selection-end-line="210" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Home.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/HomePage.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="39" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/main.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vue.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.electron-vue/webpack.renderer.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="144" column="38" selection-start-line="144" selection-start-column="19" selection-end-line="144" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.electron-vue/webpack.main.config.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="uml://JavaScript-modules-diagram//Users/hubert_i/EIP/Mirror/src/main/index.ts">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$/src/main/index.ts</OriginalElement>
+          <nodes>
+            <node x="" y="">$PROJECT_DIR$/src/main/app.module.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/app.service.ts</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/inversify/dts/container/container.d.ts#Container#55;</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/di.ts</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/reflect-metadata/index.d.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/index.ts#AppService#121;/Users/hubert_i/EIP/Mirror/src/main/index.ts#Container#36;/Users/hubert_i/EIP/Mirror/src/main/index.ts#Di#170;/Users/hubert_i/EIP/Mirror/src/main/index.ts#index.d.ts#0;/Users/hubert_i/EIP/Mirror/src/main/index.ts#injectable#47;/Users/hubert_i/EIP/Mirror/src/main/index.ts#join#401;/Users/hubert_i/EIP/Mirror/src/main/index.ts#modules#85;</node>
+            <node x="" y="">$PROJECT_DIR$/node_modules/inversify/dts/annotation/injectable.d.ts#injectable#0;</node>
+            <node x="" y="">join;</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="279.0" y="224.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>Details</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JavaScript-modules-diagram//Users/hubert_i/EIP/Mirror/src/main/app.module.ts">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$/src/main/app.module.ts</OriginalElement>
+          <nodes>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/api/api.module.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/app.module.ts#Api#369;/Users/hubert_i/EIP/Mirror/src/main/app.module.ts#AppService#68;/Users/hubert_i/EIP/Mirror/src/main/app.module.ts#ConfigService#414;/Users/hubert_i/EIP/Mirror/src/main/app.module.ts#CookieService#235;/Users/hubert_i/EIP/Mirror/src/main/app.module.ts#GitService#179;/Users/hubert_i/EIP/Mirror/src/main/app.module.ts#LocalModuleService#296;/Users/hubert_i/EIP/Mirror/src/main/app.module.ts#LoggerService#7;/Users/hubert_i/EIP/Mirror/src/main/app.module.ts#ModuleService#117;/Users/hubert_i/EIP/Mirror/src/main/app.module.ts#SocketIoService#536;/Users/hubert_i/EIP/Mirror/src/main/app.module.ts#SocketService#475;</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/app.service.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/utils/config.service.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/utils/cookie.service.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/module/git.service.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/module/local.module.service.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/utils/logger.service.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/module/module.service.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/utils/socket-io.service.ts</node>
+            <node x="" y="">$PROJECT_DIR$/src/main/services/utils/socket.service.ts</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.8503953355594387" x="397.0" y="317.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>Details</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/app.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="69" column="38" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="45" column="11" lean-forward="true" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.vue" />
+    <entry file="file://$PROJECT_DIR$/src/main/services/api/register/register.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="41" lean-forward="true" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/module-youtube/src/index.ts" />
+    <entry file="file://$PROJECT_DIR$/modules/module-template/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
