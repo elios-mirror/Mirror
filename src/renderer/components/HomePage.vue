@@ -1,6 +1,6 @@
 <template>
-    <div class="modules">
-        <div v-for="module in modules" class="module" :key="module.id">
+    <div class="modules columns is-multiline is-desktop">
+        <div v-for="module in modules" class="module column" :key="module.name" v-bind:data-module="module.name">
             <div v-html="module"></div>
         </div>
     </div>
@@ -15,10 +15,5 @@
 <style scoped>
     .modules {
         padding: 10px;
-        display: block;
-        overflow: auto;
-    }
-    .module {
-        display: block;
     }
 </style>

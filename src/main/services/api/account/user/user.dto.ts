@@ -24,5 +24,4 @@ export default interface UserDTO {
     id: string;
     confirmed: boolean;
     communities: CommunityDTO[];
-
 }
