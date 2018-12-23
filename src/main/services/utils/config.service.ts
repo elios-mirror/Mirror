@@ -13,7 +13,8 @@ interface SocketsConfigDTO {
 
 interface ConfigDTO {
     api: ApiConfigDTO,
-    sockets: SocketsConfigDTO
+    sockets: SocketsConfigDTO,
+    model: String,
 }
 
 /**

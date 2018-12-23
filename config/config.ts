@@ -9,5 +9,6 @@ export default {
     sockets: {
         address: 'http://51.15.239.102',
         port: '4224'
-    }
+    },
+    model: 'LKD28376382'
 }

@@ -1,5 +1,7 @@
 import ApiService from "../api.service";
 import {injectable} from "inversify";
+import ConfigService from '../../utils/config.service';
+import config from "../../../../../config/config";
 
 interface RegisterDTO {
     status: string;
@@ -12,12 +14,11 @@ interface RegisterDTO {
 export default class RegisterService {
 
 
-    constructor(private apiService: ApiService) {}
+    constructor(private apiService: ApiService, private configService: ConfigService) {}
 
     register(): Promise<RegisterDTO> {
         return this.apiService.post('/api/mirrors', {
-            name: 'Miroir de test',
-            model: 'LKD28376382'
+            model: this.configService.get().model
         });
     }
 
