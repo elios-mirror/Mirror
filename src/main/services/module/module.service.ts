@@ -1,22 +1,14 @@
-import {injectable} from "inversify";
+import { injectable } from "inversify";
 import GitService from "./git.service";
 import LocalModuleService from "./local.module.service";
 import SocketService from "../utils/socket.service";
+import { async } from "rxjs/internal/scheduler/async";
 
 const path = require('path');
 
 const os = require('os');
 const fs = require('fs');
 const modulesPath = path.resolve(os.homedir(), '.elios', 'modules');
-
-let PluginManager: any;
-
-if (process.env.NODE_ENV !== 'testing') {
-    PluginManager = require("live-plugin-manager").PluginManager;
-    PluginManager = new PluginManager({
-        pluginsPath: modulesPath
-    });
-}
 
 export interface IModuleRepository {
     repository: string;
@@ -85,17 +77,25 @@ export default class ModuleService {
 
 
     private loadFromPath(modulePath: string, module: IModuleRepository) {
-        const moduleName = path.basename(module.repository);
-        return PluginManager.installFromPath(modulePath, {force: true}).then(async (m: any) => {
-            const moduleInfos = m;
-            m = PluginManager.require(moduleName);
+        return new Promise(async (resolve, reject) => {
+            const moduleName = path.basename(module.repository);
+
+            console.log(modulePath);
+    
+            function requireDynamically(path: string) {
+                path = path.split('\\').join('/'); // Normalize windows slashes
+                return eval(`require('${path}');`); // Ensure Webpack does not analyze the require statement
+            }
+    
+            let m = requireDynamically(modulePath);
+          
 
             if (m.default) {
                 m = new m.default(global.container);
             }
 
-            m.version = moduleInfos.version;
-            m.name = moduleInfos.name;
+            m.version = module.version;
+            m.name = moduleName;
             m.repository = module.repository;
 
             if (m.requireVersion) {
@@ -109,17 +109,19 @@ export default class ModuleService {
             }
 
             if (m.showOnStart) {
-                this.socketService.send('loading', {action: 'init_module', module: m.title ? m.title : m.name});
+                this.socketService.send('loading', { action: 'init_module', module: m.title ? m.title : m.name });
             }
             await m.init(null, () => {
                 console.log(m.name + ' module initialized !');
             });
             this.initializedModules[moduleName + '-' + module.version] = m;
-            return (m);
-        }).catch((res: any) => {
-            console.error(res);
-            return;
+            resolve(m);
+        }).catch((err) => {
+            console.error(err);
         });
+
+
+
     }
 
     /**
@@ -206,7 +208,7 @@ export default class ModuleService {
         });
     }
 
-    loadOrReloadDevModules () {
+    loadOrReloadDevModules() {
         const localModules = this.getDirectories(path.resolve('./modules'));
 
         localModules.forEach((moduleName: string) => {
@@ -255,11 +257,11 @@ export default class ModuleService {
      */
     clear() {
         const modules = this.getAll();
-        PluginManager.uninstallAll();
         Object.keys(modules).map((objectKey, index) => {
             const module = modules[objectKey];
             this.localModuleService.delete(module);
             delete this.initializedModules[module.name + '-' + module.version];
+            this.initializedModules = {};
         });
     }
 

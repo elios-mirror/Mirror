@@ -1,6 +1,5 @@
 import Vue from "vue";
 import SocketService from "../../main/services/utils/socket.service";
-import {remote} from 'electron';
 import ModuleService from "../../main/services/module/module.service";
 
 const fs = require('fs');

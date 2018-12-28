@@ -1,4 +1,4 @@
-import {injectable} from "inversify";
+import { injectable } from "inversify";
 import ApiService from "../api.service";
 import LoginDto from "./login.dto";
 import ConfigService from "../../utils/config.service";
@@ -6,6 +6,7 @@ import CookieService from "../../utils/cookie.service";
 import UserService from "../account/user/user.service";
 import ModuleService from "../../module/module.service";
 import UserDTO from "../account/user/user.dto";
+import MirrorService from "../mirror/mirror.service";
 
 @injectable()
 export default class AuthService {
@@ -13,8 +14,7 @@ export default class AuthService {
     private isReload: boolean = false;
 
     constructor(
-        private apiService: ApiService,
-        private configService: ConfigService,
+        private mirrorService: MirrorService,
         private cookieService: CookieService,
         private userService: UserService,
         private moduleService: ModuleService
@@ -42,34 +42,25 @@ export default class AuthService {
         this.isReload = true;
         return new Promise((resolve, reject) => {
 
-            this.userService
-                .get()
-                .then((res: UserDTO) => {
+            this.mirrorService.get().then((res) => {
 
-                    /*const communities = res.communities;
-
-                    for (let community of communities) {
-                        const servers = community.servers;
-
-                        for (let server of servers) {
-                            const module = server.module;
-                            this.moduleService.add({
-                                commit: module.commit,
-                                repository: module.repository,
-                                version: module.version
-                            });
-                        }
-                    }*/
-
-                    this.moduleService.loadAll().then(() => {
-                        this.isReload = false;
-                        resolve();
+                console.log(res);
+                
+                for (let module of res.modules) {
+                    this.moduleService.add({
+                        commit: module.commit,
+                        repository: module.module.repository,
+                        version: module.version
                     });
-                })
-                .catch(err => {
+                }
+                this.moduleService.loadAll().then(() => {
                     this.isReload = false;
-                    reject(err);
+                    resolve();
                 });
+            }).catch(err => {
+                this.isReload = false;
+                reject(err);
+            });;
         });
     }
 

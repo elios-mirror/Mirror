@@ -54,7 +54,9 @@ export default class AppService {
 
         this.socketService.on('loadModules').subscribe(() => {
             this.moduleService.clear();
-            this.moduleService.loadOrReloadDevModules();
+            if (process.env.NODE_ENV === 'development') {
+                this.moduleService.loadOrReloadDevModules();
+            }
             if (this.authService.canReload()) {
                 this.authService.loadModules().then(() => {
                     this.startApp();
@@ -82,7 +84,7 @@ export default class AppService {
     createWindow() {
 
         this.mainWindow = new BrowserWindow({
-            fullscreen: false,
+            fullscreen: true,
             show: false,
             frame: false,
             resizable: true,
