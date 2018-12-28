@@ -75,20 +75,22 @@ export default class ModuleService {
         });
     }
 
+    /**
+     * Load custom module with simple require and absolute path
+     * 
+     * @param {string} path
+     */
+    private requireDynamically(path: string) {
+        path = path.split('\\').join('/');
+        return eval(`require('${path}');`);
+    }
+
 
     private loadFromPath(modulePath: string, module: IModuleRepository) {
         return new Promise(async (resolve, reject) => {
             const moduleName = path.basename(module.repository);
 
-            console.log(modulePath);
-    
-            function requireDynamically(path: string) {
-                path = path.split('\\').join('/'); // Normalize windows slashes
-                return eval(`require('${path}');`); // Ensure Webpack does not analyze the require statement
-            }
-    
-            let m = requireDynamically(modulePath);
-          
+            let m = this.requireDynamically(modulePath);
 
             if (m.default) {
                 m = new m.default(global.container);
@@ -104,7 +106,7 @@ export default class ModuleService {
                     console.log('Version is ok!');
                 } else {
                     console.log('Version is incorrect. Skip module: ' + moduleName);
-                    return;
+                    reject(m);
                 }
             }
 
@@ -119,9 +121,6 @@ export default class ModuleService {
         }).catch((err) => {
             console.error(err);
         });
-
-
-
     }
 
     /**
@@ -162,7 +161,7 @@ export default class ModuleService {
                 });
             }
 
-            this.loadModule(module).then((m: any) => {
+            return this.loadModule(module).then((m: any) => {
                 if (!m) {
                     reject(m);
                     return;
@@ -190,7 +189,7 @@ export default class ModuleService {
                     let nextModule = this.modules[0];
                     this.socketService.send('loading', {
                         action: 'message',
-                        message: 'Download module: ' + path.basename(nextModule.repository) + ' v' + nextModule.version + ' <br>' + ((totalOfModules - this.modules.length) + 1) + '/' + totalOfModules
+                        message: 'Check module: ' + path.basename(nextModule.repository) + ' v' + nextModule.version + ' <br>' + ((totalOfModules - this.modules.length) + 1) + '/' + totalOfModules
                     });
                     this.check(nextModule).then(() => {
                         this.modules = this.modules.slice(1);

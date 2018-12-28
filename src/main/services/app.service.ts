@@ -45,8 +45,7 @@ export default class AppService {
             }
         });
 
-
-        if (!this.cookieService.has('id')) {
+        if (!this.cookieService.has('id') || !this.authService.isAuthenticated()) {
             this.registerMirror().then(() => {
 
             });
@@ -82,9 +81,8 @@ export default class AppService {
      * Create the mainWindow of your app
      */
     createWindow() {
-
         this.mainWindow = new BrowserWindow({
-            fullscreen: true,
+            // fullscreen: true,
             show: false,
             frame: false,
             resizable: true,
@@ -104,9 +102,7 @@ export default class AppService {
         this.mainWindow.loadURL(this.winUrl);
 
         this.mainWindow.once('ready-to-show', () => {
-
             this.mainWindow.show();
-
             this.startApp();
         });
 

@@ -22,7 +22,10 @@ export default class AuthService {
         if (cookieService.has("access_token")) {
             this.userService.get().then(() => {
                 this.isAuth = true;
-            });
+            }).catch(() => {
+                this.cookieService.delete("access_token");
+                this.cookieService.delete("refresh_token");
+            }) ;
         }
     }
 
