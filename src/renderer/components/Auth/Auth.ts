@@ -42,9 +42,6 @@ export default Vue.extend({
             authService.login(data.access_token);
             this.$router.push('/loading');
         });
-
-        //this.$router.push('/home');
-
     }
 
 });

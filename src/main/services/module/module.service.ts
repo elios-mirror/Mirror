@@ -271,6 +271,7 @@ export default class ModuleService {
             const module = modules[objectKey];
             this.localModuleService.delete(module);
             delete this.initializedModules[module.name + '-' + module.version];
+            this.initializedModules = {};
         });
     }
 
