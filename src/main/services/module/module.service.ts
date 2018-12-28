@@ -10,15 +10,6 @@ const os = require('os');
 const fs = require('fs');
 const modulesPath = path.resolve(os.homedir(), '.elios', 'modules');
 
-let PluginManager: any;
-
-if (process.env.NODE_ENV !== 'testing') {
-    PluginManager = require("live-plugin-manager").PluginManager;
-    PluginManager = new PluginManager({
-        pluginsPath: modulesPath
-    });
-}
-
 export interface IModuleRepository {
     repository: string;
     version: string;
@@ -266,7 +257,6 @@ export default class ModuleService {
      */
     clear() {
         const modules = this.getAll();
-        PluginManager.uninstallAll();
         Object.keys(modules).map((objectKey, index) => {
             const module = modules[objectKey];
             this.localModuleService.delete(module);
