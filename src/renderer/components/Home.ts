@@ -1,6 +1,6 @@
 import Vue from "vue";
 import SocketService from "../../main/services/utils/socket.service";
-import ModuleService, {IModule} from "../../main/services/module/module.service";
+import ModuleService, { IModule } from "../../main/services/module/module.service";
 
 const Handlebars = require('handlebars');
 

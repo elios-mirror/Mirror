@@ -40,7 +40,7 @@ export default Vue.extend({
 
         socketIoService.socket.on(`linked_${this.mirrorId}`, (data: LinkedDTO) => {
             authService.login(data.access_token);
-            this.$router.push('/home');
+            this.$router.push('/loading');
         });
 
         //this.$router.push('/home');
