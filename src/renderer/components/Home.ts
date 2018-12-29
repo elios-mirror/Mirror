@@ -47,11 +47,10 @@ export default Vue.extend({
         this.mirrorId = cookieService.get('id')
 
         const modules = moduleService.getAll();
-        for (let moduleName in modules) {
-            console.log(moduleName);
-            const module = modules[moduleName] as IModule;
+        for (let moduleInstallId in modules) {
+            const module = modules[moduleInstallId] as IModule;
             this.layout.push({
-                id: moduleName,
+                id: moduleInstallId,
                 hidden: false,
                 pinned: false,
                 position: {

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import AuthService from "../../../main/services/api/auth/auth.service";
+import AccountService from "../../../main/services/api/account/account.service";
 import CookieService from '../../../main/services/utils/cookie.service';
 import SocketIoService from "../../../main/services/utils/socket-io.service";
 import UserDTO from "../../../main/services/api/account/user/user.dto";
@@ -25,11 +25,11 @@ export default Vue.extend({
 
     },
     beforeMount() {
-        const authService = this.$container.get<AuthService>(AuthService.name);
+        const accountService = this.$container.get<AccountService>(AccountService.name);
         const cookieService = this.$container.get<CookieService>(CookieService.name);
         const socketIoService = this.$container.get<SocketIoService>(SocketIoService.name);
 
-        if (authService.isAuthenticated()) {
+        if (accountService.isAuthenticated()) {
             this.$router.push('/home');
             return;
         }
@@ -39,7 +39,7 @@ export default Vue.extend({
         }
 
         socketIoService.socket.on(`linked_${this.mirrorId}`, (data: LinkedDTO) => {
-            authService.login(data.access_token);
+            accountService.add(data.user.id, data.access_token);
             this.$router.push('/loading');
         });
     }

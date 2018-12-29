@@ -16,16 +16,23 @@ export default class ApiService {
         axios.defaults.headers.common['Content-Type'] = 'application/json';
     }
 
-    async request<T>(method: string, url: string, params: any = {}): Promise<T> {
+    async request<T>(method: string, url: string, params: any = {}, mirror: boolean): Promise<T> {
         let response: AxiosResponse<T>;
         const headers: any = {};
         const agent = new https.Agent({
             rejectUnauthorized: false
         });
 
-        if (this.cookieService.has('access_token')) {
-            headers['Authorization'] = 'Bearer ' + this.cookieService.get('access_token');
+        if (mirror) {
+            if (this.cookieService.has('access_token')) {
+                headers['Authorization'] = 'Bearer ' + this.cookieService.get('access_token');
+            }
+        } else {
+            if (this.cookieService.has('connected')) {
+                headers['Authorization'] = 'Bearer ' + this.cookieService.get('connected').access_token;
+            }
         }
+        
 
         console.log('request to ' + url);
 
@@ -42,11 +49,11 @@ export default class ApiService {
         return response.data;
     }
 
-    get<T>(url: string, params: any = {}) {
-        return this.request<T>('get', url, params);
+    get<T>(url: string, params: any = {}, mirror = false) {
+        return this.request<T>('get', url, params, mirror);
     }
 
-    post<T>(url: string, params: any = {}) {
-        return this.request<T>('post', url, params);
+    post<T>(url: string, params: any = {}, mirror = false) {
+        return this.request<T>('post', url, params, mirror);
     }
 }

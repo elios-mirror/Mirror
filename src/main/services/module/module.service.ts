@@ -11,6 +11,7 @@ const fs = require('fs');
 const modulesPath = path.resolve(os.homedir(), '.elios', 'modules');
 
 export interface IModuleRepository {
+    installId: string;
     repository: string;
     version: string;
     commit: string | null;
@@ -99,6 +100,7 @@ export default class ModuleService {
 
             m.version = module.version;
             m.name = moduleName;
+            m.installId = module.installId;
             m.repository = module.repository;
 
             if (m.requireVersion) {
@@ -117,7 +119,7 @@ export default class ModuleService {
             await m.init(null, () => {
                 console.log(m.name + ' module initialized !');
             });
-            this.initializedModules[moduleName + '-' + module.version] = m;
+            this.initializedModules[module.installId] = m;
             resolve(m);
         }).catch((err) => {
             console.error(err);
@@ -215,7 +217,8 @@ export default class ModuleService {
             this.loadFromPath(path.resolve('./modules', moduleName), {
                 repository: 'dev/' + moduleName,
                 commit: null,
-                version: 'dev'
+                version: 'dev',
+                installId: 'dev-' + moduleName
             }).then((m: any) => {
                 console.log('Local module loaded', moduleName)
             }).catch(() => {
@@ -260,7 +263,7 @@ export default class ModuleService {
         Object.keys(modules).map((objectKey, index) => {
             const module = modules[objectKey];
             this.localModuleService.delete(module);
-            delete this.initializedModules[module.name + '-' + module.version];
+            delete this.initializedModules[module.installId];
             this.initializedModules = {};
         });
     }

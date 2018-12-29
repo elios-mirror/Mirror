@@ -2,10 +2,9 @@ import { injectable } from "inversify";
 import { app, BrowserWindow, webFrame, globalShortcut } from 'electron';
 import ModuleService from './module/module.service';
 import LoggerService from "./utils/logger.service";
-import AuthService from "./api/auth/auth.service";
+import AccountService from "./api/account/account.service";
 import UserService from "./api/account/user/user.service";
 import SocketService from "./utils/socket.service";
-import RegisterService from "./api/register/register.service";
 import CookieService from "./utils/cookie.service";
 import MirrorService from "./api/mirror/mirror.service";
 
@@ -21,9 +20,9 @@ export default class AppService {
     private mainWindow: any;
 
     constructor(private moduleService: ModuleService, private loggerService: LoggerService,
-        private authService: AuthService, private userService: UserService,
-        private socketService: SocketService, private registerService: RegisterService,
-        private cookieService: CookieService, private mirrorService: MirrorService) {
+        private authService: AccountService, private userService: UserService,
+        private socketService: SocketService, private cookieService: CookieService,
+         private mirrorService: MirrorService) {
         this.loggerService.debug('Starting App in version: ' + global.version);
     }
 
@@ -49,9 +48,12 @@ export default class AppService {
         });
 
         if (this.cookieService.has('id')) {
-           // TODO : If Mirror Doesn't exitst registerMirror !!
-           // for that we need to create a custom token for mirror at the creation && mirror use this access_token for get own info
-           // When it link, api need to create another custom token for call API with this and API know what mirror send request with X account 
+          this.mirrorService.get().then((res) => {
+              console.log("Mirror ok ",  res);
+          }).catch(() => {
+            this.registerMirror().then(() => {
+            });
+          });
         } else {
             this.registerMirror().then(() => {
             });
@@ -74,9 +76,11 @@ export default class AppService {
 
     registerMirror() {
         return new Promise(resolve => {
-            this.registerService.register().then((res) => {
+            this.mirrorService.register().then((res) => {
                 this.cookieService.set('id', res.id);
                 this.cookieService.set('access_token', res.access_token);
+                this.cookieService.delete('accounts');
+                this.cookieService.delete('connected');
                 console.log(res);
             }).catch(error => {
                 console.log(error);
