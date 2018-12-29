@@ -54,6 +54,7 @@
     }
   },
   "dependencies": {
+    "@dattn/dnd-grid": "0.0.14",
     "@xkeshi/vue-qrcode": "^1.0.0",
     "axios": "^0.18.0",
     "buefy": "^0.6.6",

@@ -23,6 +23,7 @@ export interface IModule {
     requireVersion: number;
     showOnStart: boolean;
     template: any;
+    html: any;
     data: any;
     computed: any;
     start: () => any;

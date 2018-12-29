@@ -5,7 +5,9 @@ import SocketIoService from "../../main/services/utils/socket-io.service";
 import { MirrorDTO, ModuleVersionDTO } from '../../main/services/api/mirror/mirror.service';
 import CookieService from '../../main/services/utils/cookie.service';
 import UserDTO from '../../main/services/api/account/user/user.dto';
+import '@dattn/dnd-grid/dist/dnd-grid.css';
 
+const { Container, Box } = require('@dattn/dnd-grid');
 const Handlebars = require('handlebars');
 
 interface ModuleSocketDTO {
@@ -20,7 +22,16 @@ export default Vue.extend({
     data() {
         return {
             mirrorId: '' as string,
-            modules: [] as any
+            modules: [] as any,
+            cellSize: {
+                w: 25,
+                h: 25
+            },
+            maxColumnCount: 68,
+            maxRowCount: 37,
+            bubbleUp: false,
+            margin: 3,
+            layout: []
         };
     },
     methods: {},
@@ -29,12 +40,23 @@ export default Vue.extend({
         const moduleService = this.$container.get<ModuleService>(ModuleService.name);
         const cookieService = this.$container.get<CookieService>(CookieService.name);
         const socketIoService = this.$container.get<SocketIoService>(SocketIoService.name);
-        
+
         this.mirrorId = cookieService.get('id')
 
         const modules = moduleService.getAll();
         for (let moduleName in modules) {
+            console.log(moduleName);
             const module = modules[moduleName] as IModule;
+            this.layout.push({
+                id: moduleName,
+                hidden: false,
+                pinned: false,
+                position: {
+                    x: 0,
+                    y: 0,
+                    w: 8,
+                    h: 6
+            }} as never);
             module.start();
         }
 
@@ -44,7 +66,8 @@ export default Vue.extend({
             for (let moduleName in modules) {
                 const module = modules[moduleName] as IModule;
                 const template = Handlebars.compile(module.template);
-                this.modules.push(template(module.data));
+                module.html = template(module.data);
+                this.modules.push(module);
             }
         }, 100);
 
@@ -60,5 +83,9 @@ export default Vue.extend({
             this.$router.push('/loading');
         });
 
-    }
+    },
+    components: {
+        DndGridContainer: Container,
+        DndGridBox: Box
+    },
 });
