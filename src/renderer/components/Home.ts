@@ -19,6 +19,10 @@ interface ModuleSocketDTO {
 
 export default Vue.extend({
     name: "home-page",
+    components: {
+        DndGridContainer: Container,
+        DndGridBox: Box
+    },
     data() {
         return {
             mirrorId: '' as string,
@@ -34,7 +38,6 @@ export default Vue.extend({
             layout: []
         };
     },
-    methods: {},
     mounted() {
         const socketService = this.$container.get<SocketService>(SocketService.name);
         const moduleService = this.$container.get<ModuleService>(ModuleService.name);
@@ -84,8 +87,9 @@ export default Vue.extend({
         });
 
     },
-    components: {
-        DndGridContainer: Container,
-        DndGridBox: Box
-    },
+    methods: {
+        onLayoutUpdate (evt : any) {
+            this.layout = evt.layout
+        }
+    }
 });
