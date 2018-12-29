@@ -23,9 +23,8 @@ export default class AuthService {
             this.userService.get().then(() => {
                 this.isAuth = true;
             }).catch(() => {
-                this.cookieService.delete("access_token");
-                this.cookieService.delete("refresh_token");
-            }) ;
+               // TODO : REFACTOR AUTH SYSTEM MIROR
+            });
         }
     }
 
@@ -47,8 +46,6 @@ export default class AuthService {
 
             this.mirrorService.get().then((res) => {
 
-                console.log(res);
-                
                 for (let module of res.modules) {
                     this.moduleService.add({
                         commit: module.commit,

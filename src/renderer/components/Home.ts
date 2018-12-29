@@ -35,9 +35,7 @@ export default Vue.extend({
         const modules = moduleService.getAll();
         for (let moduleName in modules) {
             const module = modules[moduleName] as IModule;
-            if (!module) {
-                console.log(moduleName);
-            }
+            module.start();
         }
 
         const it = setInterval(() => {

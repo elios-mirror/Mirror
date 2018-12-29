@@ -14,7 +14,6 @@ export default class {
 
     constructor(private container: any) {
         console.log('Construtor');
-        console.log(container);
     }
 
     init() {

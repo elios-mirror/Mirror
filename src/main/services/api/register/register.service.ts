@@ -1,12 +1,12 @@
 import ApiService from "../api.service";
 import {injectable} from "inversify";
 import ConfigService from '../../utils/config.service';
-import config from "../../../../../config/config";
 
 interface RegisterDTO {
     status: string;
     message: string;
     id: string;
+    access_token: string;
 }
 
 
