@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import { app, BrowserWindow, webFrame, globalShortcut } from 'electron';
 import ModuleService from './module/module.service';
 import LoggerService from "./utils/logger.service";
-import AccountService from "./api/account/account.service";
+import AccountService, { AccountDTO } from "./api/account/account.service";
 import UserService from "./api/account/user/user.service";
 import SocketService from "./utils/socket.service";
 import CookieService from "./utils/cookie.service";
@@ -22,7 +22,7 @@ export default class AppService {
     constructor(private moduleService: ModuleService, private loggerService: LoggerService,
         private authService: AccountService, private userService: UserService,
         private socketService: SocketService, private cookieService: CookieService,
-         private mirrorService: MirrorService) {
+        private mirrorService: MirrorService) {
         this.loggerService.debug('Starting App in version: ' + global.version);
     }
 
@@ -47,31 +47,17 @@ export default class AppService {
             }
         });
 
-        if (this.cookieService.has('id')) {
-          this.mirrorService.get().then((res) => {
-              console.log("Mirror ok ",  res);
-          }).catch(() => {
-            this.registerMirror().then(() => {
+        if (this.cookieService.has('id') && this.cookieService.has('access_token')) {
+            this.mirrorService.get().then((res) => {
+                console.log("Mirror ok ", res);
+            }).catch(() => {
+                this.registerMirror().then(() => {
+                });
             });
-          });
         } else {
             this.registerMirror().then(() => {
             });
         }
-
-        this.socketService.on('loadModules').subscribe(() => {
-            this.moduleService.clear();
-            if (process.env.NODE_ENV === 'development') {
-                this.moduleService.loadOrReloadDevModules();
-            }
-            if (this.authService.canReload()) {
-                this.authService.loadModules().then(() => {
-                    this.startApp();
-                }).catch(() => {
-                    this.startApp();
-                });
-            }
-        });
     }
 
     registerMirror() {
@@ -114,7 +100,6 @@ export default class AppService {
 
         this.mainWindow.once('ready-to-show', () => {
             this.mainWindow.show();
-            this.startApp();
         });
 
         this.mainWindow.on('closed', () => {
@@ -122,33 +107,30 @@ export default class AppService {
         });
     }
 
-    startApp() {
-        this.socketService.send('loading', { action: 'message', message: 'DEMARAGE' });
-        if (this.authService.isAuthenticated()) {
-            this.userService.get().then(res => {
-                this.socketService.send('loading', {
-                    action: 'message',
-                    message: 'Bienvenue <font color="#FF8A65"> ' + res.name + ' </font>'
-                });
-            });
-        }
-        setTimeout(() => {
-            this.socketService.send('loading', { action: 'finished' });
-        }, 1500);
-    }
-
 
 
     registerShortcuts() {
 
+        globalShortcut.register('CommandOrControl+L', () => {
+            const accounts = this.cookieService.get('accounts');
+            const connected = this.cookieService.get('connected');
+            accounts.forEach((account: AccountDTO) => {
+                if (account.userId != connected.userId) {
+                    this.authService.loginAs(account.userId);
+                }
+            });
+        });
+        globalShortcut.register('CommandOrControl+N', () => {
+            this.socketService.send('accounts.login');
+        });
+
         globalShortcut.register('CommandOrControl+R', () => {
-            this.socketService.send('reload');
+            this.socketService.send('app.reload');
         });
 
         globalShortcut.register('CommandOrControl+T', () => {
             this.mainWindow.openDevTools();
         });
-
 
     }
 }

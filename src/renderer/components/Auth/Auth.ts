@@ -4,7 +4,6 @@ import CookieService from '../../../main/services/utils/cookie.service';
 import SocketIoService from "../../../main/services/utils/socket-io.service";
 import UserDTO from "../../../main/services/api/account/user/user.dto";
 
-
 interface LinkedDTO {
     access_token: string;
     user: UserDTO;
@@ -18,21 +17,11 @@ export default Vue.extend({
         }
     },
     methods: {
-
-        login: function () {
-            this.$router.push('/home');
-        }
-
     },
     beforeMount() {
         const accountService = this.$container.get<AccountService>(AccountService.name);
         const cookieService = this.$container.get<CookieService>(CookieService.name);
         const socketIoService = this.$container.get<SocketIoService>(SocketIoService.name);
-
-        if (accountService.isAuthenticated()) {
-            this.$router.push('/home');
-            return;
-        }
 
         if (cookieService.has('id')) {
             this.mirrorId = cookieService.get('id')

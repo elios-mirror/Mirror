@@ -3,6 +3,8 @@ import CookieService from "../../utils/cookie.service";
 import UserService from "./user/user.service";
 import ModuleService from "../../module/module.service";
 import MirrorService from "../mirror/mirror.service";
+import SocketService from "../../utils/socket.service";
+import { BehaviorSubject } from "rxjs";
 
 
 export interface AccountDTO {
@@ -12,7 +14,7 @@ export interface AccountDTO {
 
 @injectable()
 export default class AccountService {
-    private isAuth: boolean = false;
+    private isAuth: BehaviorSubject<boolean> = new BehaviorSubject(false);
     private isReload: boolean = false;
 
     private accounts: AccountDTO[] = [];
@@ -22,20 +24,27 @@ export default class AccountService {
         private mirrorService: MirrorService,
         private cookieService: CookieService,
         private userService: UserService,
-        private moduleService: ModuleService
+        private moduleService: ModuleService,
+        private socketService: SocketService
     ) {
         if (cookieService.has("accounts") && cookieService.has("connected")) {
             this.accounts = cookieService.get('accounts');
             this.connected = cookieService.get('connected');
             this.userService.get().then(() => {
-                this.isAuth = true;
-            })
+                this.isAuth.next(true);
+                this.socketService.send('app.reload');
+            }).catch(() => {
+              this.logout();
+            });
         }
     }
 
-    logout(userId: string) {
+    logout() {
         this.moduleService.clear();
-        this.isAuth = false;
+        this.isAuth.next(false);
+        this.accounts = [];
+        this.connected = null;
+        this.cookieService.delete('connected');
     }
 
     add(userId: string, access_token: string) {
@@ -45,8 +54,9 @@ export default class AccountService {
         } as AccountDTO;
         this.accounts.push(account);
         this.connected = account;
-        this.isAuth = true;
+        this.isAuth.next(true);
         this.save();
+        this.socketService.send('app.reload');        
     }
 
     get(userId: string): Promise<AccountDTO> {
@@ -79,13 +89,14 @@ export default class AccountService {
     loginAs(userId: string) {
         this.get(userId).then((account) => {
             const connectedAs = this.connected;
-            this.connected = account
-            this.userService.get().then(() => {
-                this.isAuth = true;
+            this.connected = account;
+            this.userService.get().then((user) => {
+                this.isAuth.next(true);
                 this.save();
+                this.socketService.send('app.reload');
                 this.loadModules();
             }).catch(() => {
-                this.isAuth = false;
+                this.isAuth.next(false);
                 this.connected = connectedAs;
             });
         })
@@ -111,7 +122,7 @@ export default class AccountService {
                     });
                 }).catch(err => {
                     this.isReload = false;
-                    this.isAuth = false;
+                    this.isAuth.next(false);
                     reject(err);
                 });;
             })
@@ -119,13 +130,11 @@ export default class AccountService {
         });
     }
 
-    isAuthenticated(): boolean {
+    isAuthenticated(): BehaviorSubject<boolean> {
         return this.isAuth;
     }
 
     canReload(): boolean {
         return this.isReload === false;
     }
-
-
 }

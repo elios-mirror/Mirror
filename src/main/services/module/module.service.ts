@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import GitService from "./git.service";
 import LocalModuleService from "./local.module.service";
 import SocketService from "../utils/socket.service";
-import { async } from "rxjs/internal/scheduler/async";
+import { BehaviorSubject } from 'rxjs';
 
 const path = require('path');
 
@@ -88,39 +88,40 @@ export default class ModuleService {
     }
 
 
-    private loadFromPath(modulePath: string, module: IModuleRepository) {
+    private loadFromPath(moduleAbsolutePath: string, moduleRepository: IModuleRepository) {
         return new Promise(async (resolve, reject) => {
-            const moduleName = path.basename(module.repository);
+            const moduleName = path.basename(moduleRepository.repository);
 
-            let m = this.requireDynamically(modulePath);
+            let module = this.requireDynamically(moduleAbsolutePath);
 
-            if (m.default) {
-                m = new m.default(global.container);
+            if (module.default) {
+                module = new module.default(global.container);
             }
 
-            m.version = module.version;
-            m.name = moduleName;
-            m.installId = module.installId;
-            m.repository = module.repository;
+            module.version = moduleRepository.version;
+            module.name = moduleName;
+            module.installId = moduleRepository.installId;
+            module.repository = moduleRepository.repository;
 
-            if (m.requireVersion) {
-                console.log('Check Launcher version for module ' + moduleName + ' - Minimum version:  ' + m.requireVersion + ' - Current version: ' + global.version);
-                if (ModuleService.cmpVersions(global.version, m.requireVersion) >= 0) {
+            if (module.requireVersion) {
+                console.log('Check Launcher version for module ' + moduleName + ' - Minimum version:  ' + module.requireVersion + ' - Current version: ' + global.version);
+                if (ModuleService.cmpVersions(global.version, module.requireVersion) >= 0) {
                     console.log('Version is ok!');
                 } else {
                     console.log('Version is incorrect. Skip module: ' + moduleName);
-                    reject(m);
+                    reject(module);
                 }
             }
 
-            if (m.showOnStart) {
-                this.socketService.send('loading', { action: 'init_module', module: m.title ? m.title : m.name });
+            if (module.showOnStart) {
+                this.socketService.send('modules.install.init', { action: 'init_module', module: module.title ? module.title : module.name });
             }
-            await m.init(null, () => {
-                console.log(m.name + ' module initialized !');
+            await module.init(null, () => {
+                console.log(module.name + ' module initialized !');
             });
-            this.initializedModules[module.installId] = m;
-            resolve(m);
+            console.log("installed module ", moduleRepository);
+            this.initializedModules[moduleRepository.installId] = module;
+            resolve(module);
         }).catch((err) => {
             console.error(err);
         });
@@ -142,7 +143,7 @@ export default class ModuleService {
      * @param {IModuleRepository} module
      * @returns {Promise<any>}
      */
-    check(module: IModuleRepository) {
+    private check(module: IModuleRepository) {
         return new Promise(async (resolve, reject) => {
 
             if (this.localModuleService.has(module)) {
@@ -184,25 +185,34 @@ export default class ModuleService {
     loadAll() {
         return new Promise((resolve) => {
             let totalOfModules = this.modules.length;
+            this.socketService.send('modules.load.start');
 
-            console.log('Loading modules...');
+            if (process.env.NODE_ENV === 'development') {
+                this.loadOrReloadDevModules();
+            }
 
             let loadNextModule = () => {
                 if (this.modules.length > 0) {
                     let nextModule = this.modules[0];
-                    this.socketService.send('loading', {
-                        action: 'message',
-                        message: 'Check module: ' + path.basename(nextModule.repository) + ' v' + nextModule.version + ' <br>' + ((totalOfModules - this.modules.length) + 1) + '/' + totalOfModules
+                    this.socketService.send('modules.install.start', {
+                        module: nextModule, stats: {
+                            total: totalOfModules,
+                            current: ((totalOfModules - this.modules.length) + 1)
+                        }
                     });
-                    this.check(nextModule).then(() => {
+
+                    this.check(nextModule).then((m) => {
                         this.modules = this.modules.slice(1);
+                        this.socketService.send('modules.install.end', { success: true, module: m });
                         loadNextModule();
                     }).catch(() => {
                         this.localModuleService.delete(nextModule);
                         this.modules = this.modules.slice(1);
+                        this.socketService.send('modules.install.end', { success: false });
                         loadNextModule();
                     });
                 } else {
+                    this.socketService.send('modules.load.end');
                     resolve();
                 }
             };
@@ -237,6 +247,27 @@ export default class ModuleService {
     }
 
     /**
+    * Directly install module
+    *
+    * @param {IModuleRepository} module
+    */
+    install(module: IModuleRepository): Promise<any> {
+        this.modules.push(module);
+        return this.loadAll();
+    }
+
+    /**
+    * Directly uinstall module
+    *
+    * @param {IModuleRepository} module
+    */
+    uninstall(): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+
+        });
+    }
+
+    /**
      * Get module by version
      *
      * @param {string} name
@@ -266,6 +297,7 @@ export default class ModuleService {
             delete this.initializedModules[module.installId];
             this.initializedModules = {};
         });
+
     }
 
 }
