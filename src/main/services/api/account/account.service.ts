@@ -5,11 +5,13 @@ import ModuleService from "../../module/module.service";
 import MirrorService from "../mirror/mirror.service";
 import SocketService from "../../utils/socket.service";
 import { BehaviorSubject } from "rxjs";
+import UserDTO from './user/user.dto';
 
 
 export interface AccountDTO {
-    userId: string;
+    user: UserDTO;
     access_token: string;
+    refresh_token: string;
 }
 
 @injectable()
@@ -54,13 +56,13 @@ export default class AccountService {
         this.save();
     }
 
-    add(userId: string, access_token: string) {
+    add(user: UserDTO, access_token: string) {
         const account = {
-            userId: userId,
+            user: user,
             access_token: access_token
         } as AccountDTO;
-        this.accounts.set(userId, account);
-        this.connected = account.userId;
+        this.accounts.set(user.id, account);
+        this.connected = account.user.id;
         this.isAuth.next(true);
         this.save();
         this.socketService.send('app.reload');
@@ -69,7 +71,7 @@ export default class AccountService {
     get(userId: string): Promise<AccountDTO> {
         return new Promise((resolve, reject) => {
             this.accounts.forEach((account) => {
-                if (account.userId === userId) {
+                if (account.user.id === userId) {
                     resolve(account);
                 }
             });
@@ -80,7 +82,7 @@ export default class AccountService {
     getConnected(): Promise<AccountDTO> {
         return new Promise((resolve, reject) => {
             this.accounts.forEach((account) => {
-                if (this.connected && account.userId === this.connected) {
+                if (this.connected && account.user.id === this.connected) {
                     resolve(account);
                 }
             });
@@ -119,7 +121,7 @@ export default class AccountService {
     loginAs(userId: string) {
         this.get(userId).then((account) => {
             const connectedAs = this.connected;
-            this.connected = account.userId;
+            this.connected = account.user.id;
             this.userService.get().then((user) => {
                 this.isAuth.next(true);
                 this.save();
@@ -136,8 +138,8 @@ export default class AccountService {
         this.isReload = true;
         return new Promise((resolve, reject) => {
 
-            this.getConnected().then((user) => {
-                this.mirrorService.getModules(user.userId).then((modules) => {
+            this.getConnected().then((account) => {
+                this.mirrorService.getModules(account.user.id).then((modules) => {
                     for (let module of modules) {
                         this.moduleService.add({
                             commit: module.commit,
@@ -155,6 +157,8 @@ export default class AccountService {
                     this.isAuth.next(false);
                     reject(err);
                 });;
+            }).catch((err) => {
+                console.error(err);
             })
 
         });

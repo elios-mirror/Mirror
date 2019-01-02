@@ -19,10 +19,10 @@ export default Vue.extend({
     mounted() {
         if (this.accountService.isAuthenticated()) {
             this.moduleService.clear();
-            this.accountService.loadModules().then();
+            this.accountService.loadModules().then(res => console.log(res)).catch((err) => console.log(err));
         }
 
-        this.socketSub = this.socketService.on('modules.install.start').subscribe((data) => {
+        this.socketSub = this.socketService.on('modules.install.start').subscribe((data: any) => {
             this.message = `Installation of ${data.module.repository}-${data.module.version}  |  ${data.stats.current} / ${data.stats.total}`;
         });
 

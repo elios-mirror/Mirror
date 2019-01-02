@@ -61,7 +61,7 @@ export default Vue.extend({
         }, 100);
 
 
-        socketService.on('modules.install.end').subscribe((data) => {
+        socketService.on('modules.install.end').subscribe((data: any) => {
             if (data.success) {
                 modules[data.module.installId] = data.module
                 this.layout.push({

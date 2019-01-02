@@ -114,9 +114,9 @@ export default class AppService {
         globalShortcut.register('CommandOrControl+L', () => {
             this.authService.getConnected().then((connected) => {
                 const accounts = this.authService.getAccounts();
-                accounts.forEach((account: any) => {
-                    if (account.userId != connected.userId) {
-                        this.authService.loginAs(account.userId);
+                accounts.forEach((account) => {
+                    if (account.user.id != connected.user.id) {
+                        this.authService.loginAs(account.user.id);
                     }
                 });
             });
