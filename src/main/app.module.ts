@@ -8,6 +8,7 @@ import Api from './services/api/api.module';
 import ConfigService from "./services/utils/config.service";
 import SocketService from "./services/utils/socket.service";
 import SocketIoService from "./services/utils/socket-io.service";
+import FaceRecognitionService from './services/faceid/facerecognition.service';
 
 /**
  * List of classes what you want to be autoInjectable
@@ -25,5 +26,6 @@ export default [
     AppService,
     CookieService,
     ModuleService,
+    FaceRecognitionService,
     ConfigService
 ]

@@ -3,6 +3,7 @@ import AccountService, { AccountDTO } from "../../../main/services/api/account/a
 import CookieService from '../../../main/services/utils/cookie.service';
 import SocketIoService from "../../../main/services/utils/socket-io.service";
 import UserDTO from "../../../main/services/api/account/user/user.dto";
+import FaceRecognitionService from '../../../main/services/faceid/facerecognition.service';
 
 interface LinkedDTO {
     access_token: string;
@@ -14,7 +15,8 @@ export default Vue.extend({
         return {
             mirrorId: '',
             accounts: [] as AccountDTO[],
-            accountService: this.$container.get<AccountService>(AccountService.name)
+            accountService: this.$container.get<AccountService>(AccountService.name),
+            faceRecognitionService: this.$container.get<FaceRecognitionService>(FaceRecognitionService.name)
         }
     },
     methods: {
@@ -25,6 +27,8 @@ export default Vue.extend({
     beforeMount() {
         const cookieService = this.$container.get<CookieService>(CookieService.name);
         const socketIoService = this.$container.get<SocketIoService>(SocketIoService.name);
+        this.faceRecognitionService.start();
+
 
         if (cookieService.has('id')) {
             this.mirrorId = cookieService.get('id')
@@ -36,6 +40,9 @@ export default Vue.extend({
             this.accountService.add(data.user, data.access_token);
             this.$router.push('/loading');
         });
+    },
+    beforeDestroy() {
+        this.faceRecognitionService.stop();
     }
 
 });

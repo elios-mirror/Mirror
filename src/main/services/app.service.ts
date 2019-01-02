@@ -33,6 +33,7 @@ export default class AppService {
         app.on('ready', () => {
             this.createWindow();
             this.registerShortcuts();
+            this.socketService.send('app.ready');
         });
 
         app.on('window-all-closed', () => {

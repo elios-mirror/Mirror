@@ -14,6 +14,7 @@ import { MirrorDTO, ModuleVersionDTO } from '../main/services/api/mirror/mirror.
 import UserDTO from "../main/services/api/account/user/user.dto";
 import CookieService from '../main/services/utils/cookie.service';
 import ModuleService from "../main/services/module/module.service";
+import FaceRecognitionService from '../main/services/faceid/facerecognition.service';
 
 const Buefy = require('buefy');
 const VueQrcode = require('@xkeshi/vue-qrcode');
@@ -58,7 +59,6 @@ interface ModuleSocketDTO {
     user: UserDTO;
     module: ModuleVersionDTO;
 }
-
 
 const socketService = container.get<SocketService>(SocketService.name);
 const moduleService = container.get<ModuleService>(ModuleService.name);
