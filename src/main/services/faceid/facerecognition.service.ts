@@ -2,6 +2,7 @@ import { injectable } from 'inversify';
 import AccountService from '../api/account/account.service';
 import * as cv from 'opencv4nodejs';
 import * as fr from 'face-recognition';
+import SocketService from '../utils/socket.service';
 
 const path = require('path')
 const fs = require('fs')
@@ -18,8 +19,11 @@ export default class FaceRecognitionService {
   private classifier = new cv.CascadeClassifier(cv.HAAR_FRONTALFACE_ALT2);
   private classNames = ['leo'];
 
-  intvl: any = null;
-  cap: any = cv.Mat;
+  private intvl: any = null;
+  private cap: cv.VideoCapture | null = null;
+
+  private connected = null as string | null;
+
 
 
   /**
@@ -28,7 +32,7 @@ export default class FaceRecognitionService {
   private unknownThreshold = 0.6;
   private minDetections = 5;
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private socketService: SocketService) {
     fr.withCv(cv);
     this.init();
   }
@@ -45,21 +49,7 @@ export default class FaceRecognitionService {
   }
 
   private init() {
-    if (!fs.existsSync(trainedModelFilePath)) {
-      console.log('%s not found, start training recognizer...', trainedModelFile)
-      const allFiles = fs.readdirSync(facesPath)
-      const imagesByClass = this.classNames.map(c =>
-        allFiles
-          .filter((f: any) => f.includes(c))
-          .map((f: any) => path.join(facesPath, f))
-          .map((fp: any) => fr.loadImage(fp))
-      )
-
-      imagesByClass.forEach((faces, label) =>
-        this.recognizer.addFaces(faces, this.classNames[label]))
-
-      fs.writeFileSync(trainedModelFilePath, JSON.stringify(this.recognizer.serialize()));
-    } else {
+    if (fs.existsSync(trainedModelFilePath)) {
       console.log('found %s, loading model', trainedModelFile);
 
       this.recognizer.load(eval(`require('${trainedModelFilePath.split('\\').join('/')}');`))
@@ -69,14 +59,36 @@ export default class FaceRecognitionService {
     }
   }
 
+  addFace() {
+    this.cap = new cv.VideoCapture(0);
+    let frame = this.cap.read();
+    // loop back to start on end of stream reached
+    if (frame.empty) {
+      this.cap.reset();
+      frame = this.cap.read();
+    }
+
+    const frameResized = frame.resizeToMax(800);
+    const faceRects = this.detectFaces(frameResized, 150);
+    if (faceRects.length) {
+      faceRects.forEach((det) => {
+        const cvFace = new fr.CvImage(det.face);
+        this.recognizer.addFaces([fr.cvImageToImageRGB(cvFace)], 'remi')
+      })
+    }
+    this.stop();
+  }
+
   start() {
-    let connected = null as any;
 
     let timeout = null as any;
 
 
     this.cap = new cv.VideoCapture(0);
     this.intvl = setInterval(() => {
+      if (!this.cap) {
+        return;
+      }
       let frame = this.cap.read();
       // loop back to start on end of stream reached
       if (frame.empty) {
@@ -89,23 +101,26 @@ export default class FaceRecognitionService {
       const faceRects = this.detectFaces(frameResized, 150);
       if (faceRects.length) {
         // draw detection
-        faceRects.forEach((det: any) => {
+        faceRects.forEach((det) => {
           const { rect, face } = det;
           const cvFace = new fr.CvImage(face);
           const prediction = this.recognizer.predictBest(fr.cvImageToImageRGB(cvFace), this.unknownThreshold);
-          if (prediction.className != 'unknown' && prediction.className != connected) {
+          if (prediction.className != 'unknown' && prediction.className != this.connected) {
             console.log(prediction);
-            connected = prediction.className;
-          } else if (prediction.className != 'unknown' && prediction.className == connected) {
+            this.connected = prediction.className;
+          } else if (prediction.className != 'unknown' && prediction.className == this.connected) {
             clearTimeout(timeout);
             timeout = setTimeout(() => {
-              connected = null;
-              console.log("disconneted", connected);
+              this.connected = null;
+              console.log("disconneted", this.connected);
             }, 10000);
           }
-          // const text = `${prediction.className} (${prediction.distance})`
-          // const blue = new cv.Vec3(255, 0, 0);
-          // drawRectWithText(frameResized, rect, text, blue)
+          const text = `${prediction.className} (${prediction.distance})`
+          const blue = new cv.Vec3(255, 0, 0);
+          this.drawRectWithText(frameResized, rect, text, blue)
+          const outBase64 = cv.imencode('.jpg', frameResized).toString('base64');
+          const htmlImg = '<img src=data:image/jpeg;base64,' + outBase64 + '>';
+          this.socketService.send('faceid.face', { html: htmlImg });
         });
       }
 
@@ -122,14 +137,11 @@ export default class FaceRecognitionService {
     this.cap = null;
   }
 
-
-
-
   /**
    * Debug draw functions 
    */
 
-  drawRectWithText(image: any, rect: cv.Rect, text: string, color: cv.Vec) {
+  private drawRectWithText(image: any, rect: cv.Rect, text: string, color: cv.Vec) {
     const thickness = 1;
     image.drawRectangle(
       new cv.Point2(rect.x, rect.y),
