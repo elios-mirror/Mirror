@@ -88,6 +88,10 @@ export default class AccountService {
         });
     }
 
+    getAccounts(): Map<string, AccountDTO> {
+        return this.accounts;
+    }
+
     mapToObj(inputMap: Map<string, AccountDTO>) {
         let obj = {} as any;
 

@@ -112,12 +112,13 @@ export default class AppService {
     registerShortcuts() {
 
         globalShortcut.register('CommandOrControl+L', () => {
-            const accounts = this.cookieService.get('accounts');
-            const connected = this.cookieService.get('connected');
-            accounts.forEach((account: AccountDTO) => {
-                if (account.userId != connected.userId) {
-                    this.authService.loginAs(account.userId);
-                }
+            this.authService.getConnected().then((connected) => {
+                const accounts = this.authService.getAccounts();
+                accounts.forEach((account: any) => {
+                    if (account.userId != connected.userId) {
+                        this.authService.loginAs(account.userId);
+                    }
+                });
             });
         });
         globalShortcut.register('CommandOrControl+N', () => {
