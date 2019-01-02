@@ -1,7 +1,8 @@
-import {injectable} from "inversify";
+import { injectable } from "inversify";
 import CookieService from "../utils/cookie.service";
-import axios, {AxiosPromise, AxiosResponse} from 'axios';
+import axios, { AxiosPromise, AxiosResponse } from 'axios';
 import ConfigService from "../utils/config.service";
+import AccountService, { AccountDTO } from "./account/account.service";
 
 const https = require('https');
 
@@ -28,11 +29,15 @@ export default class ApiService {
                 headers['Authorization'] = 'Bearer ' + this.cookieService.get('access_token');
             }
         } else {
-            if (this.cookieService.has('connected')) {
-                headers['Authorization'] = 'Bearer ' + this.cookieService.get('connected').access_token;
+            if (this.cookieService.has('connected') && this.cookieService.has('accounts')) {
+                const userConnectedId = this.cookieService.get('connected');
+                const accounts = this.cookieService.get('accounts');
+                const account = accounts[userConnectedId];
+                if (account) {
+                    headers['Authorization'] = 'Bearer ' + account.access_token;
+                }
             }
         }
-        
 
         console.log('request to ' + url);
 

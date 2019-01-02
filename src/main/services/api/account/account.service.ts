@@ -17,8 +17,8 @@ export default class AccountService {
     private isAuth: BehaviorSubject<boolean> = new BehaviorSubject(false);
     private isReload: boolean = false;
 
-    private accounts: AccountDTO[] = [];
-    private connected: AccountDTO | null = null;
+    private accounts: Map<string, AccountDTO> = new Map<string, AccountDTO>();
+    private connected: string | null = null;
 
     constructor(
         private mirrorService: MirrorService,
@@ -28,23 +28,30 @@ export default class AccountService {
         private socketService: SocketService
     ) {
         if (cookieService.has("accounts") && cookieService.has("connected")) {
-            this.accounts = cookieService.get('accounts');
+            this.accounts = this.buildMap(cookieService.get('accounts'));
             this.connected = cookieService.get('connected');
             this.userService.get().then(() => {
                 this.isAuth.next(true);
-                this.socketService.send('app.reload');
+                this.socketService.send('app.reload'); // TODO : remove that !
             }).catch(() => {
-              this.logout();
+                this.logout(this.connected);
             });
         }
     }
 
-    logout() {
-        this.moduleService.clear();
+    logout(userId: null | string = null) {
         this.isAuth.next(false);
-        this.accounts = [];
-        this.connected = null;
-        this.cookieService.delete('connected');
+        if (this.connected && this.connected == userId) {
+            this.moduleService.clear();
+            this.connected = null;
+            this.cookieService.delete('connected');
+        }
+        if (userId) {
+            this.accounts.delete(userId);
+        } else {
+            this.accounts.clear();
+        }
+        this.save();
     }
 
     add(userId: string, access_token: string) {
@@ -52,11 +59,11 @@ export default class AccountService {
             userId: userId,
             access_token: access_token
         } as AccountDTO;
-        this.accounts.push(account);
-        this.connected = account;
+        this.accounts.set(userId, account);
+        this.connected = account.userId;
         this.isAuth.next(true);
         this.save();
-        this.socketService.send('app.reload');        
+        this.socketService.send('app.reload');
     }
 
     get(userId: string): Promise<AccountDTO> {
@@ -73,7 +80,7 @@ export default class AccountService {
     getConnected(): Promise<AccountDTO> {
         return new Promise((resolve, reject) => {
             this.accounts.forEach((account) => {
-                if (this.connected && account.userId === this.connected.userId) {
+                if (this.connected && account.userId === this.connected) {
                     resolve(account);
                 }
             });
@@ -81,15 +88,34 @@ export default class AccountService {
         });
     }
 
+    mapToObj(inputMap: Map<string, AccountDTO>) {
+        let obj = {} as any;
+
+        inputMap.forEach(function (value, key) {
+            obj[key] = value
+        });
+
+        return obj;
+    }
+
+    buildMap(obj: any) {
+        let map = new Map();
+        Object.keys(obj).forEach(key => {
+            map.set(key, obj[key]);
+        });
+        return map;
+    }
+
+
     save() {
-        this.cookieService.set('accounts', this.accounts);
+        this.cookieService.set('accounts', this.mapToObj(this.accounts));
         this.cookieService.set('connected', this.connected);
     }
 
     loginAs(userId: string) {
         this.get(userId).then((account) => {
             const connectedAs = this.connected;
-            this.connected = account;
+            this.connected = account.userId;
             this.userService.get().then((user) => {
                 this.isAuth.next(true);
                 this.save();

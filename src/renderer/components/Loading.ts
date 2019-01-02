@@ -23,7 +23,7 @@ export default Vue.extend({
         }
 
         this.socketSub = this.socketService.on('modules.install.start').subscribe((data) => {
-            this.message = `Installation of ${data.module.name} - ${data.stats.current} / ${data.stats.total}`;
+            this.message = `Installation of ${data.module.repository}-${data.module.version}  |  ${data.stats.current} / ${data.stats.total}`;
         });
 
         const sub = this.socketService.on('modules.load.end').subscribe((data) => {
