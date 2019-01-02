@@ -27,7 +27,6 @@ export default Vue.extend({
     beforeMount() {
         const cookieService = this.$container.get<CookieService>(CookieService.name);
         const socketIoService = this.$container.get<SocketIoService>(SocketIoService.name);
-        this.faceRecognitionService.start();
 
 
         if (cookieService.has('id')) {
@@ -40,6 +39,9 @@ export default Vue.extend({
             this.accountService.add(data.user, data.access_token);
             this.$router.push('/loading');
         });
+    },
+    mounted() {
+        this.faceRecognitionService.start();
     },
     beforeDestroy() {
         this.faceRecognitionService.stop();
