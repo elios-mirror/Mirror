@@ -126,6 +126,20 @@ export default class AppService {
                         }
                     },
                     {
+                        label: 'TEST',
+                        accelerator: 'CmdOrCtrl+T',
+                        click() {
+                            that.socketService.send('test');
+                        }
+                    },
+                    {
+                        label: 'Dev Tools',
+                        accelerator: 'CmdOrCtrl+Option+I',
+                        click() {
+                            that.mainWindow.toggleDevTools();
+                        }
+                    },
+                    {
                         label: 'Exit',
                         accelerator: 'CmdOrCtrl+Q',
                         click() {
@@ -162,13 +176,6 @@ export default class AppService {
                                     }
                                 });
                             });
-                        }
-                    },
-                    {
-                        label: 'TEST',
-                        accelerator: 'CmdOrCtrl+T',
-                        click() {
-                           that.faceRecognitionService.addFace();
                         }
                     },
                     {

@@ -29,6 +29,8 @@ export default class FaceRecognitionService {
   /**
    * Settings 
    */
+  private camFps = 10;
+  private camInterval = 1000 / this.camFps;
   private unknownThreshold = 0.6;
   private minDetections = 5;
 
@@ -56,6 +58,8 @@ export default class FaceRecognitionService {
 
       console.log('imported the following descriptors:')
       console.log(this.recognizer.getDescriptorState())
+    } else {
+      fs.writeFileSync(trainedModelFilePath, JSON.stringify(this.recognizer.serialize()));
     }
   }
 
@@ -73,10 +77,32 @@ export default class FaceRecognitionService {
     if (faceRects.length) {
       faceRects.forEach((det) => {
         const cvFace = new fr.CvImage(det.face);
-        this.recognizer.addFaces([fr.cvImageToImageRGB(cvFace)], 'remi')
+        this.accountService.getConnected().then((account) => {
+          this.recognizer.addFaces([fr.cvImageToImageRGB(cvFace)], account.user.id)
+        });
       })
     }
+    fs.writeFileSync(trainedModelFilePath, JSON.stringify(this.recognizer.serialize()));
     this.stop();
+  }
+
+
+  test() {
+    this.cap = new cv.VideoCapture(0);
+
+    this.intvl = setInterval(() => {
+      if (!this.cap)
+        return;
+      let frame = this.cap.read();
+      if (frame.empty) {
+        this.cap.reset();
+        frame = this.cap.read();
+      }
+      const frameResized = frame.resizeToMax(800);
+      const outBase64 = cv.imencode('.jpg', frameResized).toString('base64');
+      const htmlImg = '<img src=data:image/jpeg;base64,' + outBase64 + '>';
+      this.socketService.send('faceid.face', { html: htmlImg });
+    }, this.camInterval);
   }
 
   start() {
@@ -108,6 +134,7 @@ export default class FaceRecognitionService {
           if (prediction.className != 'unknown' && prediction.className != this.connected) {
             console.log(prediction);
             this.connected = prediction.className;
+            this.accountService.loginAs(this.connected);
           } else if (prediction.className != 'unknown' && prediction.className == this.connected) {
             clearTimeout(timeout);
             timeout = setTimeout(() => {

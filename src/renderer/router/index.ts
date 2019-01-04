@@ -21,6 +21,11 @@ export default new Router({
             component: require('@/components/Auth/AuthPage').default
         },
         {
+            path: '/faceid',
+            name: 'faceid',
+            component: require('@/components/FaceID/FaceIDPage').default
+        },
+        {
             path: '*',
             redirect: '/'
         }

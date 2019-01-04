@@ -78,7 +78,6 @@ socketService.on('app.reload').subscribe(() => {
 socketIoService.socket.on(`module_${mirrorId}`, (data: ModuleSocketDTO) => {
     if (data.action === 'install') {
         console.log('install module', data.module);
-        // accountService.loadModules();
         moduleService.install({
             commit: data.module.commit,
             repository: data.module.module.repository,
@@ -96,10 +95,19 @@ socketIoService.socket.on(`module_${mirrorId}`, (data: ModuleSocketDTO) => {
 accountService.isAuthenticated().subscribe((isAuth) => {
     if (isAuth) {
         vm.$router.push('/loading');
+        // vm.$router.push('/faceid');
+
     } else {
         vm.$router.push('/auth');
     }
 })
+
+socketService.on('test').subscribe(() => {
+    vm.$router.push('/faceid');
+});
+
+
+
 
 /**
  * Prevent drop file on window
