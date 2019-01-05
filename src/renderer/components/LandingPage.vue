@@ -37,7 +37,7 @@
 <script lang="ts">
     import Vue from "vue";
     import SystemInformation from "./LandingPage/SystemInformation.vue";
-    import AuthService from "../../main/services/api/auth/auth.service";
+import AccountService from "../../main/services/api/account/account.service";
 
     export default Vue.extend({
         name: "landing-page",
@@ -47,7 +47,7 @@
                 this.$electron.shell.openExternal(link);
             },
             logout() {
-                const authService = this.$container.get<AuthService>(AuthService.name);
+                const authService = this.$container.get<AccountService>(AccountService.name);
                 authService.logout();
                 this.$router.push('/auth');
             },

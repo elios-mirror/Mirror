@@ -8,13 +8,13 @@
     :bubbleUp="bubbleUp"
   >
     <dnd-grid-box
-      v-for="module in modules"
+      v-for="widget in widgets"
       class="module"
-      :key="module.installId"
-      :boxId="module.installId"
-      v-bind:data-module="module.installId"
+      :key="widget.id"
+      :boxId="widget.id"
+      v-bind:data-module="widget.id"
     >
-      <div v-html="module.html"></div>
+      <div v-html="widget.html"></div>
     </dnd-grid-box>
   </dnd-grid-container>
 </template>

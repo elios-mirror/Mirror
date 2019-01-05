@@ -14,28 +14,17 @@ export default class {
 
     constructor(private container: any) {
         console.log('Construtor');
-        console.log(container);
     }
 
     init() {
         console.log('MODULE DEV LOADED');
-        setInterval(() => {
-            const date = new Date();
-            this.data.body = date.getHours() + ' - ' + date.getMinutes() + ' - ' + date.getSeconds()
-            setTimeout(() => {
-                const date = new Date();
-                this.data.body = date.getHours() + ' : ' + date.getMinutes() + ' : ' + date.getSeconds()
-            }, 500);
-        }, 1000);
+       
 
     }
 
     start() {
         console.log('MODULE STARTED');
 
-        const userService = this.container.get('UserService');
-        userService.get().then((res: any) => {
-            this.data.title = `L'horloge de - ${res.name}`;
-        })
+       
     }
 }

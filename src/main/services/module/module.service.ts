@@ -3,6 +3,7 @@ import GitService from "./git.service";
 import LocalModuleService from "./local.module.service";
 import SocketService from "../utils/socket.service";
 import { BehaviorSubject } from 'rxjs';
+import Elios from "../../elios/elios.controller";
 
 const path = require('path');
 
@@ -43,7 +44,7 @@ export default class ModuleService {
      * @param {LocalModuleService} localModuleService
      * @param {SocketService} socketService
      */
-    constructor(private gitService: GitService, private localModuleService: LocalModuleService, private socketService: SocketService) {
+    constructor(private gitService: GitService, private localModuleService: LocalModuleService, private socketService: SocketService, private eliosController: Elios) {
 
     }
 
@@ -95,7 +96,7 @@ export default class ModuleService {
             let module = this.requireDynamically(moduleAbsolutePath);
 
             if (module.default) {
-                module = new module.default(global.container);
+                module = new module.default(this.eliosController);
             }
 
             module.version = moduleRepository.version;
@@ -110,12 +111,14 @@ export default class ModuleService {
                 } else {
                     console.log('Version is incorrect. Skip module: ' + moduleName);
                     reject(module);
+                    return;
                 }
             }
 
             if (module.showOnStart) {
                 this.socketService.send('modules.install.init', { action: 'init_module', module: module.title ? module.title : module.name });
             }
+            
             await module.init(null, () => {
                 console.log(module.name + ' module initialized !');
             });
