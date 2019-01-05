@@ -1,12 +1,12 @@
-import {injectable} from "inversify";
-import {app, BrowserWindow, webFrame, globalShortcut} from 'electron';
+import { injectable } from "inversify";
+import { app, BrowserWindow, webFrame, globalShortcut } from 'electron';
 import ModuleService from './module/module.service';
 import LoggerService from "./utils/logger.service";
-import AuthService from "./api/auth/auth.service";
+import AccountService, { AccountDTO } from "./api/account/account.service";
 import UserService from "./api/account/user/user.service";
 import SocketService from "./utils/socket.service";
-import RegisterService from "./api/register/register.service";
 import CookieService from "./utils/cookie.service";
+import MirrorService from "./api/mirror/mirror.service";
 
 global.version = require('../../../package.json').version;
 
@@ -19,8 +19,10 @@ export default class AppService {
 
     private mainWindow: any;
 
-    constructor(private moduleService: ModuleService, private loggerService: LoggerService, private authService: AuthService,
-                private userService: UserService, private socketService: SocketService, private registerService: RegisterService, private cookieService: CookieService) {
+    constructor(private moduleService: ModuleService, private loggerService: LoggerService,
+        private authService: AccountService, private userService: UserService,
+        private socketService: SocketService, private cookieService: CookieService,
+        private mirrorService: MirrorService) {
         this.loggerService.debug('Starting App in version: ' + global.version);
     }
 
@@ -45,30 +47,26 @@ export default class AppService {
             }
         });
 
-
-        if (!this.cookieService.has('id')) {
+        if (this.cookieService.has('id') && this.cookieService.has('access_token')) {
+            this.mirrorService.get().then((res) => {
+                console.log("Mirror ok ", res);
+            }).catch(() => {
+                this.registerMirror().then(() => {
+                });
+            });
+        } else {
             this.registerMirror().then(() => {
-
             });
         }
-
-        this.socketService.on('loadModules').subscribe(() => {
-            this.moduleService.clear();
-            this.moduleService.loadOrReloadDevModules();
-            if (this.authService.canReload()) {
-                this.authService.loadModules().then(() => {
-                    this.startApp();
-                }).catch(() => {
-                    this.startApp();
-                });
-            }
-        });
     }
 
     registerMirror() {
         return new Promise(resolve => {
-            this.registerService.register().then((res) => {
+            this.mirrorService.register().then((res) => {
                 this.cookieService.set('id', res.id);
+                this.cookieService.set('access_token', res.access_token);
+                this.cookieService.delete('accounts');
+                this.cookieService.delete('connected');
                 console.log(res);
             }).catch(error => {
                 console.log(error);
@@ -80,9 +78,8 @@ export default class AppService {
      * Create the mainWindow of your app
      */
     createWindow() {
-
         this.mainWindow = new BrowserWindow({
-            fullscreen: false,
+            // fullscreen: true,
             show: false,
             frame: false,
             resizable: true,
@@ -102,10 +99,7 @@ export default class AppService {
         this.mainWindow.loadURL(this.winUrl);
 
         this.mainWindow.once('ready-to-show', () => {
-
             this.mainWindow.show();
-
-            this.startApp();
         });
 
         this.mainWindow.on('closed', () => {
@@ -113,33 +107,31 @@ export default class AppService {
         });
     }
 
-    startApp() {
-        this.socketService.send('loading', {action: 'message', message: 'DEMARAGE'});
-        if (this.authService.isAuthenticated()) {
-            this.userService.get().then(res => {
-                this.socketService.send('loading', {
-                    action: 'message',
-                    message: 'Bienvenue <font color="#FF8A65"> ' + res.name + ' </font>'
-                });
-            });
-        }
-        setTimeout(() => {
-            this.socketService.send('loading', {action: 'finished'});
-        }, 1500);
-    }
-
 
 
     registerShortcuts() {
 
+        globalShortcut.register('CommandOrControl+L', () => {
+            this.authService.getConnected().then((connected) => {
+                const accounts = this.authService.getAccounts();
+                accounts.forEach((account) => {
+                    if (account.user.id != connected.user.id) {
+                        this.authService.loginAs(account.user.id);
+                    }
+                });
+            });
+        });
+        globalShortcut.register('CommandOrControl+N', () => {
+            this.socketService.send('accounts.login');
+        });
+
         globalShortcut.register('CommandOrControl+R', () => {
-            this.socketService.send('reload');
+            this.socketService.send('app.reload');
         });
 
         globalShortcut.register('CommandOrControl+T', () => {
             this.mainWindow.openDevTools();
         });
-
 
     }
 }

@@ -35,7 +35,7 @@ export default class LocalModuleService {
      * @param module
      */
     set(module: IModuleRepository) {
-        this.modules[module.repository + '-' + module.version] = module;
+        this.modules[module.installId] = module;
         this.save();
     }
 
@@ -46,13 +46,14 @@ export default class LocalModuleService {
      * @param module
      */
     get(module: IModuleRepository): IModuleRepository {
-        if (this.modules[module.repository + '-' + module.version]) {
-            return this.modules[module.repository + '-' + module.version]
+        if (this.modules[module.installId]) {
+            return this.modules[module.installId]
         } else {
             return {
                 commit: '',
                 repository: module.repository,
-                version: module.version
+                version: module.version,
+                installId: module.installId
             }
         }
     }
@@ -88,7 +89,7 @@ export default class LocalModuleService {
     delete(module: IModuleRepository) {
         if (this.has(module)) {
             this.deleteFolderRecursive(this.getLocal() + path.basename(module.repository) + '-' + module.version);
-            delete this.modules[module.repository + '-' + module.version];
+            delete this.modules[module.installId];
             this.save()
         } else if (fs.existsSync(this.getLocal() + path.basename(module.repository) + '-' + module.version)) {
             this.deleteFolderRecursive(this.getLocal() + path.basename(module.repository) + '-' + module.version);

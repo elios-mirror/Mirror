@@ -12,5 +12,9 @@ export default class SocketIoService {
         this.socket.on('connect', function () {
             console.log('connected');
         });
+
+        this.socket.on('disconnect', function () {
+            console.log('disconnect');
+        });
     }
 }

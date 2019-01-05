@@ -1,9 +1,8 @@
 import Vue from 'vue'
-import AuthService from "../../../main/services/api/auth/auth.service";
+import AccountService, { AccountDTO } from "../../../main/services/api/account/account.service";
 import CookieService from '../../../main/services/utils/cookie.service';
 import SocketIoService from "../../../main/services/utils/socket-io.service";
 import UserDTO from "../../../main/services/api/account/user/user.dto";
-
 
 interface LinkedDTO {
     access_token: string;
@@ -14,37 +13,29 @@ export default Vue.extend({
     data() {
         return {
             mirrorId: '',
-            isLoading: false,
+            accounts: [] as AccountDTO[],
+            accountService: this.$container.get<AccountService>(AccountService.name)
         }
     },
     methods: {
-
-        login: function () {
-            this.$router.push('/home');
+        loginAs(account: AccountDTO) {
+            this.accountService.loginAs(account.user.id);
         }
-
     },
     beforeMount() {
-        const authService = this.$container.get<AuthService>(AuthService.name);
         const cookieService = this.$container.get<CookieService>(CookieService.name);
         const socketIoService = this.$container.get<SocketIoService>(SocketIoService.name);
-
-        if (authService.isAuthenticated()) {
-            this.$router.push('/home');
-            return;
-        }
 
         if (cookieService.has('id')) {
             this.mirrorId = cookieService.get('id')
         }
-
-        socketIoService.socket.on(`linked_${this.mirrorId}`, (data: LinkedDTO) => {
-            authService.login(data.access_token);
-            this.$router.push('/home');
+        this.accountService.getAccounts().forEach((account) => {
+            this.accounts.push(account);
         });
-
-        //this.$router.push('/home');
-
+        socketIoService.socket.on(`linked_${this.mirrorId}`, (data: LinkedDTO) => {
+            this.accountService.add(data.user, data.access_token);
+            this.$router.push('/loading');
+        });
     }
 
 });

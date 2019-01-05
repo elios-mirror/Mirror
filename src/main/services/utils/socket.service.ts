@@ -15,7 +15,7 @@ export default class SocketService {
         }
     }
 
-    on(channel: string): Subject<any> {
+    on<T>(channel: string): Subject<T> {
         let socket;
 
         if (this.sockets.has(channel)) {
