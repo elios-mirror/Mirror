@@ -61,7 +61,7 @@ export default Vue.extend({
                 id: widget.id
             });
             this.widgetObservers.push(widget.html.subscribe((html) => {
-                this.widgets = this.widgets.splice(index, 1);
+                this.widgets = this.widgets.splice(index - 1, 1);
                 index = this.widgets.push({
                     html: html,
                     id: widget.id
