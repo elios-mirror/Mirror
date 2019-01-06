@@ -1,4 +1,4 @@
-import { EliosController } from "../../../src/main/elios/interfaces/elios.interface";
+import {Module, Controller} from 'elios-sdk';
 
 export default class Clock implements Module {
     name: string = '';
@@ -9,7 +9,7 @@ export default class Clock implements Module {
     widget: any;
     it: any;
 
-    constructor(private elios: EliosController) {
+    constructor(private elios: Controller) {
         console.log('Construtor');
         this.widget = elios.createWidget({
         });

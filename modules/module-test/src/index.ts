@@ -1,36 +1,5 @@
-import { EliosController } from "../../../src/main/elios/interfaces/elios.interface";
-
-interface EliosModule {
-
-    /**
-     * Define what lowest version of the mirror your module need
-     */
-    readonly requireVersion: string;
-
-    /**
-     * Define if you want to show module in account loading message
-     */
-    readonly showOnStart: boolean;
-
-    /**
-     * Called when module was loaded
-     */
-    init: () => void;
-
-    /**
-     * Will be called when module need to be started
-     */
-    start: () => void;
-
-    /**
-     * Will be called when module need to be stopped
-     */
-    stop: () => void;
-}
-
-
-
-export default class Module implements EliosModule {
+import { Controller, Module } from "elios-sdk";
+export default class Test implements Module {
     name: string = '';
 
     requireVersion: string = '0.0.1';
@@ -39,7 +8,7 @@ export default class Module implements EliosModule {
     widget: any;
     it: any;
 
-    constructor(private elios: EliosController) {
+    constructor(private elios: Controller) {
         console.log('Construtor');
         console.log(elios);
         this.widget = elios.createWidget({

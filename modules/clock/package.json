@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MrDarkSkil/module-template#readme",
   "dependencies": {
+    "elios-sdk": "0.0.3",
     "fs": "0.0.1-security",
     "html-loader": "^0.5.5",
     "vue": "^2.5.17"
