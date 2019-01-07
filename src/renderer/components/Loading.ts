@@ -19,7 +19,7 @@ export default Vue.extend({
     mounted() {
         if (this.accountService.isAuthenticated()) {
             this.moduleService.clear();
-            this.accountService.loadModules().then(res => console.log(res)).catch((err) => console.log(err));
+            this.accountService.loadModules().then().catch((err) => console.log(err));
         }
 
         this.socketSub = this.socketService.on('modules.install.start').subscribe((data: any) => {

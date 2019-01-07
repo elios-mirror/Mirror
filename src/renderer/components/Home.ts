@@ -3,7 +3,6 @@ import ModuleService, { IModule } from "../../main/services/module/module.servic
 import '@dattn/dnd-grid/dist/dnd-grid.css';
 import SocketService from '../../main/services/utils/socket.service';
 import Elios from "../../main/elios/elios.controller";
-import { EliosWidget } from "../../main/elios/interfaces/elios.interface";
 
 const { Container, Box } = require('@dattn/dnd-grid');
 
@@ -15,8 +14,8 @@ export default Vue.extend({
     },
     data() {
         return {
-            it: null as any,
             modulesSubscribe: null as any,
+            widgetsSubscribe: null as any,
             cellSize: {
                 w: 25,
                 h: 25
@@ -34,49 +33,7 @@ export default Vue.extend({
         const moduleService = this.$container.get<ModuleService>(ModuleService.name);
         const socketService = this.$container.get<SocketService>(SocketService.name);
         const elios = this.$container.get<Elios>(Elios.name);
-
-
-        const modules = moduleService.getAll();
-        for (let moduleInstallId in modules) {
-            const module = modules[moduleInstallId] as IModule;
-            module.start();
-        }
-
-        const widgets = elios.getWidgets();
-        this.layout = [];
-        widgets.forEach((widget) => {
-            this.addWidget(widget);
-        });
-
-        elios.getWidgetSubject().subscribe((widget) => {
-            this.addWidget(widget);
-        });
-        
-
-        socketService.on('modules.install.end').subscribe((data: any) => {
-            if (data.success) {
-                data.module.start();
-            }
-        });
-
-    },
-    beforeDestroy() {
-        clearInterval(this.it);
-        this.widgetObservers.forEach(widgetOberver => widgetOberver.unsubscribe());
-        const moduleService = this.$container.get<ModuleService>(ModuleService.name);
-
-        const modules = moduleService.getAll();
-        for (let moduleInstallId in modules) {
-            const module = modules[moduleInstallId] as IModule;
-            module.stop();
-        }
-
-    },
-    methods: {
-        onLayoutUpdate(evt: any) {
-            this.layout = evt.layout
-        },
-        addWidget(widget: any) {
+        this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
             this.layout.push({
                 id: widget.id,
                 hidden: false,
@@ -90,8 +47,38 @@ export default Vue.extend({
             } as never);
             this.$set(this.widgets, widget.id, '')
             this.widgetObservers.push(widget.html.subscribe((html: string) => {
-                this.$set(this.widgets, widget.id, html)
+                this.$set(this.widgets, widget.id, html);
             }));
+        });  
+        
+        const modules = moduleService.getAll();
+        for (let moduleInstallId in modules) {
+            const module = modules[moduleInstallId] as IModule;
+            module.start();
+        }
+
+        socketService.on('modules.install.end').subscribe((data: any) => {
+            if (data.success) {
+                data.module.start();
+            }
+        });
+
+    },
+    beforeDestroy() {
+        this.widgetsSubscribe.unsubscribe();
+        this.widgetObservers.forEach(widgetOberver => widgetOberver.unsubscribe());
+        const moduleService = this.$container.get<ModuleService>(ModuleService.name);
+
+        const modules = moduleService.getAll();
+        for (let moduleInstallId in modules) {
+            const module = modules[moduleInstallId] as IModule;
+            module.stop();
+        }
+
+    },
+    methods: {
+        onLayoutUpdate(evt: any) {
+            this.layout = evt.layout;
         }
     }
 });

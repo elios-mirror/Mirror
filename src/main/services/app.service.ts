@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { app, BrowserWindow, webFrame, globalShortcut } from 'electron';
+import { app, BrowserWindow, webFrame, globalShortcut, Menu } from 'electron';
 import ModuleService from './module/module.service';
 import LoggerService from "./utils/logger.service";
 import AccountService, { AccountDTO } from "./api/account/account.service";
@@ -111,27 +111,83 @@ export default class AppService {
 
     registerShortcuts() {
 
-        globalShortcut.register('CommandOrControl+L', () => {
-            this.authService.getConnected().then((connected) => {
-                const accounts = this.authService.getAccounts();
-                accounts.forEach((account) => {
-                    if (account.user.id != connected.user.id) {
-                        this.authService.loginAs(account.user.id);
+        let that = this;
+
+        const menu = Menu.buildFromTemplate([
+            {
+                label: 'Menu',
+                submenu: [
+                    {
+                        label: 'Reload Modules',
+                        accelerator: 'CmdOrCtrl+R',
+                        click() {
+                            that.socketService.send('app.reload');
+                        }
+                    },
+                    {
+                        label: 'TEST',
+                        accelerator: 'CmdOrCtrl+T',
+                        click() {
+                            that.socketService.send('test');
+                        }
+                    },
+                    {
+                        label: 'Dev Tools',
+                        accelerator: 'CmdOrCtrl+Option+I',
+                        click() {
+                            that.mainWindow.toggleDevTools();
+                        }
+                    },
+                    {
+                        label: 'Exit',
+                        accelerator: 'CmdOrCtrl+Q',
+                        click() {
+                            app.quit();
+                        }
                     }
-                });
-            });
-        });
-        globalShortcut.register('CommandOrControl+N', () => {
-            this.socketService.send('accounts.login');
-        });
+                ]
+            },
+            {
+                label: 'Accounts',
+                submenu: [
+                    {
+                        label: 'Logout Currect Account',
+                        accelerator: 'CmdOrCtrl+P',
+                        click() {
+                        }
+                    },
+                    {
+                        label: 'Logout All Accounts',
+                        accelerator: 'CmdOrCtrl+Shift+P',
+                        click() {
 
-        globalShortcut.register('CommandOrControl+R', () => {
-            this.socketService.send('app.reload');
-        });
-
-        globalShortcut.register('CommandOrControl+T', () => {
-            this.mainWindow.openDevTools();
-        });
+                        }
+                    },
+                    {
+                        label: 'New Account',
+                        accelerator: 'CmdOrCtrl+L',
+                        click() {
+                            that.authService.getConnected().then((authAccount) => {
+                                const accounts = that.authService.getAccounts();
+                                accounts.forEach((account) => {
+                                    if (account.user.id !== authAccount.user.id) {
+                                        that.authService.loginAs(account.user.id);
+                                    }
+                                });
+                            });
+                        }
+                    },
+                    {
+                        label: 'New Account',
+                        accelerator: 'CmdOrCtrl+N',
+                        click() {
+                            that.socketService.send('accounts.login');
+                        }
+                    }
+                ]
+            }
+        ])
+        Menu.setApplicationMenu(menu);
 
     }
 }

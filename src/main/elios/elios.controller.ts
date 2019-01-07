@@ -1,19 +1,19 @@
 import { injectable } from "inversify";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject, Observable } from "rxjs";
 import { EliosController, EliosWidget } from "./interfaces/elios.interface";
 const uuidv4 = require('uuid/v4')
 
 @injectable()
 export default class Elios implements EliosController {
     private _widgets: EliosWidget[] = [];
-    private _widgetsSubjet: BehaviorSubject<EliosWidget> = new BehaviorSubject<EliosWidget>(this._widgets[0]);
+    private _widgetsSubject = new Subject<EliosWidget>();
 
     getWidgets() {
         return this._widgets;
     }
 
-    getWidgetSubject() {
-        return this._widgetsSubjet;
+    getWidgetsSubject() {
+        return this._widgetsSubject;
     }
 
     createWidget(args: {}): EliosWidget {
@@ -21,8 +21,9 @@ export default class Elios implements EliosController {
             html: new BehaviorSubject(''),
             id: uuidv4()
         };
+        console.log('add widget hre')
         this._widgets.push(widget);
-        this._widgetsSubjet.next(widget)
+        this._widgetsSubject.next(widget)
         return widget;
     }
 }

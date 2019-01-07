@@ -11,8 +11,6 @@ export default class Clock implements Module {
 
     constructor(private elios: Controller) {
         console.log('Construtor');
-        this.widget = elios.createWidget({
-        });
     }
 
     init() {
@@ -21,7 +19,9 @@ export default class Clock implements Module {
 
     start() {
         console.log('MODULE STARTED ' + this.name);
+        this.widget = this.elios.createWidget({
 
+        });
         this.it = setInterval(() => {
             const date = new Date();
 
