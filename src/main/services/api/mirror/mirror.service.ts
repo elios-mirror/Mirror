@@ -18,9 +18,10 @@ export interface ModuleVersionDTO {
     changelog: string;
     module_id: string;
     module: ModuleDTO;
-    pivot: {
-        user_id: string;
-        install_id: string;
+    link: {
+        link_id: string;
+        module_id: string;
+        id: string;
     }
 }
 

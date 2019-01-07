@@ -67,6 +67,7 @@
     "rxjs": "^6.3.3",
     "sass-loader": "^7.0.3",
     "socket.io-client": "^2.2.0",
+    "uuid": "^3.3.2",
     "vue": "^2.5.21",
     "vue-electron": "^1.0.6",
     "vue-qrcode": "0.0.2",

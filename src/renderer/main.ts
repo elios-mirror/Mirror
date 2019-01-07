@@ -82,7 +82,7 @@ socketIoService.socket.on(`module_${mirrorId}`, (data: ModuleSocketDTO) => {
         moduleService.install({
             commit: data.module.commit,
             repository: data.module.module.repository,
-            installId: data.module.pivot.install_id,
+            installId: data.module.link.id,
             version: data.module.version
         }).then((module) => {
             console.log('done');

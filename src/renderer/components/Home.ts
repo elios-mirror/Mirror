@@ -26,7 +26,7 @@ export default Vue.extend({
             bubbleUp: false,
             margin: 3,
             widgetObservers: [] as any[],
-            widgets: [] as any[],
+            widgets: {} as any,
             layout: []
         };
     },
@@ -43,7 +43,40 @@ export default Vue.extend({
         }
 
         const widgets = elios.getWidgets();
+        this.layout = [];
         widgets.forEach((widget) => {
+            this.addWidget(widget);
+        });
+
+        elios.getWidgetSubject().subscribe((widget) => {
+            this.addWidget(widget);
+        });
+        
+
+        socketService.on('modules.install.end').subscribe((data: any) => {
+            if (data.success) {
+                data.module.start();
+            }
+        });
+
+    },
+    beforeDestroy() {
+        clearInterval(this.it);
+        this.widgetObservers.forEach(widgetOberver => widgetOberver.unsubscribe());
+        const moduleService = this.$container.get<ModuleService>(ModuleService.name);
+
+        const modules = moduleService.getAll();
+        for (let moduleInstallId in modules) {
+            const module = modules[moduleInstallId] as IModule;
+            module.stop();
+        }
+
+    },
+    methods: {
+        onLayoutUpdate(evt: any) {
+            this.layout = evt.layout
+        },
+        addWidget(widget: any) {
             this.layout.push({
                 id: widget.id,
                 hidden: false,
@@ -55,47 +88,10 @@ export default Vue.extend({
                     h: 6
                 }
             } as never);
-
-            let index = this.widgets.push({
-                html: '',
-                id: widget.id
-            });
-            this.widgetObservers.push(widget.html.subscribe((html) => {
-                this.widgets = this.widgets.splice(index - 1, 1);
-                index = this.widgets.push({
-                    html: html,
-                    id: widget.id
-                });
+            this.$set(this.widgets, widget.id, '')
+            this.widgetObservers.push(widget.html.subscribe((html: string) => {
+                this.$set(this.widgets, widget.id, html)
             }));
-
-        })
-
-        // socketService.on('modules.install.end').subscribe((data: any) => {
-        //     if (data.success) {
-        //         modules[data.module.installId] = data.module
-        //         this.layout.push({
-        //             id: data.module.installId,
-        //             hidden: false,
-        //             pinned: false,
-        //             position: {
-        //                 x: 0,
-        //                 y: 0,
-        //                 w: 8,
-        //                 h: 6
-        //             }
-        //         } as never);
-        //         data.module.start();
-        //     }
-        // }); // TODO: Add new module system 
-
-    },
-    beforeDestroy() {
-        clearInterval(this.it);
-        this.widgetObservers.forEach(widgetOberver => widgetOberver.unsubscribe());
-    },
-    methods: {
-        onLayoutUpdate(evt: any) {
-            this.layout = evt.layout
         }
     }
 });

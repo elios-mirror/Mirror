@@ -30,6 +30,7 @@ export interface IModule {
     computed: any;
     start: () => any;
     init: () => any;
+    stop: () => any;
 }
 
 @injectable()

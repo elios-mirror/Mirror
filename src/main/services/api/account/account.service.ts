@@ -140,12 +140,13 @@ export default class AccountService {
 
             this.getConnected().then((account) => {
                 this.mirrorService.getModules(account.user.id).then((modules) => {
+                    console.log(modules);
                     for (let module of modules) {
                         this.moduleService.add({
                             commit: module.commit,
                             repository: module.module.repository,
                             version: module.version,
-                            installId: module.pivot.install_id
+                            installId: module.link.id
                         });
                     }
                     this.moduleService.loadAll().then(() => {
