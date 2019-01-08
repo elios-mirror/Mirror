@@ -107,8 +107,6 @@ export default class AppService {
         });
     }
 
-
-
     registerShortcuts() {
 
         let that = this;

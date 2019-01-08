@@ -97,9 +97,9 @@ export default class ModuleService {
             let module = this.requireDynamically(moduleAbsolutePath);
 
             if (module.default) {
-                module = new module.default(this.eliosController);
+                module = new module.default(this.eliosController, moduleRepository.installId);
             }
-
+            
             module.version = moduleRepository.version;
             module.name = moduleName;
             module.installId = moduleRepository.installId;
