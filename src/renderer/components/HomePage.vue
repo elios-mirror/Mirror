@@ -6,7 +6,8 @@
     :maxRowCount="maxRowCount"
     :margin="margin"
     :bubbleUp="bubbleUp"
-    v-on:drag:end="onBoxDragEnd"
+    v-on:drag:end="onLayoutChanged"
+    v-on:resize:end="onLayoutChanged"
   >
     <dnd-grid-box
       v-for="(widget, key) in widgets"

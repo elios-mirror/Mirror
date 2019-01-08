@@ -5,6 +5,10 @@ import SocketService from '../../main/services/utils/socket.service';
 import Elios from "../../main/elios/elios.controller";
 const { Container, Box } = require('@dattn/dnd-grid');
 
+interface WidgetsBox {
+  [details: string] : WidgetBox;   
+}
+
 interface WidgetBox {
   hidden: boolean;
   id: string;
@@ -76,7 +80,9 @@ export default Vue.extend({
     });
   },
   methods: {
-    onBoxDragEnd(evt: any) {
+    onLayoutChanged(evt: any) {
+      let changedModules: WidgetsBox = {};
+
       this.layout.forEach((item: WidgetBox) => {
         let old = this.oldLayout.get(item.id) as WidgetBox;
 
@@ -89,12 +95,13 @@ export default Vue.extend({
             || item.position.w != old.position.w
             || item.position.h != old.position.h) {
             this.oldLayout.set(item.id, item);
-            console.log(item);
+            changedModules[item.id] = item;
           }
         }
-        else // TODO: Remove this
+        else // TODO: Remove this after service impl
           this.oldLayout.set(item.id, item);
       });
+      console.log(changedModules);
     },
 
     beforeDestroy() {
@@ -107,38 +114,6 @@ export default Vue.extend({
         const module = modules[moduleInstallId] as IModule;
         module.stop();
       }
-    },
-
-    addWidget(widget: any) {
-      this.layout.push({
-        id: widget.id,
-        hidden: false,
-        pinned: false,
-        position: {
-          x: 0,
-          y: 0,
-          w: 8,
-          h: 6
-        }
-      } as WidgetBox);
-      this.$set(this.widgets, widget.id, '')
-      this.widgetObservers.push(widget.html.subscribe((html: string) => {
-        this.$set(this.widgets, widget.id, html)
-      }));
-    },
-
-    widgetsBoxToJson(newVal: WidgetBox) {
-      return {
-        id: newVal.id,
-        hidden: newVal.hidden,
-        pinned: newVal.pinned,
-        position: {
-          x: newVal.position.x,
-          y: newVal.position.y,
-          w: newVal.position.w,
-          h: newVal.position.h
-        }
-      };
     }
   }
 });
