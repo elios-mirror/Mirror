@@ -1,0 +1,818 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2019-01-08T06:22:58.937Z",
+	"__export_source": "insomnia.desktop.app:v6.3.2",
+	"resources": [
+		{
+			"_id": "wrk_48a011ffbde84242a4d47529c00a101f",
+			"created": 1546883717009,
+			"description": "",
+			"modified": 1546883717009,
+			"name": "Insomnia",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_7125e04469a0474194a70ce2be67004b",
+			"color": null,
+			"created": 1546883717044,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1546883717044,
+			"modified": 1546887949187,
+			"name": "New Environment",
+			"parentId": "wrk_48a011ffbde84242a4d47529c00a101f",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_e6dc4a95380e4ef5aced4824dda3679a",
+			"cookies": [],
+			"created": 1546883717046,
+			"modified": 1546883717046,
+			"name": "Default Jar",
+			"parentId": "wrk_48a011ffbde84242a4d47529c00a101f",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_09c3d86b31f349b6a09394e6865e75a5",
+			"created": 1546886460757,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1546886460757,
+			"modified": 1546886460757,
+			"name": "Admin",
+			"parentId": "wrk_48a011ffbde84242a4d47529c00a101f",
+			"_type": "request_group"
+		},
+		{
+			"_id": "env_49d48a02d2044b12bece31aae05fb743",
+			"color": "#d70000",
+			"created": 1546886975347,
+			"data": {
+				"access_token": "{% response 'body', 'req_12db30d469f540669e926126a20823cf', '$.access_token' %}",
+				"api_url": "http://51.15.239.102",
+				"client_id": "1",
+				"client_secret": "Rp52CEoYWjiIA0kRTTGspdbjee3tQxSaNCVn7J87",
+				"install_id": "{% response 'body', 'req_56a7692391f54c77897c92dd6f1c34ec', '$.modules[0].link.id' %}",
+				"mirror_id": "46dda0e0-12ce-11e9-99df-f5c1a4625d73",
+				"mirror_token": "{% response 'body', 'req_36a7f665bf3c42cbaeac0287363aa8d9', '$.access_token' %}",
+				"module_id": "{% response 'body', 'req_ff39c9ae40c84243b52c73d5d7476dd5', '$[0].id' %}",
+				"user_id": "{% response 'body', 'req_67466150c3fe45818391db07c071cb58', '$.id' %}"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1546886975347,
+			"modified": 1546928281497,
+			"name": "Production",
+			"parentId": "env_7125e04469a0474194a70ce2be67004b",
+			"_type": "environment"
+		},
+		{
+			"_id": "env_03b02514d94b48e9b820391652671ff5",
+			"color": "#2a15cd",
+			"created": 1546927067740,
+			"data": {
+				"access_token": "{% response 'body', 'req_12db30d469f540669e926126a20823cf', '$.access_token' %}",
+				"api_url": "https://admin.test",
+				"client_id": "1",
+				"client_secret": "Rp52CEoYWjiIA0kRTTGspdbjee3tQxSaNCVn7J87",
+				"install_id": "{% response 'body', 'req_56a7692391f54c77897c92dd6f1c34ec', '$.modules[0].link.id' %}",
+				"mirror_id": "{% response 'body', 'req_36a7f665bf3c42cbaeac0287363aa8d9', '$.id' %}",
+				"mirror_token": "{% response 'body', 'req_36a7f665bf3c42cbaeac0287363aa8d9', '$.access_token' %}",
+				"module_id": "{% response 'body', 'req_ff39c9ae40c84243b52c73d5d7476dd5', '$[0].id' %}",
+				"user_id": "{% response 'body', 'req_67466150c3fe45818391db07c071cb58', '$.id' %}"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1546927067740,
+			"modified": 1546928276397,
+			"name": "Development",
+			"parentId": "env_7125e04469a0474194a70ce2be67004b",
+			"_type": "environment"
+		},
+		{
+			"_id": "fld_ef1a40be8d814e5c86934a60a4573e73",
+			"created": 1546886460715,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1546886460715,
+			"modified": 1546886460715,
+			"name": "User",
+			"parentId": "fld_09c3d86b31f349b6a09394e6865e75a5",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"created": 1546886460747,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1546886460747,
+			"modified": 1546886460747,
+			"name": "Mirroir",
+			"parentId": "fld_09c3d86b31f349b6a09394e6865e75a5",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_461c7a519c4e4a3080478653e9bfb677",
+			"created": 1546886460754,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1546886460754,
+			"modified": 1546886460754,
+			"name": "Modules",
+			"parentId": "fld_09c3d86b31f349b6a09394e6865e75a5",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_380490e9aead4621bce42f595b08828e",
+			"authentication": {},
+			"body": {
+				"mimeType": "",
+				"text": "{\n  \"name\": \"Walter White\", \n  \"email\": \"wwhite@someemaildomain.net\",\n  \"password\": \"testpassword\",\n  \"password_confirmation\": \"testpassword\"\n}"
+			},
+			"created": 1546886460700,
+			"description": "",
+			"headers": [
+				{
+					"name": "Accept",
+					"value": "application/json"
+				},
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460700,
+			"method": "POST",
+			"modified": 1546886460700,
+			"name": "Register",
+			"parameters": [],
+			"parentId": "fld_09c3d86b31f349b6a09394e6865e75a5",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/register",
+			"_type": "request"
+		},
+		{
+			"_id": "req_31c4361f06ae486db264c153db95324a",
+			"authentication": {},
+			"body": {
+				"mimeType": "multipart/form-data",
+				"params": [
+					{
+						"disabled": false,
+						"name": "email",
+						"type": "text",
+						"value": "matthias.prost@epitech.eu"
+					}
+				]
+			},
+			"created": 1546886460706,
+			"description": "",
+			"headers": [
+				{
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460706,
+			"method": "POST",
+			"modified": 1546886460706,
+			"name": "Password Reset",
+			"parameters": [],
+			"parentId": "fld_09c3d86b31f349b6a09394e6865e75a5",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/password/email",
+			"_type": "request"
+		},
+		{
+			"_id": "req_12db30d469f540669e926126a20823cf",
+			"authentication": {},
+			"body": {
+				"mimeType": "multipart/form-data",
+				"params": [
+					{
+						"disabled": false,
+						"id": "pair_23a07ce0e82449b499d513805666325d",
+						"name": "grant_type",
+						"type": "text",
+						"value": "password"
+					},
+					{
+						"disabled": false,
+						"id": "pair_be4dc6f12b8c421b98bc15e809b3c99b",
+						"name": "client_id",
+						"type": "text",
+						"value": "{{client_id}}"
+					},
+					{
+						"disabled": false,
+						"id": "pair_2017fe1c57cb4598b341eeb96213097b",
+						"name": "client_secret",
+						"type": "text",
+						"value": "{{client_secret}}"
+					},
+					{
+						"disabled": false,
+						"id": "pair_2960bbf3a916486b96b53880e63d02ff",
+						"name": "username",
+						"type": "text",
+						"value": "root@root.com"
+					},
+					{
+						"disabled": false,
+						"id": "pair_8b523023e2324ee5bb1565635d4038a7",
+						"name": "password",
+						"type": "text",
+						"value": "root"
+					},
+					{
+						"disabled": false,
+						"id": "pair_5b5bc137f41344348d476bbfe17b2e01",
+						"name": "scope",
+						"type": "text",
+						"value": "*"
+					},
+					{
+						"disabled": false,
+						"id": "pair_1281b983718b428da85129fc3b93503f",
+						"name": "provider",
+						"type": "text",
+						"value": "users"
+					}
+				]
+			},
+			"created": 1546886460709,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1546886460709,
+			"method": "POST",
+			"modified": 1546887834088,
+			"name": "Login",
+			"parameters": [],
+			"parentId": "fld_09c3d86b31f349b6a09394e6865e75a5",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/oauth/token",
+			"_type": "request"
+		},
+		{
+			"_id": "req_67466150c3fe45818391db07c071cb58",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460713,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_78bbbd64de584a948af9ffa77ed3a4a3",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_fccaaf232c52482cbf5b51aec930adae",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460713,
+			"method": "GET",
+			"modified": 1546887157750,
+			"name": "Get User Infos",
+			"parameters": [],
+			"parentId": "fld_ef1a40be8d814e5c86934a60a4573e73",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/user",
+			"_type": "request"
+		},
+		{
+			"_id": "fld_f0604a76aa2749619bbbcabf2842de9c",
+			"created": 1546886460745,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1546886460745,
+			"modified": 1546886460745,
+			"name": "Private Mirror Routes ",
+			"parentId": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_c4a958cb5a1142ceb81e484efda908a2",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460716,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_df29692f70e54f97affbf10ce87f9b8f",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_a84c9ec5b30041449fcf21cb879692d6",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460716,
+			"method": "DELETE",
+			"modified": 1546887805079,
+			"name": "Uninstall module",
+			"parameters": [],
+			"parentId": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirrors/{{ mirror_id }}/{{ module_id }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_56a7692391f54c77897c92dd6f1c34ec",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460722,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_3ae1724a10d94ee28ab464737656c1a8",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_b7ab98bf2f1e4acab4ed9dc0c38cc582",
+					"name": "Accept",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_40151f67493f4c9fa5f0f7d9a9603aab",
+					"name": "",
+					"value": ""
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460722,
+			"method": "POST",
+			"modified": 1546889129082,
+			"name": "Install module ",
+			"parameters": [],
+			"parentId": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirrors/{{ mirror_id }}/{{ module_id }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_bcd25276de2341e1a500ff522fd81ece",
+			"authentication": {},
+			"body": {
+				"mimeType": "",
+				"text": "{\n\t\"name\": \"Le nouveau nom\"\n}\t\t"
+			},
+			"created": 1546886460725,
+			"description": "Response:\n\n{\n\t\"name\": \"TOTO\",\n\t\"modules\": []\n}",
+			"headers": [
+				{
+					"id": "pair_fecede5f7ee94c97b0cf444b887f7391",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_3116cefc881346cea57075182bb9f0e5",
+					"name": "Accept",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_7d4df09890ea46178e7a68a89a1f550c",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460725,
+			"method": "PUT",
+			"modified": 1546887785107,
+			"name": "Change Mirror Infos",
+			"parameters": [],
+			"parentId": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirrors/{{ mirror_id }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8ae53936905a49b1be7a711a9000d336",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460727,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_d8d4c20bfc6741cf9ab9f6855f38c25e",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_102746fbca024dd4a19e1988b40f6839",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460727,
+			"method": "GET",
+			"modified": 1546887773442,
+			"name": "Get Mirror Infos",
+			"parameters": [],
+			"parentId": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirrors/{{ mirror_id }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_ae5647f4b58e4528af27be28717f17ab",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460729,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9603cb8bd1cf46e4afe294ce114cd475",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_9000c4ea77774aeb8047d1f8ca950fb5",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460729,
+			"method": "GET",
+			"modified": 1546887389401,
+			"name": "Get Mirror List",
+			"parameters": [],
+			"parentId": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirrors",
+			"_type": "request"
+		},
+		{
+			"_id": "req_36a7f665bf3c42cbaeac0287363aa8d9",
+			"authentication": {},
+			"body": {
+				"mimeType": "",
+				"text": "{\n\t\"name\": \"TATA\",\n\t\"model\": \"LKD28376382\"\n}"
+			},
+			"created": 1546886460732,
+			"description": "",
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460732,
+			"method": "POST",
+			"modified": 1546886460732,
+			"name": "Register Mirror",
+			"parameters": [],
+			"parentId": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirrors",
+			"_type": "request"
+		},
+		{
+			"_id": "req_67f05e9f46fc44ef9d63b98d1db968c0",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460733,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_66e45c669d1a4f519a1ee9f5431f6f13",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_3046e8cbed2240eb84f863411b0ad79b",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460733,
+			"method": "POST",
+			"modified": 1546887748873,
+			"name": "Unlink Mirror to Account",
+			"parameters": [],
+			"parentId": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirrors/{{ mirror_id }}/unlink",
+			"_type": "request"
+		},
+		{
+			"_id": "req_00f99a97a2fb4b62af954d1c8e0e2af9",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460735,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9bacf53abcc54763a070e66d18321bf9",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_31c56533951d412ea73e22089e92587f",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460735,
+			"method": "POST",
+			"modified": 1546927615351,
+			"name": "Link Mirror to Account",
+			"parameters": [],
+			"parentId": "fld_d47cd5b5527b4726aa83b0dd9155665c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirrors/{{ mirror_id }}/link",
+			"_type": "request"
+		},
+		{
+			"_id": "req_69a2d32342f94edf8a799ab8f5d4ea59",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460749,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b062523116b945bda841dce6cddb497d",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_261d1f6c7c6a4511a8c095766970460d",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460749,
+			"method": "GET",
+			"modified": 1546887709279,
+			"name": "Get Module Detail",
+			"parameters": [],
+			"parentId": "fld_461c7a519c4e4a3080478653e9bfb677",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/modules/{{ module_id }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_ff39c9ae40c84243b52c73d5d7476dd5",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460751,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_53bd0b69754c4d38ab89d2d9f36d8768",
+					"name": "Authorization",
+					"value": "Bearer {{ access_token }}"
+				},
+				{
+					"id": "pair_f2f7e08121bf409c86949634ee1654e9",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460751,
+			"method": "GET",
+			"modified": 1546887474655,
+			"name": "Get List of Module Available ",
+			"parameters": [],
+			"parentId": "fld_461c7a519c4e4a3080478653e9bfb677",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/modules",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6452887ed1aa4786bff466d30a21ef4a",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460737,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_939b6bbdfd654f82995c86d5c9ede39a",
+					"name": "Authorization",
+					"value": "Bearer {{ mirror_token }}"
+				},
+				{
+					"id": "pair_37325d44b73941eaaeba51e435f9d9e4",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460738,
+			"method": "GET",
+			"modified": 1546927542214,
+			"name": "Get Mirror User Modules",
+			"parameters": [],
+			"parentId": "fld_f0604a76aa2749619bbbcabf2842de9c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirror/users/{{ user_id }}/modules",
+			"_type": "request"
+		},
+		{
+			"_id": "req_34d1d4fe5a1241fdbe5ef3be43ebf3f7",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460741,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_f389a0eaaaf043719c518e7ed403ca2c",
+					"name": "Authorization",
+					"value": "Bearer {{ mirror_token }}"
+				},
+				{
+					"id": "pair_ea9d1a2734294fb6b5c65cce86698d25",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460741,
+			"method": "GET",
+			"modified": 1546927538247,
+			"name": "Get Mirror Users",
+			"parameters": [],
+			"parentId": "fld_f0604a76aa2749619bbbcabf2842de9c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirror/users",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6e8fd108691d414695ba451077a9fc86",
+			"authentication": {},
+			"body": {},
+			"created": 1546886460742,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_0800dd1b827f463395137c8f242a3d84",
+					"name": "Authorization",
+					"value": "Bearer {{ mirror_token }}"
+				},
+				{
+					"id": "pair_96a211809fa344a6a453bcf1382dbcbc",
+					"name": "Accept",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460742,
+			"method": "GET",
+			"modified": 1546927533448,
+			"name": "Get Mirror Infos",
+			"parameters": [],
+			"parentId": "fld_f0604a76aa2749619bbbcabf2842de9c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirror",
+			"_type": "request"
+		},
+		{
+			"_id": "req_752cd3fafbb54ce8abc3419bea9816dd",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"settings\": \"{\\\"toto\\\": 2}\"\n}"
+			},
+			"created": 1546928131929,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_939b6bbdfd654f82995c86d5c9ede39a",
+					"name": "Authorization",
+					"value": "Bearer {{ mirror_token }}"
+				},
+				{
+					"id": "pair_37325d44b73941eaaeba51e435f9d9e4",
+					"name": "Accept",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_578a793e36384e69acd19eab648c1afc",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546886460736.5,
+			"method": "PUT",
+			"modified": 1546928501438,
+			"name": "Change Mirror Module Infos",
+			"parameters": [],
+			"parentId": "fld_f0604a76aa2749619bbbcabf2842de9c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{api_url}}/api/mirror/users/{{ user_id }}/modules/{{install_id}}",
+			"_type": "request"
+		}
+	]
+}

@@ -85,7 +85,10 @@ export default class AppService {
             resizable: true,
             backgroundColor: '#000000',
             center: true,
-            fullscreenable: true
+            fullscreenable: true,
+            webPreferences: {
+                nodeIntegration: true // TODO : need to set false before V5.0.0 of electron !!!!!
+            }
         }) as BrowserWindow;
 
         // Disable zoom feature on window
