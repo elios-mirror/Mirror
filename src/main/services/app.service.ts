@@ -79,7 +79,7 @@ export default class AppService {
      */
     createWindow() {
         this.mainWindow = new BrowserWindow({
-            // fullscreen: true,
+            fullscreen: process.env.NODE_ENV === 'development' ? false : true,
             show: false,
             frame: false,
             resizable: true,
