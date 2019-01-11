@@ -7,7 +7,7 @@
   "main": "./dist/electron/main.js",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "install": "node ./modules/installer.js && ./node_modules/.bin/electron-rebuild",
+    "install": "./node_modules/.bin/electron-rebuild && node ./modules/installer.js",
     "build": "node .electron-vue/build.js && electron-builder",
     "build:modules": "node ./modules/builder.js",
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
