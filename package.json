@@ -6,7 +6,6 @@
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
-    "postinstall": "electron-builder install-app-deps",
     "install": "node ./modules/installer.js && ./node_modules/.bin/electron-rebuild",
     "build": "node .electron-vue/build.js && electron-builder",
     "build:modules": "node ./modules/builder.js",
