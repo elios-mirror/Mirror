@@ -99,7 +99,7 @@ export default class ModuleService {
             if (module.default) {
                 module = new module.default(this.eliosController);
             }
-
+            
             module.version = moduleRepository.version;
             module.name = moduleName;
             module.installId = moduleRepository.installId;

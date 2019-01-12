@@ -6,6 +6,8 @@
     :maxRowCount="maxRowCount"
     :margin="margin"
     :bubbleUp="bubbleUp"
+    v-on:drag:end="onLayoutChanged"
+    v-on:resize:end="onLayoutChanged"
   >
     <dnd-grid-box
       v-for="(widget, key) in widgets"
@@ -26,9 +28,6 @@ export default Home;
 </script>
 
 <style scoped>
-.modules {
-  padding: 10px;
-}
 .demo-box {
   width: 100%;
   height: 100%;

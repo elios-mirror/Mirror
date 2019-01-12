@@ -1,6 +1,7 @@
 import { Controller, Module } from "elios-sdk";
 export default class Test implements Module {
     name: string = '';
+    installId: string = '';
 
     requireVersion: string = '0.0.1';
     showOnStart: boolean = true;
@@ -10,10 +11,7 @@ export default class Test implements Module {
 
     constructor(private elios: Controller) {
         console.log('Construtor');
-        console.log(elios);
-        this.widget = elios.createWidget({
 
-        });
     }
 
     init() {
@@ -22,8 +20,10 @@ export default class Test implements Module {
 
     start() {
         console.log('MODULE STARTED ' + this.name);
-
-
+        
+        this.widget = this.elios.createWidget({
+            id: this.installId
+        });
 
         let i = 0;
 
@@ -41,7 +41,11 @@ export default class Test implements Module {
                 .card {
                     color: white;
                     padding: 10px;
-                    height: 150px;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left:  0;
+                    bottom: 0;
                     background-color: goldenrod;
                     border-radius: 5px;
                 }
@@ -54,6 +58,7 @@ export default class Test implements Module {
     }
 
     stop() {
+        clearInterval(this.it);
         console.log('MODULE STOPED ' + this.name);
     }
 }
