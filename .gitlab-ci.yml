@@ -13,5 +13,6 @@ all_tests:
     - ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.0
   script:
    - npm install
+   - npm run install:modules
    - npm run build
    
