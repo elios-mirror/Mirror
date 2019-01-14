@@ -146,7 +146,8 @@ export default class AccountService {
                             commit: module.commit,
                             repository: module.module.repository,
                             version: module.version,
-                            installId: module.link.id
+                            installId: module.link.id,
+                            settings: module.link.settings
                         });
                     }
                     this.moduleService.loadAll().then(() => {

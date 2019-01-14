@@ -16,6 +16,7 @@ export interface IModuleRepository {
     repository: string;
     version: string;
     commit: string | null;
+    settings: any;
 }
 
 export interface IModule {
@@ -104,6 +105,7 @@ export default class ModuleService {
             module.name = moduleName;
             module.installId = moduleRepository.installId;
             module.repository = moduleRepository.repository;
+            module.settings = moduleRepository.settings;
 
             if (module.requireVersion) {
                 console.log('Check Launcher version for module ' + moduleName + ' - Minimum version:  ' + module.requireVersion + ' - Current version: ' + global.version);
@@ -232,7 +234,8 @@ export default class ModuleService {
                 repository: 'dev/' + moduleName,
                 commit: null,
                 version: 'dev',
-                installId: 'dev-' + moduleName
+                installId: 'dev-' + moduleName,
+                settings: null
             }).then((m: any) => {
                 console.log('Local module loaded', moduleName)
             }).catch(() => {
@@ -274,11 +277,10 @@ export default class ModuleService {
     /**
      * Get module by version
      *
-     * @param {string} name
-     * @param {string} version
+     * @param {string} installId
      */
-    get(name: string, version: string): IModule {
-        return this.initializedModules[name + '-' + version];
+    get(installId: string): IModule {
+        return this.initializedModules[installId];
     }
 
     /**

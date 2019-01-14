@@ -22,6 +22,7 @@ export interface ModuleVersionDTO {
         link_id: string;
         module_id: string;
         id: string;
+        settings: string;
     }
 }
 
@@ -52,6 +53,10 @@ export default class MirrorService {
 
     getModules(userId: string): Promise<ModuleVersionDTO[]> {
         return this.apiService.get<ModuleVersionDTO[]>(`/api/mirror/users/${userId}/modules`, {}, true);
+    }
+
+    setInstallConfig(userId: string, installId: string, settings: any): Promise<ModuleVersionDTO> {
+        return this.apiService.put<ModuleVersionDTO>(`/api/mirror/users/${userId}/modules/${installId}`, {settings: JSON.stringify(settings)}, true);        
     }
 
     register(): Promise<RegisterDTO> {

@@ -3,10 +3,12 @@ import ModuleService, { IModule } from "../../main/services/module/module.servic
 import '@dattn/dnd-grid/dist/dnd-grid.css';
 import SocketService from '../../main/services/utils/socket.service';
 import Elios from "../../main/elios/elios.controller";
+import MirrorService from "../../main/services/api/mirror/mirror.service";
+import AccountService from "../../main/services/api/account/account.service";
 const { Container, Box } = require('@dattn/dnd-grid');
 
 interface WidgetsBox {
-  [details: string] : WidgetBox;   
+  [details: string]: WidgetBox;
 }
 
 interface WidgetBox {
@@ -50,17 +52,22 @@ export default Vue.extend({
     const socketService = this.$container.get<SocketService>(SocketService.name);
     const elios = this.$container.get<Elios>(Elios.name);
     this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
-      this.layout.push({
-        id: widget.id,
-        hidden: false,
-        pinned: false,
-        position: {
-          x: 0,
-          y: 0,
-          w: 8,
-          h: 6
-        }
-      } as WidgetBox);
+      const module = moduleService.get(widget.id) as any;
+      if (module && module.installId === widget.id && module.settings) {
+        this.layout.push(JSON.parse(module.settings));
+      } else {
+        this.layout.push({
+          id: widget.id,
+          hidden: false,
+          pinned: false,
+          position: {
+            x: 0,
+            y: 0,
+            w: 8,
+            h: 6
+          }
+        });
+      }
       this.$set(this.widgets, widget.id, '')
       this.widgetObservers.push(widget.html.subscribe((html: string) => {
         this.$set(this.widgets, widget.id, html);
@@ -81,6 +88,9 @@ export default Vue.extend({
   },
   methods: {
     onLayoutChanged(evt: any) {
+      const mirrorService = this.$container.get<MirrorService>(MirrorService.name);
+      const accountService = this.$container.get<AccountService>(AccountService.name);
+
       let changedModules: WidgetsBox = {};
 
       this.layout.forEach((item: WidgetBox) => {
@@ -95,6 +105,7 @@ export default Vue.extend({
             || item.position.w != old.position.w
             || item.position.h != old.position.h) {
             this.oldLayout.set(item.id, item);
+            accountService.getConnected().then((account) => mirrorService.setInstallConfig(account.user.id, item.id, item)).catch(err => console.log(err));
             changedModules[item.id] = item;
           }
         }

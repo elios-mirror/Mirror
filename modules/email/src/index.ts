@@ -7,6 +7,7 @@ var Imap = require('imap'),
 
 export default class Email implements Module {
   name: string = '';
+  installId: string = '';
 
   requireVersion: string = '0.0.1';
   showOnStart: boolean = true;
@@ -46,6 +47,7 @@ export default class Email implements Module {
 
     console.log('Construtor');
     this.widget = this.elios.createWidget({
+      id: this.installId
     });
 
     const html = require('./index.html');
