@@ -61,4 +61,8 @@ export default class ApiService {
     post<T>(url: string, params: any = {}, mirror = false) {
         return this.request<T>('post', url, params, mirror);
     }
+
+    put<T>(url: string, params: any = {}, mirror = false) {
+        return this.request<T>('put', url, params, mirror);
+    }
 }

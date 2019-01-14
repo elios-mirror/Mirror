@@ -53,7 +53,8 @@ export default class LocalModuleService {
                 commit: '',
                 repository: module.repository,
                 version: module.version,
-                installId: module.installId
+                installId: module.installId,
+                settings: null
             }
         }
     }

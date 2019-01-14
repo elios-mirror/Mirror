@@ -1,7 +1,7 @@
 {
-  "name": "module-test",
-  "version": "2.0.0",
-  "description": "Module template for EZGames launcher ",
+  "name": "clock",
+  "version": "1.0.0",
+  "description": "Module clock for Elios ",
   "main": "dist/index.js",
   "scripts": {
     "start": "webpack --watch --mode development",

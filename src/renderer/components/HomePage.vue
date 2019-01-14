@@ -6,15 +6,17 @@
     :maxRowCount="maxRowCount"
     :margin="margin"
     :bubbleUp="bubbleUp"
+    v-on:drag:end="onLayoutChanged"
+    v-on:resize:end="onLayoutChanged"
   >
     <dnd-grid-box
-      v-for="module in modules"
+      v-for="(widget, key) in widgets"
       class="module"
-      :key="module.installId"
-      :boxId="module.installId"
-      v-bind:data-module="module.installId"
+      :key="key"
+      :boxId="key"
+      v-bind:data-module="key"
     >
-      <div v-html="module.html"></div>
+      <div v-html="widget"></div>
     </dnd-grid-box>
   </dnd-grid-container>
 </template>
@@ -26,9 +28,6 @@ export default Home;
 </script>
 
 <style scoped>
-.modules {
-  padding: 10px;
-}
 .demo-box {
   width: 100%;
   height: 100%;

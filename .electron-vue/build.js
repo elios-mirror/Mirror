@@ -22,6 +22,15 @@ if (process.env.BUILD_TARGET === "clean") clean();
 else if (process.env.BUILD_TARGET === "web") web();
 else build();
 
+
+process.on('exit', function (code) {
+  process.exit(code);
+  process.kill(process.pid);
+  process.abort();
+  console.log('exit');
+  return code;
+});
+
 function clean() {
   del.sync(["build/*", "!build/icons", "!build/icons/icon.*"]);
   console.log(`\n${doneLog}\n`);
