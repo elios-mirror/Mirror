@@ -54,11 +54,11 @@ export default Vue.extend({
     this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
       const module = moduleService.get(widget.id) as any;
       if (module && module.installId === widget.id && module.settings) {
-        this.layout.push(JSON.parse(module.settings));
+        this.setBothLayout(module.installId, JSON.parse(module.settings));
       } else {
-        this.layout.push({
-          id: widget.id,
+        this.setBothLayout(module.installId, {
           hidden: false,
+          id: widget.id,
           pinned: false,
           position: {
             x: 0,
@@ -105,14 +105,11 @@ export default Vue.extend({
             || item.position.w != old.position.w
             || item.position.h != old.position.h) {
             this.oldLayout.set(item.id, item);
-            accountService.getConnected().then((account) => mirrorService.setInstallConfig(account.user.id, item.id, item)).catch(err => console.log(err));
             changedModules[item.id] = item;
+            accountService.getConnected().then((account) => mirrorService.setInstallConfig(account.user.id, item.id, item)).catch(err => console.log(err));
           }
         }
-        else // TODO: Remove this after service impl
-          this.oldLayout.set(item.id, item);
       });
-      console.log(changedModules);
     },
 
     beforeDestroy() {
@@ -125,6 +122,11 @@ export default Vue.extend({
         const module = modules[moduleInstallId] as IModule;
         module.stop();
       }
+    },
+
+    setBothLayout(id: string, wBox: WidgetBox) {
+      this.layout.push(wBox);
+      this.oldLayout.set(id, wBox);
     }
   }
 });
