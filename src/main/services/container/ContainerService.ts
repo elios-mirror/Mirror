@@ -1,0 +1,168 @@
+const mirrSdk = require('elios-protocol');
+const { exec } = require('child_process');
+const yaml = require('js-yaml');
+const fs = require('fs');
+
+class ContainerService {
+  /**
+   * Execute a system command
+   * @param command Command to execute
+   */
+  executeCommand(command: string) {
+    return new Promise((resolve, reject) => {
+      exec(command, (err, stdout, stderr) => {
+        if (err) {
+          reject(err)
+          return;
+        } else if (stdout) {
+          resolve(stdout);
+        }
+        resolve(undefined);
+      });
+    });
+  }
+
+  /**
+   * Stop the application and delete related container
+   * @param name Application's name
+   */
+  async stopAndDeleteAppContainer(name: string) {
+    return this.executeCommand(`docker stop ${name}`).then(async () => {
+      return this.executeCommand(`docker rm ${name}`).then(() => {
+        console.log(`[${name}] Container deleted`);
+      }).catch((err) => {
+        console.error(`[${name}] Container delete error -> ${err}`);
+      });
+    });
+  }
+
+  /**
+   * Delete an application image and container.
+   * The application is stopped if running.
+   * @param name Application's name
+   */
+  async deleteAppImage(name: string) {
+    return this.stopAndDeleteAppContainer(name).then(() => {
+      return this.executeCommand(`docker rmi application:${name}`).then(() => {
+        console.log(`[${name}] Image deleted`);
+      }).catch((err) => {
+        console.error(`[${name}] Image delete error -> ${err}`);
+      });
+    });
+  }
+
+  /**
+   * Check if application exist then delete it's image and container
+   * The application is stopped if running.
+   * @param name Application's name
+   */
+  async checkAndDeleteAppImage(name: string) {
+    return this.executeCommand(`docker images -q application:${name}`).then((stdout) => {
+      if (stdout) {
+        console.log(`[${name}] Image exist, deleting...`);
+        return this.deleteAppImage(name);
+      }
+    });
+  }
+
+  /**
+   * Build a docker image of an application
+   * @param path Path of the application directory
+   * @param name Name of the aplication
+   */
+  async buildAppImage(path: string, name: string) {
+    return this.checkAndDeleteAppImage(name).then(async (stdout) => {
+      let config = yaml.safeLoad(fs.readFileSync(path + '/mirror.yml', 'utf8'));
+      let buildCmd = `docker build --tag application:${name} -f dockerfiles/Dockerfile_${config['language']} ../applications/${name}`;
+
+      console.log(`[${name}] Start Building image`);
+      return this.executeCommand(buildCmd).then((stdout) => {
+        console.log(`[${name}] Image build finished`);
+      }).catch((err) => {
+        console.error(`[${name}] Image build error -> ${err}`);
+      });
+    }).catch((err) => {
+      console.error(`[${name}] AppImage existence check error -> ${err}`);
+    });
+  }
+
+  /**
+   * Run an application
+   * @param name Application's name
+   */
+  async runApp(name: string) {
+    return this.executeCommand(`docker ps -af "name=${name}" --format '{{.Names}}'`).then(async (stdout) => {
+      if (stdout == undefined) {
+        let runCmd = `docker run -d --mount type=bind,source=/tmp/${name}.sock,target=/mirrorsocket.sock --name "${name}" application:${name}`;
+        return this.executeCommand(runCmd).then((stdout) => {
+          console.log(`[${name}] Running`);
+        }).catch((err) => {
+          console.error(`[${name}] ${err}`);
+        });
+      } else {
+        return this.executeCommand(`docker start ${name}`).then((stdout) => {
+          console.log(`[${name}] Started`);
+        }).catch((err) => {
+          console.error(`[${name}] ${err}`);
+        });
+      }
+    }).catch((err) => {
+      console.error(`[${name}] ${err}`);
+    });
+  }
+
+  /**
+   * Build a docker image of an application and run it
+   * @param path Path of the application directory
+   * @param name Name of the aplication
+   */
+  async buildAppImageAndRun(path: string, name: string) {
+    return this.buildAppImage(path, name).then(async () => {
+      return this.runApp(name);
+    });
+  }
+
+  /**
+   * Stop a running application
+   * @param name Name of the aplication
+   */
+  stopApp(name: string) {
+    return this.executeCommand(`docker stop ${name}`);
+  }
+
+  /**
+   * Pause a running application
+   * @param name 
+   */
+  pauseApp(name: string) {
+    return this.executeCommand(`docker pause ${name}`);
+  }
+
+  /**
+   * Resume a previously paused application
+   * @param name Name of the aplication
+   */
+  resumeApp(name: string) {
+    return this.executeCommand(`docker unpause ${name}`);
+  }
+}
+
+// let appName = "clock";
+// let dock = new ContainerService;
+// const sock = mirrSdk(`/tmp/${appName}.sock`);
+
+// dock.buildAppImageAndRun("../applications/" + appName, appName).then(() => {
+//   sock.receive(function (data) {
+//     console.log(data);
+//   });
+// }).catch((err) => {
+//   console.log(err);
+// });
+
+// dock.runApp(appName).then(() => {
+//   sock.receive(function (data) {
+//     console.log(data);
+//   });
+// });
+
+// dock.deleteAppImage(appName);
