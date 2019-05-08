@@ -1,16 +1,17 @@
-const mirrSdk = require('elios-protocol');
+import {injectable} from "inversify";
 const { exec } = require('child_process');
 const yaml = require('js-yaml');
 const fs = require('fs');
 
-class ContainerService {
+@injectable()
+export default class ContainerService {
   /**
    * Execute a system command
    * @param command Command to execute
    */
   executeCommand(command: string) {
     return new Promise((resolve, reject) => {
-      exec(command, (err, stdout, stderr) => {
+      exec(command, (err: string, stdout: string, stderr: string) => {
         if (err) {
           reject(err)
           return;
@@ -42,7 +43,7 @@ class ContainerService {
    * @param name Application's name
    */
   async deleteAppImage(name: string) {
-    return this.stopAndDeleteAppContainer(name).then(() => {
+    return this.stopAndDeleteAppContainer(name).then(async () => {
       return this.executeCommand(`docker rmi application:${name}`).then(() => {
         console.log(`[${name}] Image deleted`);
       }).catch((err) => {
@@ -71,12 +72,12 @@ class ContainerService {
    * @param name Name of the aplication
    */
   async buildAppImage(path: string, name: string) {
-    return this.checkAndDeleteAppImage(name).then(async (stdout) => {
+    return this.checkAndDeleteAppImage(name).then(async () => {
       let config = yaml.safeLoad(fs.readFileSync(path + '/mirror.yml', 'utf8'));
       let buildCmd = `docker build --tag application:${name} -f dockerfiles/Dockerfile_${config['language']} ../applications/${name}`;
 
       console.log(`[${name}] Start Building image`);
-      return this.executeCommand(buildCmd).then((stdout) => {
+      return this.executeCommand(buildCmd).then(() => {
         console.log(`[${name}] Image build finished`);
       }).catch((err) => {
         console.error(`[${name}] Image build error -> ${err}`);
@@ -94,13 +95,13 @@ class ContainerService {
     return this.executeCommand(`docker ps -af "name=${name}" --format '{{.Names}}'`).then(async (stdout) => {
       if (stdout == undefined) {
         let runCmd = `docker run -d --mount type=bind,source=/tmp/${name}.sock,target=/mirrorsocket.sock --name "${name}" application:${name}`;
-        return this.executeCommand(runCmd).then((stdout) => {
+        return this.executeCommand(runCmd).then(() => {
           console.log(`[${name}] Running`);
         }).catch((err) => {
           console.error(`[${name}] ${err}`);
         });
       } else {
-        return this.executeCommand(`docker start ${name}`).then((stdout) => {
+        return this.executeCommand(`docker start ${name}`).then(() => {
           console.log(`[${name}] Started`);
         }).catch((err) => {
           console.error(`[${name}] ${err}`);
@@ -146,23 +147,3 @@ class ContainerService {
     return this.executeCommand(`docker unpause ${name}`);
   }
 }
-
-// let appName = "clock";
-// let dock = new ContainerService;
-// const sock = mirrSdk(`/tmp/${appName}.sock`);
-
-// dock.buildAppImageAndRun("../applications/" + appName, appName).then(() => {
-//   sock.receive(function (data) {
-//     console.log(data);
-//   });
-// }).catch((err) => {
-//   console.log(err);
-// });
-
-// dock.runApp(appName).then(() => {
-//   sock.receive(function (data) {
-//     console.log(data);
-//   });
-// });
-
-// dock.deleteAppImage(appName);
