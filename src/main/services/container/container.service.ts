@@ -9,7 +9,7 @@ export default class ContainerService {
    * Execute a system command
    * @param command Command to execute
    */
-  executeCommand(command: string) {
+  private _executeCommand(command: string) {
     return new Promise((resolve, reject) => {
       exec(command, (err: string, stdout: string, stderr: string) => {
         if (err) {
@@ -28,8 +28,8 @@ export default class ContainerService {
    * @param name Application's name
    */
   async stopAndDeleteAppContainer(name: string) {
-    return this.executeCommand(`docker stop ${name}`).then(async () => {
-      return this.executeCommand(`docker rm ${name}`).then(() => {
+    return this._executeCommand(`docker stop ${name}`).then(async () => {
+      return this._executeCommand(`docker rm ${name}`).then(() => {
         console.log(`[${name}] Container deleted`);
       }).catch((err) => {
         console.error(`[${name}] Container delete error -> ${err}`);
@@ -44,7 +44,7 @@ export default class ContainerService {
    */
   async deleteAppImage(name: string) {
     return this.stopAndDeleteAppContainer(name).then(async () => {
-      return this.executeCommand(`docker rmi application:${name}`).then(() => {
+      return this._executeCommand(`docker rmi application:${name}`).then(() => {
         console.log(`[${name}] Image deleted`);
       }).catch((err) => {
         console.error(`[${name}] Image delete error -> ${err}`);
@@ -58,7 +58,7 @@ export default class ContainerService {
    * @param name Application's name
    */
   async checkAndDeleteAppImage(name: string) {
-    return this.executeCommand(`docker images -q application:${name}`).then((stdout) => {
+    return this._executeCommand(`docker images -q application:${name}`).then((stdout) => {
       if (stdout) {
         console.log(`[${name}] Image exist, deleting...`);
         return this.deleteAppImage(name);
@@ -77,7 +77,7 @@ export default class ContainerService {
       let buildCmd = `docker build --tag application:${name} -f dockerfiles/Dockerfile_${config['language']} ../applications/${name}`;
 
       console.log(`[${name}] Start Building image`);
-      return this.executeCommand(buildCmd).then(() => {
+      return this._executeCommand(buildCmd).then(() => {
         console.log(`[${name}] Image build finished`);
       }).catch((err) => {
         console.error(`[${name}] Image build error -> ${err}`);
@@ -92,16 +92,16 @@ export default class ContainerService {
    * @param name Application's name
    */
   async runApp(name: string) {
-    return this.executeCommand(`docker ps -af "name=${name}" --format '{{.Names}}'`).then(async (stdout) => {
+    return this._executeCommand(`docker ps -af "name=${name}" --format '{{.Names}}'`).then(async (stdout) => {
       if (stdout == undefined) {
-        let runCmd = `docker run -d --mount type=bind,source=/tmp/${name}.sock,target=/mirrorsocket.sock --name "${name}" application:${name}`;
-        return this.executeCommand(runCmd).then(() => {
+        let runCmd = `docker run -d --mount type=bind,source=/tmp/elios_mirror,target=/tmp/elios_sdk --mount type=bind,source=/tmp/elios_sdk,target=/tmp/elios_mirror --name "${name}" application:${name}`;
+        return this._executeCommand(runCmd).then(() => {
           console.log(`[${name}] Running`);
         }).catch((err) => {
           console.error(`[${name}] ${err}`);
         });
       } else {
-        return this.executeCommand(`docker start ${name}`).then(() => {
+        return this._executeCommand(`docker start ${name}`).then(() => {
           console.log(`[${name}] Started`);
         }).catch((err) => {
           console.error(`[${name}] ${err}`);
@@ -128,7 +128,7 @@ export default class ContainerService {
    * @param name Name of the aplication
    */
   stopApp(name: string) {
-    return this.executeCommand(`docker stop ${name}`);
+    return this._executeCommand(`docker stop ${name}`);
   }
 
   /**
@@ -136,7 +136,7 @@ export default class ContainerService {
    * @param name 
    */
   pauseApp(name: string) {
-    return this.executeCommand(`docker pause ${name}`);
+    return this._executeCommand(`docker pause ${name}`);
   }
 
   /**
@@ -144,6 +144,6 @@ export default class ContainerService {
    * @param name Name of the aplication
    */
   resumeApp(name: string) {
-    return this.executeCommand(`docker unpause ${name}`);
+    return this._executeCommand(`docker unpause ${name}`);
   }
 }
