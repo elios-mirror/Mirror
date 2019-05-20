@@ -19,6 +19,7 @@ export interface ModuleVersionDTO {
     module_id: string;
     module: ModuleDTO;
     link: {
+        name: string;
         link_id: string;
         module_id: string;
         id: string;

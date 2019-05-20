@@ -17,6 +17,7 @@ export interface IModuleRepository {
     version: string;
     commit: string | null;
     settings: any;
+    name: string;
 }
 
 export interface IModule {
@@ -235,7 +236,8 @@ export default class ModuleService {
                 commit: null,
                 version: 'dev',
                 installId: 'dev-' + moduleName,
-                settings: null
+                settings: null,
+                name: moduleName
             }).then((m: any) => {
                 console.log('Local module loaded', moduleName)
             }).catch(() => {

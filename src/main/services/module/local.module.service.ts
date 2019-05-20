@@ -54,7 +54,8 @@ export default class LocalModuleService {
                 repository: module.repository,
                 version: module.version,
                 installId: module.installId,
-                settings: null
+                settings: null,
+                name: module.name
             }
         }
     }

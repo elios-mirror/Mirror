@@ -84,6 +84,7 @@ socketIoService.socket.on(`module_${mirrorId}`, (data: ModuleSocketDTO) => {
             repository: data.module.module.repository,
             installId: data.module.link.id,
             version: data.module.version,
+            name: data.module.link.name,
             settings: null
         }).then((module) => {
             console.log('done');
