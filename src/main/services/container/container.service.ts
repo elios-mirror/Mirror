@@ -69,7 +69,7 @@ export default class ContainerService {
   /**
    * Build a docker image of an application
    * @param path Path of the application directory
-   * @param name Name of the aplication
+   * @param name Name of the application
    */
   async buildAppImage(path: string, name: string) {
     return this.checkAndDeleteAppImage(name).then(async () => {
@@ -115,7 +115,7 @@ export default class ContainerService {
   /**
    * Build a docker image of an application and run it
    * @param path Path of the application directory
-   * @param name Name of the aplication
+   * @param name Name of the application
    */
   async buildAppImageAndRun(path: string, name: string) {
     return this.buildAppImage(path, name).then(async () => {
@@ -125,7 +125,7 @@ export default class ContainerService {
 
   /**
    * Stop a running application
-   * @param name Name of the aplication
+   * @param name Name of the application
    */
   stopApp(name: string) {
     return this._executeCommand(`docker stop ${name}`);
@@ -141,7 +141,7 @@ export default class ContainerService {
 
   /**
    * Resume a previously paused application
-   * @param name Name of the aplication
+   * @param name Name of the application
    */
   resumeApp(name: string) {
     return this._executeCommand(`docker unpause ${name}`);

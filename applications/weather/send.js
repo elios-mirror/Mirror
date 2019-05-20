@@ -1,7 +1,9 @@
-var proto = require('elios-protocol');
+let elios_sdk = require('elios-sdk')
 
-const sock = proto("/tmp/elios", true);
+const sdk = new elios_sdk.default();
+
+let widget = sdk.createWidget();
 
 setInterval(() => {
-  sock.send("[Weather]: Snow");
+  widget.html("[Weather]: Snow");
 }, 1000);

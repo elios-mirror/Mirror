@@ -4,12 +4,13 @@ import LocalModuleService from "./local.module.service";
 import SocketService from "../utils/socket.service";
 import { BehaviorSubject } from 'rxjs';
 import Elios from "../../elios/elios.controller";
+import ContainerService from "../container/container.service";
 
 const path = require('path');
 
 const os = require('os');
 const fs = require('fs');
-const modulesPath = path.resolve(os.homedir(), '.elios', 'modules');
+const modulesPath = path.resolve(os.homedir(), '.elios', 'applications');
 
 export interface IModuleRepository {
     installId: string;
@@ -47,7 +48,7 @@ export default class ModuleService {
      * @param {LocalModuleService} localModuleService
      * @param {SocketService} socketService
      */
-    constructor(private gitService: GitService, private localModuleService: LocalModuleService, private socketService: SocketService, private eliosController: Elios) {
+    constructor(private gitService: GitService, private localModuleService: LocalModuleService, private socketService: SocketService, private eliosController: Elios, private containerService: ContainerService) {
 
     }
 
@@ -75,11 +76,11 @@ export default class ModuleService {
     }
 
 
-    private getDirectories(path: string) {
-        return fs.readdirSync(path).filter(function (file: string) {
-            return fs.statSync(path + '/' + file).isDirectory();
-        });
-    }
+    // private getDirectories(path: string) {
+    //     return fs.readdirSync(path).filter(function (file: string) {
+    //         return fs.statSync(path + '/' + file).isDirectory();
+    //     });
+    // }
 
     /**
      * Load custom module with simple require and absolute path
@@ -92,43 +93,34 @@ export default class ModuleService {
     }
 
 
-    private loadFromPath(moduleAbsolutePath: string, moduleRepository: IModuleRepository) {
+    private loadFromPath(moduleRepository: IModuleRepository) {
         return new Promise(async (resolve, reject) => {
-            const moduleName = path.basename(moduleRepository.repository);
 
-            let module = this.requireDynamically(moduleAbsolutePath);
+            // if (module.requireVersion) {
+            //     console.log('Check Launcher version for module ' + module.name + ' - Minimum version:  ' + module.requireVersion + ' - Current version: ' + global.version);
+            //     if (ModuleService.cmpVersions(global.version, module.requireVersion) >= 0) {
+            //         console.log('Version is ok!');
+            //     } else {
+            //         console.log('Version is incorrect. Skip module: ' + module.name);
+            //         reject(module);
+            //         return;
+            //     }
+            // }
 
-            if (module.default) {
-                module = new module.default(this.eliosController);
-            }
+            // if (module.showOnStart) {
+            //     this.socketService.send('modules.install.init', { action: 'init_module', module: module.title ? module.title : module.name });
+            // }
             
-            module.version = moduleRepository.version;
-            module.name = moduleName;
-            module.installId = moduleRepository.installId;
-            module.repository = moduleRepository.repository;
-            module.settings = moduleRepository.settings;
-
-            if (module.requireVersion) {
-                console.log('Check Launcher version for module ' + moduleName + ' - Minimum version:  ' + module.requireVersion + ' - Current version: ' + global.version);
-                if (ModuleService.cmpVersions(global.version, module.requireVersion) >= 0) {
-                    console.log('Version is ok!');
-                } else {
-                    console.log('Version is incorrect. Skip module: ' + moduleName);
-                    reject(module);
-                    return;
-                }
-            }
-
-            if (module.showOnStart) {
-                this.socketService.send('modules.install.init', { action: 'init_module', module: module.title ? module.title : module.name });
-            }
-            
-            await module.init(null, () => {
-                console.log(module.name + ' module initialized !');
+            // await module.init(null, () => {
+            //     console.log(module.name + ' module initialized !');
+            // });
+            this.containerService.runApp(moduleRepository.name).then(() => {
+                console.log("Application launched ", moduleRepository);
+                this.initializedModules[moduleRepository.installId] = moduleRepository;
+                resolve(moduleRepository);
+            }).catch((err) => {
+                console.log(err);
             });
-            console.log("installed module ", moduleRepository);
-            this.initializedModules[moduleRepository.installId] = module;
-            resolve(module);
         }).catch((err) => {
             console.error(err);
         });
@@ -141,7 +133,7 @@ export default class ModuleService {
      * @returns {Promise<any>}
      */
     private loadModule(module: IModuleRepository) {
-        return this.loadFromPath(path.resolve(modulesPath, path.basename(module.repository) + '-' + module.version), module)
+        return this.loadFromPath(module)
     }
 
     /**
@@ -156,7 +148,9 @@ export default class ModuleService {
             if (this.localModuleService.has(module)) {
                 if (this.localModuleService.get(module).commit != module.commit) {
                     await this.gitService.pull(module).then(() => {
-                        this.localModuleService.set(module);
+                        this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).then(() => {
+                            this.localModuleService.set(module);
+                        });
                     }).catch(() => {
                         console.log('error pull');
                         reject();
@@ -165,6 +159,8 @@ export default class ModuleService {
                 }
             } else {
                 await this.gitService.clone(module).then(() => {
+                    console.log('=================');
+                    this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name);
                 }).catch((err) => {
                     console.log('error clone', err);
                     reject();
@@ -195,7 +191,7 @@ export default class ModuleService {
             this.socketService.send('modules.load.start');
 
             if (process.env.NODE_ENV === 'development') {
-                this.loadOrReloadDevModules();
+                // this.loadOrReloadDevModules();
             }
 
             let loadNextModule = () => {
@@ -227,24 +223,24 @@ export default class ModuleService {
         });
     }
 
-    loadOrReloadDevModules() {
-        const localModules = this.getDirectories(path.resolve('./modules'));
+    // loadOrReloadDevModules() {
+    //     const localModules = this.getDirectories(path.resolve('./modules'));
 
-        localModules.forEach((moduleName: string) => {
-            this.loadFromPath(path.resolve('./modules', moduleName), {
-                repository: 'dev/' + moduleName,
-                commit: null,
-                version: 'dev',
-                installId: 'dev-' + moduleName,
-                settings: null,
-                name: moduleName
-            }).then((m: any) => {
-                console.log('Local module loaded', moduleName)
-            }).catch(() => {
-                console.log('Local module error loaded', moduleName)
-            });
-        });
-    }
+    //     localModules.forEach((moduleName: string) => {
+    //         this.loadFromPath(path.resolve('./modules', moduleName), {
+    //             repository: 'dev/' + moduleName,
+    //             commit: null,
+    //             version: 'dev',
+    //             installId: 'dev-' + moduleName,
+    //             settings: null,
+    //             name: moduleName
+    //         }).then((m: any) => {
+    //             console.log('Local module loaded', moduleName)
+    //         }).catch(() => {
+    //             console.log('Local module error loaded', moduleName)
+    //         });
+    //     });
+    // }
 
     /**
      * Add a module before load.

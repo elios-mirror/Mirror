@@ -1,7 +1,10 @@
-var proto = require('elios-protocol');
+let elios_sdk = require('elios-sdk')
 
-const sock = proto("/tmp/elios", true);
+const sdk = new elios_sdk.default();
+
+let widget = sdk.createWidget();
+
 
 setInterval(() => {
-  sock.send("[Clock]: " + new Date().toISOString());
+  widget.html("[Clock]: " + new Date().toISOString());
 }, 1000);

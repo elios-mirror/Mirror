@@ -9,7 +9,7 @@ const fs = require('fs');
 @injectable()
 export default class LocalModuleService {
 
-    local = path.resolve(os.homedir(), '.elios', 'modules') + '/';
+    local = path.resolve(os.homedir(), '.elios', 'applications') + '/';
     modules: any = {};
 
     /**
