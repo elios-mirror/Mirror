@@ -1,6 +1,6 @@
-var addon = require('elios-protocol');
+var proto = require('elios-protocol');
 
-const sock = addon("/mirrorsocket.sock");
+const sock = proto("/tmp/elios", true);
 
 setInterval(() => {
   sock.send("[Weather]: Snow");

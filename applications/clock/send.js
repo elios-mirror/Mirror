@@ -1,6 +1,6 @@
-var sdk = require('elios-protocol');
+var proto = require('elios-protocol');
 
-const sock = sdk("/tmp/elios");
+const sock = proto("/tmp/elios", true);
 
 setInterval(() => {
   sock.send("[Clock]: " + new Date().toISOString());

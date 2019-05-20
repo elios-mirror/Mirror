@@ -94,7 +94,7 @@ export default class ContainerService {
   async runApp(name: string) {
     return this._executeCommand(`docker ps -af "name=${name}" --format '{{.Names}}'`).then(async (stdout) => {
       if (stdout == undefined) {
-        let runCmd = `docker run -d --mount type=bind,source=/tmp/elios_mirror,target=/tmp/elios_sdk --mount type=bind,source=/tmp/elios_sdk,target=/tmp/elios_mirror --name "${name}" application:${name}`;
+        let runCmd = `docker run -d --mount type=bind,source=/tmp/${name}_mirror,target=/tmp/elios_mirror --mount type=bind,source=/tmp/${name}_sdk,target=/tmp/elios_sdk --name "${name}" application:${name}`;
         return this._executeCommand(runCmd).then(() => {
           console.log(`[${name}] Running`);
         }).catch((err) => {
