@@ -159,7 +159,6 @@ export default class ModuleService {
                 }
             } else {
                 await this.gitService.clone(module).then(() => {
-                    console.log('=================');
                     this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name);
                 }).catch((err) => {
                     console.log('error clone', err);

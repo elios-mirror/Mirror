@@ -74,7 +74,7 @@ export default class ContainerService {
   async buildAppImage(path: string, name: string) {
     return this.checkAndDeleteAppImage(name).then(async () => {
       let config = yaml.safeLoad(fs.readFileSync(path + '/mirror.yml', 'utf8'));
-      let buildCmd = `docker build --tag application:${name} -f dockerfiles/Dockerfile_${config['language']} ../applications/${name}`;
+      let buildCmd = `docker build --tag application:${name} -f dockerfiles/Dockerfile_${config['language']} ${path}`;
 
       console.log(`[${name}] Start Building image`);
       return this._executeCommand(buildCmd).then(() => {

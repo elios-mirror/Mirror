@@ -67,14 +67,14 @@ export default class GitService {
                 console.log('Cloned ' + module.name + ' to ' + repository.workdir());
                 if (module.commit) {
                     this.checkOut(repository, module.commit).then(() => {
-                        repository.free();
+                        // repository.free();
                         resolve();
                     }).catch((err: any) => {
-                        repository.free();
+                        // repository.free();
                         reject(err);
                     });
                 } else {
-                    repository.free();
+                    // repository.free();
                     resolve();
                 }
             }).catch((err: any) => {
