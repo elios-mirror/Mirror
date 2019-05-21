@@ -1,4 +1,4 @@
-import {injectable} from "inversify";
+import { injectable } from "inversify";
 const { exec } = require('child_process');
 const yaml = require('js-yaml');
 const fs = require('fs');
@@ -24,17 +24,27 @@ export default class ContainerService {
   }
 
   /**
+   * Run an application
+   * @param name Application's name
+   */
+  checkContainerExistence(name: string) {
+    return this._executeCommand(`docker ps -af "name=${name}" --format '{{.Names}}'`);
+  }
+
+  /**
    * Stop the application and delete related container
    * @param name Application's name
    */
   async stopAndDeleteAppContainer(name: string) {
-    return this._executeCommand(`docker stop ${name}`).then(async () => {
-      return this._executeCommand(`docker rm ${name}`).then(() => {
-        console.log(`[${name}] Container deleted`);
-      }).catch((err) => {
-        console.error(`[${name}] Container delete error -> ${err}`);
-      });
-    });
+    return this.checkContainerExistence(name).then((exist) => {
+      if (exist != undefined) {
+        return this._executeCommand(`docker stop ${name}`).then(() => {
+          return this._executeCommand(`docker rm ${name}`).then(() => {
+            console.log(`[${name}] Container deleted`);
+          })
+        })
+      }
+    })
   }
 
   /**
@@ -43,13 +53,11 @@ export default class ContainerService {
    * @param name Application's name
    */
   async deleteAppImage(name: string) {
-    return this.stopAndDeleteAppContainer(name).then(async () => {
+    return this.stopAndDeleteAppContainer(name).then(() => {
       return this._executeCommand(`docker rmi application:${name}`).then(() => {
         console.log(`[${name}] Image deleted`);
-      }).catch((err) => {
-        console.error(`[${name}] Image delete error -> ${err}`);
-      });
-    });
+      })
+    })
   }
 
   /**
@@ -61,9 +69,10 @@ export default class ContainerService {
     return this._executeCommand(`docker images -q application:${name}`).then((stdout) => {
       if (stdout) {
         console.log(`[${name}] Image exist, deleting...`);
-        return this.deleteAppImage(name);
+        return this.deleteAppImage(name).catch((err) => {
+        });
       }
-    });
+    })
   }
 
   /**
@@ -79,12 +88,8 @@ export default class ContainerService {
       console.log(`[${name}] Start Building image`);
       return this._executeCommand(buildCmd).then(() => {
         console.log(`[${name}] Image build finished`);
-      }).catch((err) => {
-        console.error(`[${name}] Image build error -> ${err}`);
-      });
-    }).catch((err) => {
-      console.error(`[${name}] AppImage existence check error -> ${err}`);
-    });
+      })
+    })
   }
 
   /**
@@ -92,23 +97,17 @@ export default class ContainerService {
    * @param name Application's name
    */
   async runApp(name: string) {
-    return this._executeCommand(`docker ps -af "name=${name}" --format '{{.Names}}'`).then(async (stdout) => {
-      if (stdout == undefined) {
+    return this.checkContainerExistence(name).then(async (exist) => {
+      if (exist == undefined) {
         let runCmd = `docker run -d --mount type=bind,source=/tmp/${name}_mirror,target=/tmp/elios_mirror --mount type=bind,source=/tmp/${name}_sdk,target=/tmp/elios_sdk --name "${name}" application:${name}`;
         return this._executeCommand(runCmd).then(() => {
           console.log(`[${name}] Running`);
-        }).catch((err) => {
-          console.error(`[${name}] ${err}`);
-        });
+        })
       } else {
         return this._executeCommand(`docker start ${name}`).then(() => {
           console.log(`[${name}] Started`);
-        }).catch((err) => {
-          console.error(`[${name}] ${err}`);
-        });
+        })
       }
-    }).catch((err) => {
-      console.error(`[${name}] ${err}`);
     });
   }
 

@@ -127,7 +127,7 @@ export default class ModuleService {
                 this.initializedModules[moduleRepository.installId] = moduleRepository;
                 resolve(moduleRepository);
             }).catch((err) => {
-                console.log(err);
+                console.error(err);
             });
         }).catch((err) => {
             console.error(err);
@@ -155,21 +155,25 @@ export default class ModuleService {
 
             if (this.localModuleService.has(module)) {
                 if (this.localModuleService.get(module).commit != module.commit) {
-                    await this.gitService.pull(module).then(() => {
-                        this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).then(() => {
+                    await this.gitService.pull(module).then(async () => {
+                        await this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).then(() => {
                             this.localModuleService.set(module);
+                        }).catch((err) => {
+                            console.error(err)
                         });
                     }).catch(() => {
-                        console.log('error pull');
+                        console.error('error pull');
                         reject();
                         return;
                     });
                 }
             } else {
-                await this.gitService.clone(module).then(() => {
-                    this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name);
+                await this.gitService.clone(module).then(async () => {
+                    await this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).catch((err) => {
+                        console.log(err)
+                    });
                 }).catch((err) => {
-                    console.log('error clone', err);
+                    console.error('error clone', err);
                     reject();
                     return;
                 });
