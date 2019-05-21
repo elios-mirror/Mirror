@@ -122,13 +122,15 @@ export default class ModuleService {
             // });
 
             this.eliosController.initModule(moduleRepository);
-            this.containerService.runApp(moduleRepository.name).then(() => {
-                console.log("Application launched ", moduleRepository);
-                this.initializedModules[moduleRepository.installId] = moduleRepository;
-                resolve(moduleRepository);
-            }).catch((err) => {
-                console.error(err);
-            });
+            setTimeout(() => {
+                this.containerService.runApp(moduleRepository.name).then(() => {
+                    console.log("Application launched ", moduleRepository);
+                    this.initializedModules[moduleRepository.installId] = moduleRepository;
+                    resolve(moduleRepository);
+                }).catch((err) => {
+                    console.error(err);
+                });
+            }, 1000);
         }).catch((err) => {
             console.error(err);
         });

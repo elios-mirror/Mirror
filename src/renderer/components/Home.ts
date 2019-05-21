@@ -74,15 +74,16 @@ export default Vue.extend({
       }));
     });
 
-    const modules = moduleService.getAll();
-    for (let moduleInstallId in modules) {
-      const module = modules[moduleInstallId] as IModule;
-      module.start();
-    }
+    // const modules = moduleService.getAll();
+    // for (let moduleInstallId in modules) {
+    //   const module = modules[moduleInstallId] as IModule;
+    //   // module.start();
+    // }
 
     socketService.on('modules.install.end').subscribe((data: any) => {
       if (data.success) {
-        data.module.start();
+        // data.module.start();
+        console.log('New module form socket');
       }
     });
   },
