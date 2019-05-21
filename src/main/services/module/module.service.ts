@@ -48,7 +48,13 @@ export default class ModuleService {
      * @param {LocalModuleService} localModuleService
      * @param {SocketService} socketService
      */
-    constructor(private gitService: GitService, private localModuleService: LocalModuleService, private socketService: SocketService, private eliosController: Elios, private containerService: ContainerService) {
+    constructor(
+        private gitService: GitService,
+        private localModuleService: LocalModuleService,
+        private socketService: SocketService,
+        private eliosController: Elios,
+        private containerService: ContainerService
+    ) {
 
     }
 
@@ -110,10 +116,12 @@ export default class ModuleService {
             // if (module.showOnStart) {
             //     this.socketService.send('modules.install.init', { action: 'init_module', module: module.title ? module.title : module.name });
             // }
-            
+
             // await module.init(null, () => {
             //     console.log(module.name + ' module initialized !');
             // });
+
+            this.eliosController.initModule(moduleRepository);
             this.containerService.runApp(moduleRepository.name).then(() => {
                 console.log("Application launched ", moduleRepository);
                 this.initializedModules[moduleRepository.installId] = moduleRepository;
