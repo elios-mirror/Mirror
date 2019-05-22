@@ -53,7 +53,7 @@ export default class ContainerService {
    * @param name Application's name
    */
   async deleteAppImage(name: string) {
-    return this.stopAndDeleteAppContainer(name).then(() => {
+    return this.stopAndDeleteAppContainer(name).then(async () => {
       return this._executeCommand(`docker rmi application:${name}`).then(() => {
         console.log(`[${name}] Image deleted`);
       })

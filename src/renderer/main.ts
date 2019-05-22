@@ -13,7 +13,7 @@ import SocketIoService from '../main/services/utils/socket-io.service';
 import { MirrorDTO, ModuleVersionDTO } from '../main/services/api/mirror/mirror.service';
 import UserDTO from "../main/services/api/account/user/user.dto";
 import CookieService from '../main/services/utils/cookie.service';
-import ModuleService from "../main/services/module/module.service";
+import ModuleService, { IModuleRepository } from "../main/services/module/module.service";
 
 const Buefy = require('buefy');
 const VueQrcode = require('@xkeshi/vue-qrcode');
@@ -76,22 +76,25 @@ socketService.on('app.reload').subscribe(() => {
 });
 
 socketIoService.socket.on(`module_${mirrorId}`, (data: ModuleSocketDTO) => {
+    console.log(data)
+    let app: IModuleRepository = {
+        commit: data.module.commit,
+        repository: data.module.module.repository,
+        installId: data.module.link.id,
+        version: data.module.version,
+        name: data.module.module.name,
+        settings: null
+    };
     if (data.action === 'install') {
         console.log('install module', data.module);
         // accountService.loadModules();
-        moduleService.install({
-            commit: data.module.commit,
-            repository: data.module.module.repository,
-            installId: data.module.link.id,
-            version: data.module.version,
-            name: data.module.module.name,
-            settings: null
-        }).then((module) => {
+        moduleService.install(app).then(() => {
+            moduleService.startApp(app);
             console.log('done');
         });
     } else if (data.action === 'uninstall') {
-        console.log('unistall module', data.module);
-        accountService.loadModules();
+        console.log('uninstall module', data.module);
+        moduleService.uninstall(app);
     }
 });
 

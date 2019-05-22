@@ -5,6 +5,7 @@ import SocketService from "../utils/socket.service";
 import { BehaviorSubject } from 'rxjs';
 import Elios from "../../elios/elios.controller";
 import ContainerService from "../container/container.service";
+import { app } from "electron";
 
 const path = require('path');
 
@@ -39,8 +40,8 @@ export interface IModule {
 @injectable()
 export default class ModuleService {
 
-    private modules: IModuleRepository[] = [];
-    private initializedModules: any = {};
+    private apps = new Map<string, IModuleRepository>();
+    private runningApps: any = {};
 
     /**
      *
@@ -98,53 +99,38 @@ export default class ModuleService {
         return eval(`require('${path}');`);
     }
 
-
-    private loadFromPath(moduleRepository: IModuleRepository) {
-        return new Promise(async (resolve, reject) => {
-
-            // if (module.requireVersion) {
-            //     console.log('Check Launcher version for module ' + module.name + ' - Minimum version:  ' + module.requireVersion + ' - Current version: ' + global.version);
-            //     if (ModuleService.cmpVersions(global.version, module.requireVersion) >= 0) {
-            //         console.log('Version is ok!');
-            //     } else {
-            //         console.log('Version is incorrect. Skip module: ' + module.name);
-            //         reject(module);
-            //         return;
-            //     }
-            // }
-
-            // if (module.showOnStart) {
-            //     this.socketService.send('modules.install.init', { action: 'init_module', module: module.title ? module.title : module.name });
-            // }
-
-            // await module.init(null, () => {
-            //     console.log(module.name + ' module initialized !');
-            // });
-
-            this.eliosController.initModule(moduleRepository);
-            setTimeout(() => {
-                this.containerService.runApp(moduleRepository.name).then(() => {
-                    console.log("Application launched ", moduleRepository);
-                    this.initializedModules[moduleRepository.installId] = moduleRepository;
-                    resolve(moduleRepository);
-                }).catch((err) => {
-                    console.error(err);
-                });
-            }, 1000);
-        }).catch((err) => {
-            console.error(err);
-        });
-    }
-
     /**
-     * Load module and init it
-     *
-     * @param {string} module
-     * @returns {Promise<any>}
+     * 
+     * @param app Start a already build application
      */
-    private loadModule(module: IModuleRepository) {
-        return this.loadFromPath(module)
+    startApp(app: IModuleRepository) {
+        return new Promise(async (resolve, reject) => {
+            if (this.runningApps[app.installId] != undefined) {
+                console.log(`Application ${app.name} is already running`)
+                resolve();
+            }
+            this.eliosController.initModule(app);
+            // setTimeout(() => {
+            this.containerService.runApp(app.name).then(() => {
+                console.log("Application launched ", app);
+                this.runningApps[app.installId] = app;
+                // resolve(app);
+            }).catch((err) => {
+                reject(err);
+            })
+            // }, 1000);
+        })
     }
+
+    // /**
+    //  * Load module and init it
+    //  *
+    //  * @param {string} module
+    //  * @returns {Promise<any>}
+    //  */
+    // private loadModule(module: IModuleRepository) {
+    //     return this.startApp(module)
+    // }
 
     /**
      * Check module for update and init it.
@@ -163,9 +149,9 @@ export default class ModuleService {
                         }).catch((err) => {
                             console.error(err)
                         });
-                    }).catch(() => {
+                    }).catch((err) => {
                         console.error('error pull');
-                        reject();
+                        reject(err);
                         return;
                     });
                 }
@@ -176,64 +162,92 @@ export default class ModuleService {
                     });
                 }).catch((err) => {
                     console.error('error clone', err);
-                    reject();
+                    reject(err);
                     return;
                 });
             }
 
-            return this.loadModule(module).then((m: any) => {
-                if (!m) {
-                    reject(m);
-                    return;
-                }
-                this.localModuleService.set(module);
-                console.log(m.name + ' initialized.');
-                resolve(m);
+            // return this.loadModule(module).then((m: any) => {
+            //     if (!m) {
+            //         reject(m);
+            //         return;
+            //     }
+            //     this.localModuleService.set(module);
+            //     console.log(m.name + ' initialized.');
+                resolve();
+            // });
+        });
+    }
+
+    /**
+     * Start all applications
+     */
+    startAllApps() {
+        this.apps.forEach(app => {
+            this.startApp(app).catch((err) => {
+                console.error(err);
             });
         });
     }
 
     /**
-     * Load all modules.
-     *
-     * @returns {Promise<any>}
+     * Check new app, app update and build them
      */
-    loadAll() {
-        return new Promise((resolve) => {
-            let totalOfModules = this.modules.length;
+    async loadAll(): Promise<any> {
             this.socketService.send('modules.load.start');
+            let i = 0;
+            console.log("Length-> " + this.apps.size)
+            this.apps.forEach(async (app) => {
+            // for (let app of this.apps) {
+                console.log("*** " + i)
+                this.socketService.send('modules.install.start', {
+                    module: app, stats: {
+                        total: this.apps.size,
+                        current: i
+                    }
+                });
 
-            if (process.env.NODE_ENV === 'development') {
-                // this.loadOrReloadDevModules();
-            }
+                await this.check(app).then((m) => {
+                    // this.apps = this.apps.slice(1);
+                    this.socketService.send('modules.install.end', { success: true, module: m });
+                    // loadNextModule();
+                }).catch((err) => {
+                    this.localModuleService.delete(app);
+                    // this.apps = this.apps.slice(1);
+                    this.socketService.send('modules.install.end', { success: false });
+                    // loadNextModule();
+                });
+                ++i;
+            });
+            this.socketService.send('modules.load.end');
+            // resolve();
+        //     let loadNextModule = () => {
+        //         if (this.apps.length > 0) {
+        //             let nextModule = this.apps[0];
+        //             this.socketService.send('modules.install.start', {
+        //                 module: nextModule, stats: {
+        //                     total: totalOfModules,
+        //                     current: ((totalOfModules - this.apps.length) + 1)
+        //                 }
+        //             });
 
-            let loadNextModule = () => {
-                if (this.modules.length > 0) {
-                    let nextModule = this.modules[0];
-                    this.socketService.send('modules.install.start', {
-                        module: nextModule, stats: {
-                            total: totalOfModules,
-                            current: ((totalOfModules - this.modules.length) + 1)
-                        }
-                    });
-
-                    this.check(nextModule).then((m) => {
-                        this.modules = this.modules.slice(1);
-                        this.socketService.send('modules.install.end', { success: true, module: m });
-                        loadNextModule();
-                    }).catch(() => {
-                        this.localModuleService.delete(nextModule);
-                        this.modules = this.modules.slice(1);
-                        this.socketService.send('modules.install.end', { success: false });
-                        loadNextModule();
-                    });
-                } else {
-                    this.socketService.send('modules.load.end');
-                    resolve();
-                }
-            };
-            loadNextModule();
-        });
+        //             this.check(nextModule).then((m) => {
+        //                 this.apps = this.apps.slice(1);
+        //                 this.socketService.send('modules.install.end', { success: true, module: m });
+        //                 loadNextModule();
+        //             }).catch(() => {
+        //                 this.localModuleService.delete(nextModule);
+        //                 this.apps = this.apps.slice(1);
+        //                 this.socketService.send('modules.install.end', { success: false });
+        //                 loadNextModule();
+        //             });
+        //         } else {
+        //             this.socketService.send('modules.load.end');
+        //             resolve();
+        //         }
+        //     };
+        //     loadNextModule();
+        // });
     }
 
     // loadOrReloadDevModules() {
@@ -252,7 +266,7 @@ export default class ModuleService {
     //         }).catch(() => {
     //             console.log('Local module error loaded', moduleName)
     //         });
-    //     });
+    //     });  
     // }
 
     /**
@@ -261,7 +275,8 @@ export default class ModuleService {
      * @param {IModuleRepository} module
      */
     add(module: IModuleRepository) {
-        this.modules.push(module);
+        this.apps.set(module.name, module);
+        // this.apps.push(module);
     }
 
     /**
@@ -269,20 +284,22 @@ export default class ModuleService {
     *
     * @param {IModuleRepository} module
     */
-    install(module: IModuleRepository): Promise<any> {
-        this.modules.push(module);
-        return this.loadAll();
+    install(module: IModuleRepository) {
+        // this.apps.push(module);
+        this.apps.set(module.name, module);
+        return this.check(module);
+        // return this.loadAll();
     }
 
     /**
-    * Directly uinstall module
+    * Directly uninstall application
     *
-    * @param {IModuleRepository} module
+    * @param {IModuleRepository} application
     */
-    uninstall(): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
-
-        });
+    uninstall(app: IModuleRepository): Promise<any> {
+        this.apps.delete(app.name);
+        this.runningApps[app.installId] != undefined ? this.runningApps[app.installId] = undefined : 0;
+        return this.containerService.deleteAppImage(app.name);
     }
 
     /**
@@ -291,7 +308,7 @@ export default class ModuleService {
      * @param {string} installId
      */
     get(installId: string): IModule {
-        return this.initializedModules[installId];
+        return this.runningApps[installId];
     }
 
     /**
@@ -300,7 +317,7 @@ export default class ModuleService {
      * @returns {IModule[]}
      */
     getAll() {
-        return this.initializedModules;
+        return this.runningApps;
     }
 
     /**
@@ -311,8 +328,8 @@ export default class ModuleService {
         Object.keys(modules).map((objectKey, index) => {
             const module = modules[objectKey];
             this.localModuleService.delete(module);
-            delete this.initializedModules[module.installId];
-            this.initializedModules = {};
+            delete this.runningApps[module.installId];
+            this.runningApps = {};
         });
 
     }

@@ -79,13 +79,14 @@ export default Vue.extend({
     //   const module = modules[moduleInstallId] as IModule;
     //   // module.start();
     // }
-
-    socketService.on('modules.install.end').subscribe((data: any) => {
-      if (data.success) {
-        // data.module.start();
-        console.log('New module form socket');
-      }
-    });
+    
+    // socketService.on('modules.install.end').subscribe((data: any) => {
+      //   if (data.success) {
+        //     // data.module.start();
+        //     console.log('New module form socket');
+        //   }
+        // });
+    moduleService.startAllApps();
   },
   methods: {
     onLayoutChanged(evt: any) {
