@@ -49,6 +49,12 @@ export default class Elios {
     });
   }
 
+  destroyModule(module: IModuleRepository) {
+    console.log('Destroy SDK for ' + module.name);
+    this._connections[module.installId].close();
+    delete this._connections[module.installId];
+  }
+
   // createWidget(args: any) {
   //     const widget = {
   //         html: new BehaviorSubject(''),

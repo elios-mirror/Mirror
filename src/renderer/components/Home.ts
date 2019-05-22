@@ -48,9 +48,11 @@ export default Vue.extend({
     };
   },
   mounted() {
+    
     const moduleService = this.$container.get<ModuleService>(ModuleService.name);
     const socketService = this.$container.get<SocketService>(SocketService.name);
     const elios = this.$container.get<Elios>(Elios.name);
+    
     this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
       const module = moduleService.get(widget.id) as any;
       if (module && module.installId === widget.id && module.settings) {
@@ -73,20 +75,24 @@ export default Vue.extend({
         this.$set(this.widgets, widget.id, html);
       }));
     });
-
-    // const modules = moduleService.getAll();
-    // for (let moduleInstallId in modules) {
-    //   const module = modules[moduleInstallId] as IModule;
-    //   // module.start();
-    // }
     
-    // socketService.on('modules.install.end').subscribe((data: any) => {
-      //   if (data.success) {
-        //     // data.module.start();
-        //     console.log('New module form socket');
-        //   }
-        // });
     moduleService.startAllApps();
+
+    socketService.on('modules.install.end').subscribe((data: any) => {
+      if (data.success) {
+        // data.module.start();
+        console.log('New module from socket');
+      }
+    });
+
+    socketService.on('modules.uninstall.end').subscribe((data: any) => {
+      if (data.success) {
+        // data.module.start();
+        this.$delete(this.widgets, data.module.link.id);
+        // Need to unsubscript widget 
+        console.log('Need to uninstall module here');
+      }
+    });
   },
   methods: {
     onLayoutChanged(evt: any) {
