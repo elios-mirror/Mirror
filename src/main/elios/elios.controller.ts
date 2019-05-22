@@ -2,6 +2,7 @@ import { injectable } from "inversify";
 import { Subject, BehaviorSubject } from "rxjs";
 import { IModuleRepository } from "../services/module/module.service";
 import * as elios_protocol from 'elios-protocol';
+import * as fs from 'fs';
 
 export interface Widget {
   id: string;
@@ -24,6 +25,9 @@ export default class Elios {
 
   initModule(module: IModuleRepository) {
     console.log("Initialize SDK for " + module.name);
+
+    fs.unlinkSync(`/tmp/${module.name}_sdk`);
+    fs.unlinkSync(`/tmp/${module.name}_mirror`);
     this._connections[module.installId] = elios_protocol(`/tmp/${module.name}`);
     this._connections[module.installId].receive((message: string, command_type: number) => {
       console.log('New command from ' + module.name);
@@ -53,6 +57,13 @@ export default class Elios {
     console.log('Destroy SDK for ' + module.name);
     this._connections[module.installId].close();
     delete this._connections[module.installId];
+  }
+
+
+  destroyAll() {
+    Object.keys(this._connections).forEach((value, key) => {
+      console.log(value, key);
+    });
   }
 
   // createWidget(args: any) {
