@@ -89,15 +89,15 @@ export default class ModuleService {
     //     });
     // }
 
-    /**
-     * Load custom module with simple require and absolute path
-     * 
-     * @param {string} path
-     */
-    private requireDynamically(path: string) {
-        path = path.split('\\').join('/');
-        return eval(`require('${path}');`);
-    }
+    // /**
+    //  * Load custom module with simple require and absolute path
+    //  * 
+    //  * @param {string} path
+    //  */
+    // private requireDynamically(path: string) {
+    //     path = path.split('\\').join('/');
+    //     return eval(`require('${path}');`);
+    // }
 
     /**
      * 
@@ -110,7 +110,7 @@ export default class ModuleService {
                 resolve();
             }
             this.eliosController.initModule(app);
-            // setTimeout(() => {
+            setTimeout(() => {
             this.containerService.runApp(app.name).then(() => {
                 console.log("Application launched ", app);
                 this.runningApps[app.installId] = app;
@@ -118,7 +118,7 @@ export default class ModuleService {
             }).catch((err) => {
                 reject(err);
             })
-            // }, 1000);
+            }, 100);
         })
     }
 
@@ -148,22 +148,22 @@ export default class ModuleService {
                             this.localModuleService.set(module);
                         }).catch((err) => {
                             console.error(err)
+                            reject(err);
                         });
                     }).catch((err) => {
                         console.error('error pull');
                         reject(err);
-                        return;
                     });
                 }
             } else {
                 await this.gitService.clone(module).then(async () => {
                     await this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).catch((err) => {
                         console.log(err)
+                        reject(err);
                     });
                 }).catch((err) => {
                     console.error('error clone', err);
                     reject(err);
-                    return;
                 });
             }
 
@@ -174,7 +174,7 @@ export default class ModuleService {
             //     }
             //     this.localModuleService.set(module);
             //     console.log(m.name + ' initialized.');
-                resolve();
+            resolve();
             // });
         });
     }
@@ -199,7 +199,6 @@ export default class ModuleService {
             console.log("Length-> " + this.apps.size)
             this.apps.forEach(async (app) => {
             // for (let app of this.apps) {
-                console.log("*** " + i)
                 this.socketService.send('modules.install.start', {
                     module: app, stats: {
                         total: this.apps.size,
@@ -296,10 +295,22 @@ export default class ModuleService {
     *
     * @param {IModuleRepository} application
     */
-    uninstall(app: IModuleRepository): Promise<any> {
+    async uninstall(app: IModuleRepository): Promise<any> {
+        this.socketService.send('modules.uninstall.start', { app: app });
+
         this.apps.delete(app.name);
-        this.runningApps[app.installId] != undefined ? this.runningApps[app.installId] = undefined : 0;
-        return this.containerService.deleteAppImage(app.name);
+        if (this.runningApps[app.installId] != undefined) {
+            this.runningApps[app.installId] = undefined;
+            this.eliosController.destroyModule(app);
+        }
+
+        return this.containerService.deleteAppImage(app.name).then(() => {
+            this.localModuleService.delete(app);
+            this.socketService.send('modules.uninstall.end', { success: true, app: app });
+        }).catch((err) => {
+            this.socketService.send('modules.uninstall.end', { success: false, app: app });
+            throw err;
+        });
     }
 
     /**

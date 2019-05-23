@@ -41,7 +41,7 @@ export default Vue.extend({
       maxRowCount: 37,
       bubbleUp: false,
       margin: 3,
-      widgetObservers: [] as any[],
+      widgetObservers: new Map<string, any>(),
       widgets: {} as any,
       layout: [] as WidgetBox[],
       oldLayout: new Map<string, WidgetBox>()
@@ -71,7 +71,7 @@ export default Vue.extend({
         });
       }
       this.$set(this.widgets, widget.id, '')
-      this.widgetObservers.push(widget.html.subscribe((html: string) => {
+      this.widgetObservers.set(widget.id, widget.html.subscribe((html: string) => {
         this.$set(this.widgets, widget.id, html);
       }));
     });
@@ -80,17 +80,16 @@ export default Vue.extend({
 
     socketService.on('modules.install.end').subscribe((data: any) => {
       if (data.success) {
-        // data.module.start();
         console.log('New module from socket');
       }
     });
 
     socketService.on('modules.uninstall.end').subscribe((data: any) => {
       if (data.success) {
-        // data.module.start();
-        this.$delete(this.widgets, data.module.link.id);
-        // Need to unsubscript widget 
-        console.log('Need to uninstall module here');
+        this.$delete(this.widgets, data.app.installId);
+        this.widgetObservers.get(data.app.installId).unsubscribe();
+        this.widgetObservers.delete(data.app.installId);
+        console.log('Need to uninstall module here ' + data.app);
       }
     });
   },
@@ -122,7 +121,7 @@ export default Vue.extend({
 
     beforeDestroy() {
       this.widgetsSubscribe.unsubscribe();
-      this.widgetObservers.forEach(widgetOberver => widgetOberver.unsubscribe());
+      this.widgetObservers.forEach(widgetObserver => widgetObserver.unsubscribe());
       const moduleService = this.$container.get<ModuleService>(ModuleService.name);
 
       const modules = moduleService.getAll();

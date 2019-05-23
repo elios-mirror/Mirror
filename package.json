@@ -60,7 +60,7 @@
     "@xkeshi/vue-qrcode": "^1.0.0",
     "axios": "^0.18.0",
     "buefy": "^0.6.6",
-    "elios-protocol": "^1.0.0-snapshot-4.0",
+    "elios-protocol": "^1.0.0-snapshot-8.3",
     "inversify": "^4.13.0",
     "js-yaml": "^3.13.1",
     "node-sass": "^4.12.0",

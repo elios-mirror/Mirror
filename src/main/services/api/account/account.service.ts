@@ -159,7 +159,7 @@ export default class AccountService {
                     this.isReload = false;
                     this.isAuth.next(false);
                     reject(err);
-                });;
+                });
             }).catch((err) => {
                 console.error(err);
             })

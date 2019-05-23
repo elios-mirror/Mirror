@@ -16,4 +16,6 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-CMD [ "npm", "start" ]
+RUN apt update && apt install sudo
+
+CMD ["npm", "start" ]

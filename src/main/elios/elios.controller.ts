@@ -23,11 +23,11 @@ export default class Elios {
     return this._widgetsSubject;
   }
 
-  initModule(module: IModuleRepository) {
+    initModule(module: IModuleRepository) {
     console.log("Initialize SDK for " + module.name);
 
-    fs.unlinkSync(`/tmp/${module.name}_sdk`);
-    fs.unlinkSync(`/tmp/${module.name}_mirror`);
+    // fs.unlinkSync(`/tmp/${module.name}_sdk`);
+    // fs.unlinkSync(`/tmp/${module.name}_mirror`);
     this._connections[module.installId] = new EliosProtocol(`/tmp/${module.name}`);
     this._connections[module.installId].receive((message: string, command_type: number) => {
       console.log('New command from ' + module.name);
