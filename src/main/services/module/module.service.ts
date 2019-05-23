@@ -111,13 +111,13 @@ export default class ModuleService {
             }
             this.eliosController.initModule(app);
             setTimeout(() => {
-            this.containerService.runApp(app.name).then(() => {
-                console.log("Application launched ", app);
-                this.runningApps[app.installId] = app;
-                // resolve(app);
-            }).catch((err) => {
-                reject(err);
-            })
+                this.containerService.runApp(app.name).then(() => {
+                    console.log("Application launched ", app);
+                    this.runningApps[app.installId] = app;
+                    // resolve(app);
+                }).catch((err) => {
+                    reject(err);
+                })
             }, 100);
         })
     }
@@ -194,59 +194,25 @@ export default class ModuleService {
      * Check new app, app update and build them
      */
     async loadAll(): Promise<any> {
-            this.socketService.send('modules.load.start');
-            let i = 0;
-            console.log("Length-> " + this.apps.size)
-            this.apps.forEach(async (app) => {
-            // for (let app of this.apps) {
-                this.socketService.send('modules.install.start', {
-                    module: app, stats: {
-                        total: this.apps.size,
-                        current: i
-                    }
-                });
-
-                await this.check(app).then((m) => {
-                    // this.apps = this.apps.slice(1);
-                    this.socketService.send('modules.install.end', { success: true, module: m });
-                    // loadNextModule();
-                }).catch((err) => {
-                    this.localModuleService.delete(app);
-                    // this.apps = this.apps.slice(1);
-                    this.socketService.send('modules.install.end', { success: false });
-                    // loadNextModule();
-                });
-                ++i;
+        this.socketService.send('modules.load.start');
+        let i = 0;
+        for (let app of Array.from(this.apps.values())) {
+            this.socketService.send('modules.install.start', {
+                module: app, stats: {
+                    total: this.apps.size,
+                    current: i
+                }
             });
-            this.socketService.send('modules.load.end');
-            // resolve();
-        //     let loadNextModule = () => {
-        //         if (this.apps.length > 0) {
-        //             let nextModule = this.apps[0];
-        //             this.socketService.send('modules.install.start', {
-        //                 module: nextModule, stats: {
-        //                     total: totalOfModules,
-        //                     current: ((totalOfModules - this.apps.length) + 1)
-        //                 }
-        //             });
 
-        //             this.check(nextModule).then((m) => {
-        //                 this.apps = this.apps.slice(1);
-        //                 this.socketService.send('modules.install.end', { success: true, module: m });
-        //                 loadNextModule();
-        //             }).catch(() => {
-        //                 this.localModuleService.delete(nextModule);
-        //                 this.apps = this.apps.slice(1);
-        //                 this.socketService.send('modules.install.end', { success: false });
-        //                 loadNextModule();
-        //             });
-        //         } else {
-        //             this.socketService.send('modules.load.end');
-        //             resolve();
-        //         }
-        //     };
-        //     loadNextModule();
-        // });
+            await this.check(app).then((m) => {
+                this.socketService.send('modules.install.end', { success: true, module: m });
+            }).catch((err) => {
+                this.localModuleService.delete(app);
+                this.socketService.send('modules.install.end', { success: false });
+            });
+            ++i;
+        }
+        this.socketService.send('modules.load.end');
     }
 
     // loadOrReloadDevModules() {
@@ -275,7 +241,6 @@ export default class ModuleService {
      */
     add(module: IModuleRepository) {
         this.apps.set(module.name, module);
-        // this.apps.push(module);
     }
 
     /**
@@ -284,10 +249,8 @@ export default class ModuleService {
     * @param {IModuleRepository} module
     */
     install(module: IModuleRepository) {
-        // this.apps.push(module);
         this.apps.set(module.name, module);
         return this.check(module);
-        // return this.loadAll();
     }
 
     /**
