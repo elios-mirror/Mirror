@@ -61,6 +61,7 @@ export default class MirrorService {
 
     register(): Promise<RegisterDTO> {
         return this.apiService.post('/api/mirrors', {
+            name: 'My Awesome Mirror',
             model: this.configService.get().model
         });
     }
