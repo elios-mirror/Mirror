@@ -13,7 +13,7 @@ const https = require('https');
 export default class ApiService {
     constructor(private configService: ConfigService, private cookieService: CookieService) {
         axios.defaults.baseURL = this.configService.get().api.address;
-        axios.defaults.timeout = 4000;
+        axios.defaults.timeout = 10000; // TODO: Set less than 10000 !!!!!
         axios.defaults.headers.common['Content-Type'] = 'application/json';
     }
 
