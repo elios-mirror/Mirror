@@ -15,4 +15,3 @@ declare var __static: string;
 
 declare module 'socket.io-client';
 declare module 'melanke-watchjs';
-declare module 'elios-protocol';

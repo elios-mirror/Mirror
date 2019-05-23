@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Subject, BehaviorSubject } from "rxjs";
 import { IModuleRepository } from "../services/module/module.service";
-import * as elios_protocol from 'elios-protocol';
+import EliosProtocol from 'elios-protocol';
 import * as fs from 'fs';
 
 export interface Widget {
@@ -28,7 +28,7 @@ export default class Elios {
 
     fs.unlinkSync(`/tmp/${module.name}_sdk`);
     fs.unlinkSync(`/tmp/${module.name}_mirror`);
-    this._connections[module.installId] = elios_protocol(`/tmp/${module.name}`);
+    this._connections[module.installId] = new EliosProtocol(`/tmp/${module.name}`);
     this._connections[module.installId].receive((message: string, command_type: number) => {
       console.log('New command from ' + module.name);
       console.log('Command type : ' + command_type);
