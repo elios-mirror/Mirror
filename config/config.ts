@@ -2,12 +2,12 @@
 
 export default {
     api: {
-        address: 'http://51.15.239.102',
+        address: 'https://dev.elios-mirror.com',
         client_id: 1,
         client_secret: 'Rp52CEoYWjiIA0kRTTGspdbjee3tQxSaNCVn7J87'
     },
     sockets: {
-        address: 'http://51.15.239.102',
+        address: 'http://sockets.elios-mirror.com',
         port: '4224'
     },
     model: 'LKD28376382'
