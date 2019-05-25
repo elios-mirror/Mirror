@@ -9,7 +9,7 @@ const fs = require('fs');
 @injectable()
 export default class LocalModuleService {
 
-    local = path.resolve(os.homedir(), '.elios', 'modules') + '/';
+    local = path.resolve(os.homedir(), '.elios', 'applications') + '/';
     modules: any = {};
 
     /**
@@ -54,7 +54,8 @@ export default class LocalModuleService {
                 repository: module.repository,
                 version: module.version,
                 installId: module.installId,
-                settings: null
+                settings: null,
+                name: module.name
             }
         }
     }
@@ -75,8 +76,7 @@ export default class LocalModuleService {
      * @param module
      */
     has(module: IModuleRepository) {
-        const moduleName = path.basename(module.repository);
-        if (!fs.existsSync(this.getLocal() + moduleName + '-' + module.version)) {
+        if (!fs.existsSync(this.getLocal() + module.name + '-' + module.version)) {
             return false;
         }
         return true;
@@ -89,11 +89,11 @@ export default class LocalModuleService {
      */
     delete(module: IModuleRepository) {
         if (this.has(module)) {
-            this.deleteFolderRecursive(this.getLocal() + path.basename(module.repository) + '-' + module.version);
+            this.deleteFolderRecursive(this.getLocal() + module.name + '-' + module.version);
             delete this.modules[module.installId];
             this.save()
-        } else if (fs.existsSync(this.getLocal() + path.basename(module.repository) + '-' + module.version)) {
-            this.deleteFolderRecursive(this.getLocal() + path.basename(module.repository) + '-' + module.version);
+        } else if (fs.existsSync(this.getLocal() + module.name + '-' + module.version)) {
+            this.deleteFolderRecursive(this.getLocal() + module.name + '-' + module.version);
         }
     }
 

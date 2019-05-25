@@ -147,6 +147,7 @@ export default class AccountService {
                             repository: module.module.repository,
                             version: module.version,
                             installId: module.link.id,
+                            name: module.module.name,
                             settings: module.link.settings
                         });
                     }
@@ -158,7 +159,7 @@ export default class AccountService {
                     this.isReload = false;
                     this.isAuth.next(false);
                     reject(err);
-                });;
+                });
             }).catch((err) => {
                 console.error(err);
             })

@@ -41,16 +41,18 @@ export default Vue.extend({
       maxRowCount: 37,
       bubbleUp: false,
       margin: 3,
-      widgetObservers: [] as any[],
+      widgetObservers: new Map<string, any>(),
       widgets: {} as any,
       layout: [] as WidgetBox[],
       oldLayout: new Map<string, WidgetBox>()
     };
   },
   mounted() {
+    
     const moduleService = this.$container.get<ModuleService>(ModuleService.name);
     const socketService = this.$container.get<SocketService>(SocketService.name);
     const elios = this.$container.get<Elios>(Elios.name);
+    
     this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
       const module = moduleService.get(widget.id) as any;
       if (module && module.installId === widget.id && module.settings) {
@@ -69,20 +71,25 @@ export default Vue.extend({
         });
       }
       this.$set(this.widgets, widget.id, '')
-      this.widgetObservers.push(widget.html.subscribe((html: string) => {
+      this.widgetObservers.set(widget.id, widget.html.subscribe((html: string) => {
         this.$set(this.widgets, widget.id, html);
       }));
     });
-
-    const modules = moduleService.getAll();
-    for (let moduleInstallId in modules) {
-      const module = modules[moduleInstallId] as IModule;
-      module.start();
-    }
+    
+    moduleService.startAllApps();
 
     socketService.on('modules.install.end').subscribe((data: any) => {
       if (data.success) {
-        data.module.start();
+        console.log('New module from socket');
+      }
+    });
+
+    socketService.on('modules.uninstall.end').subscribe((data: any) => {
+      if (data.success) {
+        this.$delete(this.widgets, data.app.installId);
+        this.widgetObservers.get(data.app.installId).unsubscribe();
+        this.widgetObservers.delete(data.app.installId);
+        console.log('Need to uninstall module here ' + data.app);
       }
     });
   },
@@ -114,7 +121,7 @@ export default Vue.extend({
 
     beforeDestroy() {
       this.widgetsSubscribe.unsubscribe();
-      this.widgetObservers.forEach(widgetOberver => widgetOberver.unsubscribe());
+      this.widgetObservers.forEach(widgetObserver => widgetObserver.unsubscribe());
       const moduleService = this.$container.get<ModuleService>(ModuleService.name);
 
       const modules = moduleService.getAll();

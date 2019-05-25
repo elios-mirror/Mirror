@@ -63,19 +63,18 @@ export default class GitService {
     clone(module: IModuleRepository) {
         this.localModuleService.delete(module);
         return new Promise((resolve, reject) => {
-            const moduleName = path.basename(module.repository);
-            NodeGit.Clone('https://github.com/' + module.repository + '.git', this.localModuleService.getLocal() + moduleName + '-' + module.version).then((repository: any) => {
-                console.log('Cloned ' + moduleName + ' to ' + repository.workdir());
+            NodeGit.Clone(module.repository, this.localModuleService.getLocal() + module.name + '-' + module.version).then((repository: any) => {
+                console.log('Cloned ' + module.name + ' to ' + repository.workdir());
                 if (module.commit) {
                     this.checkOut(repository, module.commit).then(() => {
-                        repository.free();
+                        // repository.free();
                         resolve();
                     }).catch((err: any) => {
-                        repository.free();
+                        // repository.free();
                         reject(err);
                     });
                 } else {
-                    repository.free();
+                    // repository.free();
                     resolve();
                 }
             }).catch((err: any) => {

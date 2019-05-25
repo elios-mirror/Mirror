@@ -9,6 +9,7 @@ import ConfigService from "./services/utils/config.service";
 import SocketService from "./services/utils/socket.service";
 import SocketIoService from "./services/utils/socket-io.service";
 import Elios from "./elios/elios.module";
+import ContainerService from "./services/container/container.service"
 
 
 /**
@@ -28,5 +29,6 @@ export default [
     AppService,
     CookieService,
     ModuleService,
-    ConfigService
+    ConfigService,
+    ContainerService
 ]
