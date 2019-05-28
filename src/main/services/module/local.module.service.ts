@@ -76,7 +76,10 @@ export default class LocalModuleService {
      * @param module
      */
     has(module: IModuleRepository) {
+        console.log(this.getLocal() + module.name + '-' + module.version);
+        
         if (!fs.existsSync(this.getLocal() + module.name + '-' + module.version)) {
+            console.log("Not existing");
             return false;
         }
         return true;

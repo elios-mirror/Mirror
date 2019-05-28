@@ -23,34 +23,36 @@ export default class Elios {
     return this._widgetsSubject;
   }
 
-    initModule(module: IModuleRepository) {
+  initModule(module: IModuleRepository) {
     console.log("Initialize SDK for " + module.name);
 
     // fs.unlinkSync(`/tmp/${module.name}_sdk`);
     // fs.unlinkSync(`/tmp/${module.name}_mirror`);
     this._connections[module.installId] = new EliosProtocol(`/tmp/${module.name}`);
-    this._connections[module.installId].receive((message: string, command_type: number) => {
-      console.log('New command from ' + module.name);
-      console.log('Command type : ' + command_type);
-      console.log('Message :\n', message);
-      let widget;
-      switch (command_type) {
-        case 0:
-          widget = {
-            id: module.installId,
-            html: new BehaviorSubject('')
-          };
-          this._widgets.push(widget);
-          this._widgetsSubject.next(widget);
-          break;
-        case 2:
-          widget = this._widgets.find((widget) => widget.id === module.installId);
-          if (widget != undefined) {
-            widget.html.next(message);
-          }
-          break;
-      }
-    });
+    setTimeout(() => {
+      this._connections[module.installId].receive((message: string, command_type: number) => {
+        console.log('New command from ' + module.name);
+        console.log('Command type : ' + command_type);
+        // console.log('Message :\n', message);
+        let widget;
+        switch (command_type) {
+          case 0:
+            widget = {
+              id: module.installId,
+              html: new BehaviorSubject('')
+            };
+            this._widgets.push(widget);
+            this._widgetsSubject.next(widget);
+            break;
+          case 2:
+            widget = this._widgets.find((widget) => widget.id === module.installId);
+            if (widget != undefined) {
+              widget.html.next(message);
+            }
+            break;
+        }
+      });
+    }, 500);
   }
 
   destroyModule(module: IModuleRepository) {

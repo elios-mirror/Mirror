@@ -65,8 +65,8 @@ export default Vue.extend({
           position: {
             x: 0,
             y: 0,
-            w: 8,
-            h: 6
+            w: 10,
+            h: 10
           }
         });
       }

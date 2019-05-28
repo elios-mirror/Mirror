@@ -140,21 +140,20 @@ export default class ModuleService {
      */
     private check(module: IModuleRepository) {
         return new Promise(async (resolve, reject) => {
-
             if (this.localModuleService.has(module)) {
-                if (this.localModuleService.get(module).commit != module.commit) {
-                    await this.gitService.pull(module).then(async () => {
-                        await this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).then(() => {
-                            this.localModuleService.set(module);
-                        }).catch((err) => {
-                            console.error(err)
-                            reject(err);
-                        });
-                    }).catch((err) => {
-                        console.error('error pull');
-                        reject(err);
-                    });
-                }
+                // if (this.localModuleService.get(module).commit != module.commit) {
+                //     await this.gitService.pull(module).then(async () => {
+                //         await this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).then(() => {
+                //             this.localModuleService.set(module);
+                //         }).catch((err) => {
+                //             console.error(err)
+                //             reject(err);
+                //         });
+                //     }).catch((err) => {
+                //         console.error('error pull');
+                //         reject(err);
+                //     });
+                // }
             } else {
                 await this.gitService.clone(module).then(async () => {
                     await this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).catch((err) => {
@@ -207,6 +206,7 @@ export default class ModuleService {
             await this.check(app).then((m) => {
                 this.socketService.send('modules.install.end', { success: true, module: m });
             }).catch((err) => {
+                console.error(err);
                 this.localModuleService.delete(app);
                 this.socketService.send('modules.install.end', { success: false });
             });
