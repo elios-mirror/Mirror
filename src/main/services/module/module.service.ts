@@ -5,12 +5,10 @@ import SocketService from "../utils/socket.service";
 import { BehaviorSubject } from 'rxjs';
 import Elios from "../../elios/elios.controller";
 import ContainerService from "../container/container.service";
-import { app } from "electron";
 
 const path = require('path');
 
 const os = require('os');
-const fs = require('fs');
 const modulesPath = path.resolve(os.homedir(), '.elios', 'applications');
 
 export interface IModuleRepository {
@@ -151,7 +149,9 @@ export default class ModuleService {
         this.socketService.send('modules.load.start');
         this.apps.forEach(async app => {
             this.check(app).then((m) => {
-                this.startApp(app);
+                this.startApp(app).catch((err) =>{
+                    console.error(err);
+                });
                 // this.socketService.send('modules.install.end', { success: true, module: m });
             }).catch((err) => {
                 console.error(err);
