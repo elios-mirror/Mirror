@@ -123,6 +123,14 @@ export default class ContainerService {
   }
 
   /**
+   * Update docker image
+   * @param name Name of the application
+   */
+  async installOrUpdateApp(name: string) {
+    return this._executeCommand(`docker pull ${name}`);
+  }
+
+  /**
    * Stop a running application
    * @param name Name of the application
    */
