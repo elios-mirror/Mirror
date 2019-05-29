@@ -35,6 +35,14 @@ export default class AppService {
             this.registerShortcuts();
         });
 
+        app.on('quit', () => {
+            this.moduleService.stopAll();
+        });
+
+        // app.on('before-quit', () => {
+        //     console.log('DDDDDDDDDDDDDDDDDD')
+        // });
+
         app.on('window-all-closed', () => {
             if (process.platform !== 'darwin') {
                 app.quit();

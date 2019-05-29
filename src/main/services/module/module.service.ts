@@ -22,26 +22,11 @@ export interface IModuleRepository {
     name: string;
 }
 
-export interface IModule {
-    title: string;
-    name: string;
-    version: string;
-    requireVersion: number;
-    showOnStart: boolean;
-    template: any;
-    html: any;
-    data: any;
-    computed: any;
-    start: () => any;
-    init: () => any;
-    stop: () => any;
-}
-
 @injectable()
 export default class ModuleService {
 
     private apps = new Map<string, IModuleRepository>();
-    private runningApps: any = {};
+    private runningApps = new Map<string, IModuleRepository>();
 
     /**
      *
@@ -82,30 +67,13 @@ export default class ModuleService {
         return segmentsA.length - segmentsB.length;
     }
 
-
-    // private getDirectories(path: string) {
-    //     return fs.readdirSync(path).filter(function (file: string) {
-    //         return fs.statSync(path + '/' + file).isDirectory();
-    //     });
-    // }
-
-    // /**
-    //  * Load custom module with simple require and absolute path
-    //  * 
-    //  * @param {string} path
-    //  */
-    // private requireDynamically(path: string) {
-    //     path = path.split('\\').join('/');
-    //     return eval(`require('${path}');`);
-    // }
-
     /**
      * 
      * @param app Start a already build application
      */
     startApp(app: IModuleRepository) {
         return new Promise(async (resolve, reject) => {
-            if (this.runningApps[app.installId] != undefined) {
+            if (this.runningApps.has(app.installId)) {
                 console.log(`Application ${app.name} is already running`)
                 resolve();
             }
@@ -113,8 +81,9 @@ export default class ModuleService {
             setTimeout(() => {
                 this.containerService.runApp(app.name).then(() => {
                     console.log("Application launched ", app);
-                    this.runningApps[app.installId] = app;
-                    // resolve(app);
+
+                    this.runningApps.set(app.installId, app);
+                    resolve();
                 }).catch((err) => {
                     reject(err);
                 })
@@ -122,15 +91,10 @@ export default class ModuleService {
         })
     }
 
-    // /**
-    //  * Load module and init it
-    //  *
-    //  * @param {string} module
-    //  * @returns {Promise<any>}
-    //  */
-    // private loadModule(module: IModuleRepository) {
-    //     return this.startApp(module)
-    // }
+    stopApp(app: IModuleRepository) {
+        this.containerService.stopApp(app.name);
+        this.runningApps.delete(app.installId);
+    }
 
     /**
      * Check module for update and init it.
@@ -165,16 +129,7 @@ export default class ModuleService {
                     reject(err);
                 });
             }
-
-            // return this.loadModule(module).then((m: any) => {
-            //     if (!m) {
-            //         reject(m);
-            //         return;
-            //     }
-            //     this.localModuleService.set(module);
-            //     console.log(m.name + ' initialized.');
             resolve();
-            // });
         });
     }
 
@@ -195,15 +150,6 @@ export default class ModuleService {
     loadAndStartAll() {
         this.socketService.send('modules.load.start');
         this.apps.forEach(async app => {
-            
-        // for (let app of Array.from(this.apps.values())) {
-            // this.socketService.send('modules.install.start', {
-            //     module: app, stats: {
-            //         total: this.apps.size,
-            //         current: i
-            //     }
-            // });
-
             this.check(app).then((m) => {
                 this.startApp(app);
                 // this.socketService.send('modules.install.end', { success: true, module: m });
@@ -216,24 +162,11 @@ export default class ModuleService {
         this.socketService.send('modules.load.end');
     }
 
-    // loadOrReloadDevModules() {
-    //     const localModules = this.getDirectories(path.resolve('./modules'));
-
-    //     localModules.forEach((moduleName: string) => {
-    //         this.loadFromPath(path.resolve('./modules', moduleName), {
-    //             repository: 'dev/' + moduleName,
-    //             commit: null,
-    //             version: 'dev',
-    //             installId: 'dev-' + moduleName,
-    //             settings: null,
-    //             name: moduleName
-    //         }).then((m: any) => {
-    //             console.log('Local module loaded', moduleName)
-    //         }).catch(() => {
-    //             console.log('Local module error loaded', moduleName)
-    //         });
-    //     });  
-    // }
+    stopAll() {
+        this.runningApps.forEach((app: IModuleRepository) => {
+            this.stopApp(app);
+        });
+    }
 
     /**
      * Add a module before load.
@@ -263,8 +196,8 @@ export default class ModuleService {
         this.socketService.send('modules.uninstall.start', { app: app });
 
         this.apps.delete(app.name);
-        if (this.runningApps[app.installId] != undefined) {
-            this.runningApps[app.installId] = undefined;
+        if (this.runningApps.has(app.installId)) {
+            this.runningApps.delete(app.installId);
             this.eliosController.destroyModule(app);
         }
 
@@ -282,16 +215,15 @@ export default class ModuleService {
      *
      * @param {string} installId
      */
-    get(installId: string): IModule {
-        return this.runningApps[installId];
+    get(installId: string): IModuleRepository | undefined  {
+        return this.runningApps.get(installId);
     }
 
     /**
      * Return all initialized modules.
-     *
-     * @returns {IModule[]}
+     * 
      */
-    getAll() {
+    getAll(): Map<string, IModuleRepository> {
         return this.runningApps;
     }
 
@@ -299,13 +231,14 @@ export default class ModuleService {
      * Clear all module
      */
     clear() {
-        const modules = this.getAll();
-        Object.keys(modules).map((objectKey, index) => {
-            const module = modules[objectKey];
-            this.localModuleService.delete(module);
-            delete this.runningApps[module.installId];
-            this.runningApps = {};
-        });
+        console.log('[module.service] Need to rework clear')
+        // const modules = this.getAll();
+        // Object.keys(modules).map((objectKey, index) => {
+        //     const module = modules[objectKey];
+        //     this.localModuleService.delete(module);
+        //     delete this.runningApps[module.installId];
+        //     this.runningApps = {};
+        // });
 
     }
 

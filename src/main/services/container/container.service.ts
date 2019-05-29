@@ -126,7 +126,7 @@ export default class ContainerService {
    * Stop a running application
    * @param name Name of the application
    */
-  stopApp(name: string) {
+  async stopApp(name: string) {
     return this._executeCommand(`docker stop ${name}`);
   }
 
@@ -134,7 +134,7 @@ export default class ContainerService {
    * Pause a running application
    * @param name 
    */
-  pauseApp(name: string) {
+  async pauseApp(name: string) {
     return this._executeCommand(`docker pause ${name}`);
   }
 
@@ -142,7 +142,7 @@ export default class ContainerService {
    * Resume a previously paused application
    * @param name Name of the application
    */
-  resumeApp(name: string) {
+  async resumeApp(name: string) {
     return this._executeCommand(`docker unpause ${name}`);
   }
 }

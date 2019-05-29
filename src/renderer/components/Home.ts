@@ -1,5 +1,5 @@
 import Vue from "vue";
-import ModuleService, { IModule } from "../../main/services/module/module.service";
+import ModuleService, { IModuleRepository } from "../../main/services/module/module.service";
 import '@dattn/dnd-grid/dist/dnd-grid.css';
 import SocketService from '../../main/services/utils/socket.service';
 import Elios from "../../main/elios/elios.controller";
@@ -54,15 +54,14 @@ export default Vue.extend({
     const elios = this.$container.get<Elios>(Elios.name);
     const accountService = this.$container.get<AccountService>(AccountService.name);
     
-    accountService.loadAndStartApps().then(() => {
-
-    });
-    
+    accountService.loadAndStartApps().catch((err) => {
+      console.error(err);
+    });    
     this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
-      const module = moduleService.get(widget.id) as any;
+      let module = moduleService.get(widget.id);
       if (module && module.installId === widget.id && module.settings) {
         this.setBothLayout(module.installId, JSON.parse(module.settings));
-      } else {
+      } else if (module != undefined && module.installId === widget.id) {
         this.setBothLayout(module.installId, {
           hidden: false,
           id: widget.id,
@@ -81,8 +80,6 @@ export default Vue.extend({
       }));
     });
     
-    moduleService.startAllApps();
-
     socketService.on('modules.install.end').subscribe((data: any) => {
       if (data.success) {
         console.log('New module from socket');
@@ -127,13 +124,13 @@ export default Vue.extend({
     beforeDestroy() {
       this.widgetsSubscribe.unsubscribe();
       this.widgetObservers.forEach(widgetObserver => widgetObserver.unsubscribe());
-      const moduleService = this.$container.get<ModuleService>(ModuleService.name);
-
-      const modules = moduleService.getAll();
-      for (let moduleInstallId in modules) {
-        const module = modules[moduleInstallId] as IModule;
-        module.stop();
-      }
+      
+      // const moduleService = this.$container.get<ModuleService>(ModuleService.name);
+      // const modules = moduleService.getAll();
+      // for (let moduleInstallId in modules) {
+      //   const module = modules[moduleInstallId] as IModule;
+      //   module.stop();
+      // }
     },
 
     setBothLayout(id: string, wBox: WidgetBox) {
