@@ -52,6 +52,11 @@ export default Vue.extend({
     const moduleService = this.$container.get<ModuleService>(ModuleService.name);
     const socketService = this.$container.get<SocketService>(SocketService.name);
     const elios = this.$container.get<Elios>(Elios.name);
+    const accountService = this.$container.get<AccountService>(AccountService.name);
+    
+    accountService.loadAndStartApps().then(() => {
+
+    });
     
     this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
       const module = moduleService.get(widget.id) as any;

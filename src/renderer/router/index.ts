@@ -5,13 +5,13 @@ Vue.use(Router);
 
 export default new Router({
     routes: [
+        // {
+        //     path: '/',
+        //     name: 'loading'
+        //     // component: require('@/components/LoadingPage').default
+        // },
         {
             path: '/',
-            name: 'loading',
-            component: require('@/components/LoadingPage').default
-        },
-        {
-            path: '/home',
             name: 'home',
             component: require('@/components/HomePage').default
         },

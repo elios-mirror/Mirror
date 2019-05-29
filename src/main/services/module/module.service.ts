@@ -192,26 +192,27 @@ export default class ModuleService {
     /**
      * Check new app, app update and build them
      */
-    async loadAll(): Promise<any> {
+    loadAndStartAll() {
         this.socketService.send('modules.load.start');
-        let i = 0;
-        for (let app of Array.from(this.apps.values())) {
-            this.socketService.send('modules.install.start', {
-                module: app, stats: {
-                    total: this.apps.size,
-                    current: i
-                }
-            });
+        this.apps.forEach(async app => {
+            
+        // for (let app of Array.from(this.apps.values())) {
+            // this.socketService.send('modules.install.start', {
+            //     module: app, stats: {
+            //         total: this.apps.size,
+            //         current: i
+            //     }
+            // });
 
-            await this.check(app).then((m) => {
-                this.socketService.send('modules.install.end', { success: true, module: m });
+            this.check(app).then((m) => {
+                this.startApp(app);
+                // this.socketService.send('modules.install.end', { success: true, module: m });
             }).catch((err) => {
                 console.error(err);
                 this.localModuleService.delete(app);
-                this.socketService.send('modules.install.end', { success: false });
+                // this.socketService.send('modules.install.end', { success: false });
             });
-            ++i;
-        }
+        });
         this.socketService.send('modules.load.end');
     }
 

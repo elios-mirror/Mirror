@@ -72,7 +72,7 @@ socketService.on('accounts.login').subscribe(() => {
 });
 
 socketService.on('app.reload').subscribe(() => {
-    vm.$router.push('/loading');
+    vm.$router.push('/');
 });
 
 socketIoService.socket.on(`module_${mirrorId}`, (data: ModuleSocketDTO) => {
@@ -100,7 +100,7 @@ socketIoService.socket.on(`module_${mirrorId}`, (data: ModuleSocketDTO) => {
 
 accountService.isAuthenticated().subscribe((isAuth) => {
     if (isAuth) {
-        vm.$router.push('/loading');
+        vm.$router.push('/');
     } else {
         vm.$router.push('/auth');
     }
