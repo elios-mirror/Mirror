@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
-    "install": "npm run install:modules && ./node_modules/.bin/electron-rebuild",
+    "install": "./node_modules/.bin/electron-rebuild",
     "build": "node .electron-vue/build.js && electron-builder",
     "build:modules": "node ./modules/builder.js",
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
