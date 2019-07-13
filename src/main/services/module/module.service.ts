@@ -67,7 +67,7 @@ export default class ModuleService {
 
     /**
      * 
-     * @param app Start a already build application
+     * @param app Start an already build application
      */
     startApp(app: IModuleRepository) {
         return new Promise(async (resolve, reject) => {
@@ -98,36 +98,13 @@ export default class ModuleService {
      * Check module for update and init it.
      *
      * @param {IModuleRepository} module
-     * @returns {Promise<any>}
      */
-    private check(module: IModuleRepository) {
-        return new Promise(async (resolve, reject) => {
-            if (this.localModuleService.has(module)) {
-                // if (this.localModuleService.get(module).commit != module.commit) {
-                //     await this.gitService.pull(module).then(async () => {
-                //         await this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).then(() => {
-                //             this.localModuleService.set(module);
-                //         }).catch((err) => {
-                //             console.error(err)
-                //             reject(err);
-                //         });
-                //     }).catch((err) => {
-                //         console.error('error pull');
-                //         reject(err);
-                //     });
-                // }
-            } else {
-                await this.gitService.clone(module).then(async () => {
-                    await this.containerService.buildAppImage(path.resolve(modulesPath, module.name + '-' + module.version), module.name).catch((err) => {
-                        console.log(err)
-                        reject(err);
-                    });
-                }).catch((err) => {
-                    console.error('error clone', err);
-                    reject(err);
-                });
-            }
-            resolve();
+    private async checkInstallOrUpdate(module: IModuleRepository) : Promise<any> {
+        return this.containerService.installOrUpdateApp(module.repository).then(() => {
+            console.log(`Application ${module.name} pulled`);
+        }).catch((err) => {
+            console.error(err);
+            throw err;
         });
     }
 
@@ -148,7 +125,7 @@ export default class ModuleService {
     loadAndStartAll() {
         this.socketService.send('modules.load.start');
         this.apps.forEach(async app => {
-            this.check(app).then((m) => {
+            this.checkInstallOrUpdate(app).then((m) => {
                 this.startApp(app).catch((err) =>{
                     console.error(err);
                 });
@@ -184,7 +161,7 @@ export default class ModuleService {
     */
     install(module: IModuleRepository) {
         this.apps.set(module.name, module);
-        return this.check(module);
+        return this.checkInstallOrUpdate(module);
     }
 
     /**

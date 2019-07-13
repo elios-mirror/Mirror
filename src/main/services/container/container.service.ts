@@ -3,6 +3,8 @@ const { exec } = require('child_process');
 const yaml = require('js-yaml');
 const fs = require('fs');
 
+const organization = 'eliosmirror'
+
 @injectable()
 export default class ContainerService {
   /**
@@ -54,8 +56,8 @@ export default class ContainerService {
    */
   async deleteAppImage(name: string) {
     return this.stopAndDeleteAppContainer(name).then(async () => {
-      return this._executeCommand(`docker rmi ${name}:latest`).then(() => {
-        console.log(`[${name}] Image deleted`);
+      return this._executeCommand(`docker rmi ${organization}/${name}:latest`).then(() => {
+        console.log(`[${organization}/${name}] Image deleted`);
       })
     })
   }
@@ -66,9 +68,9 @@ export default class ContainerService {
    * @param name Application's name
    */
   async checkAndDeleteAppImage(name: string) {
-    return this._executeCommand(`docker images -q ${name}:latest`).then((stdout) => {
+    return this._executeCommand(`docker images -q ${organization}/${name}:latest`).then((stdout) => {
       if (stdout) {
-        console.log(`[${name}] Image exist, deleting...`);
+        console.log(`[${organization}/${name}] Image exist, deleting...`);
         return this.deleteAppImage(name).catch((err) => {
         });
       }
@@ -83,11 +85,11 @@ export default class ContainerService {
   async buildAppImage(path: string, name: string) {
     return this.checkAndDeleteAppImage(name).then(async () => {
       let config = yaml.safeLoad(fs.readFileSync(path + '/mirror.yml', 'utf8'));
-      let buildCmd = `docker build --tag ${name}:latest -f dockerfiles/Dockerfile_${config['language']} ${path}`;
+      let buildCmd = `docker build --tag ${organization}/${name}:latest -f dockerfiles/Dockerfile_${config['language']} ${path}`;
 
-      console.log(`[${name}] Start Building image`);
+      console.log(`[${organization}/${name}] Start Building image`);
       return this._executeCommand(buildCmd).then(() => {
-        console.log(`[${name}] Image build finished`);
+        console.log(`[${organization}/${name}] Image build finished`);
       })
     })
   }
@@ -99,7 +101,7 @@ export default class ContainerService {
   async runApp(name: string) {
     return this.checkContainerExistence(name).then(async (exist) => {
       if (exist == undefined) {
-        let runCmd = `docker run -d --mount type=bind,source=/tmp/${name}_mirror,target=/tmp/elios_mirror --mount type=bind,source=/tmp/${name}_sdk,target=/tmp/elios_sdk --name "${name}" ${name}:latest`;
+        let runCmd = `docker run -d --mount type=bind,source=/tmp/${name}_mirror,target=/tmp/elios_mirror --mount type=bind,source=/tmp/${name}_sdk,target=/tmp/elios_sdk --name "${name}" ${organization}/${name}:latest`;
         return this._executeCommand(runCmd).then(() => {
           console.log(`[${name}] Running`);
         })
@@ -127,7 +129,7 @@ export default class ContainerService {
    * @param name Name of the application
    */
   async installOrUpdateApp(name: string) {
-    return this._executeCommand(`docker pull ${name}`);
+    return this._executeCommand(`docker pull ${organization}/${name}`);
   }
 
   /**
