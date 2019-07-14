@@ -1,6 +1,4 @@
 import { injectable } from "inversify";
-import GitService from "./git.service";
-import LocalModuleService from "./local.module.service";
 import SocketService from "../utils/socket.service";
 import { BehaviorSubject } from 'rxjs';
 import Elios from "../../elios/elios.controller";
@@ -33,8 +31,6 @@ export default class ModuleService {
      * @param {SocketService} socketService
      */
     constructor(
-        private gitService: GitService,
-        private localModuleService: LocalModuleService,
         private socketService: SocketService,
         private eliosController: Elios,
         private containerService: ContainerService
@@ -100,6 +96,7 @@ export default class ModuleService {
      * @param {IModuleRepository} module
      */
     private async checkInstallOrUpdate(module: IModuleRepository) : Promise<any> {
+        console.log(`Start pulling ${module.name}`);
         return this.containerService.installOrUpdateApp(module.repository).then(() => {
             console.log(`Application ${module.name} pulled`);
         }).catch((err) => {
@@ -132,7 +129,6 @@ export default class ModuleService {
                 // this.socketService.send('modules.install.end', { success: true, module: m });
             }).catch((err) => {
                 console.error(err);
-                this.localModuleService.delete(app);
                 // this.socketService.send('modules.install.end', { success: false });
             });
         });
@@ -179,7 +175,6 @@ export default class ModuleService {
         }
 
         return this.containerService.deleteAppImage(app.name).then(() => {
-            this.localModuleService.delete(app);
             this.socketService.send('modules.uninstall.end', { success: true, app: app });
         }).catch((err) => {
             this.socketService.send('modules.uninstall.end', { success: false, app: app });

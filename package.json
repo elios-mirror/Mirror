@@ -63,7 +63,6 @@
     "inversify": "^4.13.0",
     "js-yaml": "^3.13.1",
     "node-sass": "^4.12.0",
-    "nodegit": "^0.24.3",
     "object-observer": "^1.1.5",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.3.3",
