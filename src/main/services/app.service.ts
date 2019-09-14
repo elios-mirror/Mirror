@@ -7,6 +7,7 @@ import UserService from "./api/account/user/user.service";
 import SocketService from "./utils/socket.service";
 import CookieService from "./utils/cookie.service";
 import MirrorService from "./api/mirror/mirror.service";
+import Elios from "../elios/elios.controller";
 
 global.version = require('../../../package.json').version;
 
@@ -22,7 +23,8 @@ export default class AppService {
     constructor(private moduleService: ModuleService, private loggerService: LoggerService,
         private authService: AccountService, private userService: UserService,
         private socketService: SocketService, private cookieService: CookieService,
-        private mirrorService: MirrorService) {
+        private mirrorService: MirrorService,
+        private eliosController: Elios) {
         this.loggerService.debug('Starting App in version: ' + global.version);
     }
 
@@ -36,6 +38,7 @@ export default class AppService {
         });
 
         app.on('quit', () => {
+            this.eliosController.quit();
             this.moduleService.stopAll();
         });
 
