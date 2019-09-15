@@ -1,6 +1,7 @@
 import { injectable } from "inversify";
 import { Subject, BehaviorSubject } from "rxjs";
 import { IModuleRepository } from "../services/module/module.service";
+import SocketService from "../services/utils/socket.service";
 const { createConnection } = require('elios-protocol');
 
 export interface Widget {
@@ -15,26 +16,42 @@ export default class Elios {
   private _widgetsSubject = new Subject<Widget>();
   private _connection: any;
 
-  constructor() {
+  constructor(private socketService: SocketService) {
     this._connection = createConnection(`/tmp/elios_mirror`, 'mirror');
 
     this._connection.receive((message: string, sender_id: string, command_type: number) => {
-      
-      let widget;
+
+      let widget = this._widgets.find((widget) => widget.id === sender_id);
       switch (command_type) {
         case 0:
-          widget = {
+          let newWidget = {
             id: sender_id,
             html: new BehaviorSubject('')
           };
-          this._widgets.push(widget);
-          this._widgetsSubject.next(widget);
+          if (widget != undefined) {
+            console.log('Module already registered', sender_id);
+          } else {
+            this._widgets.push(newWidget);
+            this._widgetsSubject.next(newWidget);
+          }
+
+          console.log(this._widgets);
           break;
         case 2:
           widget = this._widgets.find((widget) => widget.id === sender_id);
           if (widget != undefined) {
             widget.html.next(message);
           }
+          break;
+        case 3:
+          for (var i = 0; i < this._widgets.length; i++) {
+            if (this._widgets[i].id === sender_id) {
+              this._widgets.splice(i, 1);
+              i--;
+            }
+          }
+          console.log('Delete module => ', sender_id);
+          this.socketService.send('modules.uninstall.end', { success: true, app: { installId: sender_id } })
           break;
       }
       console.log(`New protocol msg form ${sender_id} command_type=${command_type} => ${message} `);

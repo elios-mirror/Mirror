@@ -6,7 +6,6 @@
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
-    "install": "./node_modules/.bin/electron-rebuild",
     "build": "node .electron-vue/build.js && electron-builder",
     "build:modules": "node ./modules/builder.js",
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
@@ -59,7 +58,7 @@
     "@xkeshi/vue-qrcode": "^1.0.0",
     "axios": "^0.18.0",
     "buefy": "^0.6.6",
-    "elios-protocol": "^1.0.0-beta-7",
+    "elios-protocol": "^1.0.0-beta-9",
     "inversify": "^4.13.0",
     "js-yaml": "^3.13.1",
     "node-sass": "^4.12.0",

@@ -91,7 +91,8 @@ export default Vue.extend({
         this.$delete(this.widgets, data.app.installId);
         this.widgetObservers.get(data.app.installId).unsubscribe();
         this.widgetObservers.delete(data.app.installId);
-        console.log('Need to uninstall module here ' + data.app);
+        this.deleteBothLayout(data.app.installId);
+        console.log('Need to uninstall module here ' , data.app);
       }
     });
   },
@@ -136,6 +137,16 @@ export default Vue.extend({
     setBothLayout(id: string, wBox: WidgetBox) {
       this.layout.push(wBox);
       this.oldLayout.set(id, wBox);
+    },
+
+    deleteBothLayout(id: string) {;
+      this.oldLayout.delete(id);
+      for (var i = 0; i < this.layout.length; i++) {
+        if (this.layout[i].id === id) {
+          this.layout.splice(i, 1);
+          i--;
+        }
+      }
     }
   }
 });
