@@ -75,6 +75,7 @@ export default class AppService {
         return new Promise(resolve => {
             this.mirrorService.register().then((res) => {
                 this.cookieService.set('id', res.id);
+                this.cookieService.set('short_id', res.short_id);
                 this.cookieService.set('access_token', res.access_token);
                 this.cookieService.delete('accounts');
                 this.cookieService.delete('connected');

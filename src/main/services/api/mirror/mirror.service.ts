@@ -28,6 +28,7 @@ export interface ModuleVersionDTO {
 
 export interface MirrorDTO {
     id: string;
+    short_id: string;
     name: string;
     model: string;
     modules: ModuleVersionDTO[];
@@ -37,6 +38,7 @@ export interface RegisterDTO {
     status: string;
     message: string;
     id: string;
+    short_id: string;
     access_token: string;
 }
 

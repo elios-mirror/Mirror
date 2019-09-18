@@ -1,7 +1,7 @@
 <template>
   <section class="hero is-fullheight">
     <qrcode
-      :options="{ foreground:'white', backgroundAlpha: 0, value: mirrorId, size:300 }"
+      :options="{ foreground:'white', backgroundAlpha: 0, value: shortMirrorId ? shortMirrorId :  mirrorId, size:300 }"
       class="qrcode"
     ></qrcode>
 
@@ -9,7 +9,7 @@
       <br>Si vous rencontrez des problèmes vous pouvez entrer manuellement l'identifiant du miroir ci-dessous
       <br>
       <br>
-      <div class="mirror-id">{{ mirrorId }}</div>
+      <div class="mirror-id">{{ shortMirrorId ? shortMirrorId :  mirrorId}}</div>
     </div>
 
     <div class="accounts-list" v-for="account in accounts" :key="account.user.id">
