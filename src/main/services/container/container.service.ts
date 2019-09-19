@@ -101,7 +101,7 @@ export default class ContainerService {
   async runApp(name: string) {
     return this.checkContainerExistence(name).then(async (exist) => {
       if (exist == undefined) {
-        let runCmd = `docker run -d --mount type=bind,source=/tmp/${name}_mirror,target=/tmp/elios_mirror --mount type=bind,source=/tmp/${name}_sdk,target=/tmp/elios_sdk --name "${name}" ${organization}/${name}:latest`;
+        let runCmd = `docker run -d --mount type=bind,source=/tmp/elios_mirror,target=/tmp/elios_mirror --name "${name}" ${organization}/${name}:latest`;
         return this._executeCommand(runCmd).then(() => {
           console.log(`[${name}] Running`);
         })
@@ -129,7 +129,7 @@ export default class ContainerService {
    * @param name Name of the application
    */
   async installOrUpdateApp(name: string) {
-    return this._executeCommand(`docker pull ${organization}/${name}`);
+    return this._executeCommand(`docker pull ${organization}/${name}:latest`);
   }
 
   /**
