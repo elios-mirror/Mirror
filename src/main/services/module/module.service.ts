@@ -95,7 +95,7 @@ export default class ModuleService {
      *
      * @param {IModuleRepository} module
      */
-    private async checkInstallOrUpdate(module: IModuleRepository) : Promise<any> {
+    private async installOrUpdate(module: IModuleRepository) : Promise<any> {
         console.log(`Start pulling ${module.name}`);
         return this.containerService.installOrUpdateApp(module.repository).then(() => {
             console.log(`Application ${module.name} pulled`);
@@ -122,7 +122,7 @@ export default class ModuleService {
     loadAndStartAll() {
         this.socketService.send('modules.load.start');
         this.apps.forEach(async app => {
-            this.checkInstallOrUpdate(app).then((m) => {
+            this.installOrUpdate(app).then((m) => {
                 this.startApp(app).catch((err) =>{
                     console.error(err);
                 });
@@ -157,7 +157,7 @@ export default class ModuleService {
     */
     install(module: IModuleRepository) {
         this.apps.set(module.name, module);
-        return this.checkInstallOrUpdate(module);
+        return this.installOrUpdate(module);
     }
 
     /**
