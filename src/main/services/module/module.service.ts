@@ -82,6 +82,8 @@ export default class ModuleService {
                     reject(err);
                 })
             }, 100);
+        }).then(() => {
+            this.socketService.send('modules.install.started', app);
         })
     }
 
@@ -95,7 +97,7 @@ export default class ModuleService {
      *
      * @param {IModuleRepository} module
      */
-    private async installOrUpdate(module: IModuleRepository) : Promise<any> {
+    private async installOrUpdate(module: IModuleRepository): Promise<any> {
         console.log(`Start pulling ${module.name}`);
         return this.containerService.installOrUpdateApp(module.repository).then(() => {
             console.log(`Application ${module.name} pulled`);
@@ -123,7 +125,7 @@ export default class ModuleService {
         this.socketService.send('modules.load.start');
         this.apps.forEach(async app => {
             this.installOrUpdate(app).then((m) => {
-                this.startApp(app).catch((err) =>{
+                this.startApp(app).catch((err) => {
                     console.error(err);
                 });
                 // this.socketService.send('modules.install.end', { success: true, module: m });
@@ -146,8 +148,8 @@ export default class ModuleService {
      *
      * @param {IModuleRepository} module
      */
-    add(module: IModuleRepository) {
-        this.apps.set(module.name, module);
+    add(app: IModuleRepository) {
+        this.apps.set(app.name, app);
     }
 
     /**
@@ -155,9 +157,10 @@ export default class ModuleService {
     *
     * @param {IModuleRepository} module
     */
-    install(module: IModuleRepository) {
-        this.apps.set(module.name, module);
-        return this.installOrUpdate(module);
+    install(app: IModuleRepository) {
+        this.socketService.send('modules.install.start', app);
+        this.apps.set(app.name, app);
+        return this.installOrUpdate(app);
     }
 
     /**
@@ -166,7 +169,7 @@ export default class ModuleService {
     * @param {IModuleRepository} application
     */
     async uninstall(app: IModuleRepository): Promise<any> {
-        this.socketService.send('modules.uninstall.start', { app: app });
+        this.socketService.send('modules.uninstall.start', app);
 
         this.apps.delete(app.name);
         if (this.runningApps.has(app.installId)) {
@@ -187,7 +190,7 @@ export default class ModuleService {
      *
      * @param {string} installId
      */
-    get(installId: string): IModuleRepository | undefined  {
+    get(installId: string): IModuleRepository | undefined {
         return this.runningApps.get(installId);
     }
 

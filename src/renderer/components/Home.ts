@@ -58,13 +58,21 @@ export default Vue.extend({
       console.error(err);
     });    
     this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
-      let module = moduleService.get(widget.id);
-      if (module && module.installId === widget.id && module.settings) {
+      this.widgetObservers.set(widget.id, widget.html.subscribe((html: string) => {
+        this.$set(this.widgets, widget.id, html);
+      }));
+    });
+
+    socketService.on('modules.install.start').subscribe((module: any) => {
+
+      module.installId = module.name; // todo remove this line when docker send real installId not name of app 
+
+      if (module && module.installId && module.settings) {
         this.setBothLayout(module.installId, JSON.parse(module.settings));
-      } else if (module != undefined && module.installId === widget.id) {
+      } else if (module != undefined && module.installId) {
         this.setBothLayout(module.installId, {
           hidden: false,
-          id: widget.id,
+          id: module.id,
           pinned: false,
           position: {
             x: 0,
@@ -74,10 +82,7 @@ export default Vue.extend({
           }
         });
       }
-      this.$set(this.widgets, widget.id, '')
-      this.widgetObservers.set(widget.id, widget.html.subscribe((html: string) => {
-        this.$set(this.widgets, widget.id, html);
-      }));
+      this.$set(this.widgets, module.installId, 'Installing - ' + module.name)
     });
     
     socketService.on('modules.install.end').subscribe((data: any) => {
