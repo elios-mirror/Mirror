@@ -5,6 +5,7 @@ import SocketService from '../../main/services/utils/socket.service';
 import Elios from "../../main/elios/elios.controller";
 import MirrorService from "../../main/services/api/mirror/mirror.service";
 import AccountService from "../../main/services/api/account/account.service";
+import { install } from "vuex";
 const { Container, Box } = require('@dattn/dnd-grid');
 
 interface WidgetsBox {
@@ -48,15 +49,15 @@ export default Vue.extend({
     };
   },
   mounted() {
-    
+
     const moduleService = this.$container.get<ModuleService>(ModuleService.name);
     const socketService = this.$container.get<SocketService>(SocketService.name);
     const elios = this.$container.get<Elios>(Elios.name);
     const accountService = this.$container.get<AccountService>(AccountService.name);
-    
+
     accountService.loadAndStartApps().catch((err) => {
       console.error(err);
-    });    
+    });
     this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
       this.widgetObservers.set(widget.id, widget.html.subscribe((html: string) => {
         this.$set(this.widgets, widget.id, html);
@@ -64,27 +65,18 @@ export default Vue.extend({
     });
 
     socketService.on('modules.install.start').subscribe((module: any) => {
-
       module.installId = module.name; // todo remove this line when docker send real installId not name of app 
-
-      if (module && module.installId && module.settings) {
-        this.setBothLayout(module.installId, JSON.parse(module.settings));
-      } else if (module != undefined && module.installId) {
-        this.setBothLayout(module.installId, {
-          hidden: false,
-          id: module.id,
-          pinned: false,
-          position: {
-            x: 0,
-            y: 0,
-            w: 10,
-            h: 10
-          }
-        });
-      }
-      this.$set(this.widgets, module.installId, 'Installing - ' + module.name)
+      this.installModuleUi(module);
     });
-    
+
+
+    this.installModuleUi({
+      installId: 'clock',
+      name: 'clock',
+    });
+
+
+
     socketService.on('modules.install.end').subscribe((data: any) => {
       if (data.success) {
         console.log('New module from socket');
@@ -97,7 +89,7 @@ export default Vue.extend({
         this.widgetObservers.get(data.app.installId).unsubscribe();
         this.widgetObservers.delete(data.app.installId);
         this.deleteBothLayout(data.app.installId);
-        console.log('Need to uninstall module here ' , data.app);
+        console.log('Need to uninstall module here ', data.app);
       }
     });
   },
@@ -127,10 +119,55 @@ export default Vue.extend({
       });
     },
 
+    installModuleUi(module: any) {
+
+      if (module && module.installId && module.settings) {
+        this.setBothLayout(module.installId, JSON.parse(module.settings));
+      } else if (module != undefined && module.installId) {
+        this.setBothLayout(module.installId, {
+          hidden: false,
+          id: module.installId,
+          pinned: false,
+          position: {
+            y: 0,
+            x: 0,
+            w: 7,
+            h: 5
+          }
+        });
+      }
+
+      const installBox = document.createElement('div');
+      installBox.setAttribute('style', 'height: 100%; bottom: 0; border-radius: 5px; position: absolute; width: 100%; justify-content: center; align-items: center; align-content: center;');
+
+      const installText = document.createElement('div');
+      installText.setAttribute('style', 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)');
+      installText.innerText = module.name;
+      installBox.appendChild(installText);
+
+      const installProgressBar = document.createElement('div');
+      installProgressBar.setAttribute('style', 'background: red; height: 100%; width: 0%');
+      installBox.appendChild(installProgressBar);
+
+
+      let progress = 0;
+      const it = setInterval(() => {
+        progress += 10;
+        installProgressBar.style.width = `${progress}%`;
+        console.log(installBox.outerHTML);
+
+        this.$set(this.widgets, module.installId, installBox.outerHTML);
+        if (progress >= 100) {
+          clearInterval(it);
+        }
+      }, 300);
+
+    },
+
     beforeDestroy() {
       this.widgetsSubscribe.unsubscribe();
       this.widgetObservers.forEach(widgetObserver => widgetObserver.unsubscribe());
-      
+
       // const moduleService = this.$container.get<ModuleService>(ModuleService.name);
       // const modules = moduleService.getAll();
       // for (let moduleInstallId in modules) {
@@ -144,7 +181,8 @@ export default Vue.extend({
       this.oldLayout.set(id, wBox);
     },
 
-    deleteBothLayout(id: string) {;
+    deleteBothLayout(id: string) {
+      ;
       this.oldLayout.delete(id);
       for (var i = 0; i < this.layout.length; i++) {
         if (this.layout[i].id === id) {
