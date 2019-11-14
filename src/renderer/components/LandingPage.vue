@@ -21,7 +21,6 @@
                     </button>
                     <br><br>
                     <button @click="logout()">Logout</button>
-                    <button @click="loading()">Loading</button>
                     <br><br>
                 </div>
                 <div class="doc">
@@ -50,9 +49,6 @@ import AccountService from "../../main/services/api/account/account.service";
                 const authService = this.$container.get<AccountService>(AccountService.name);
                 authService.logout();
                 this.$router.push('/auth');
-            },
-            loading() {
-                this.$router.push('/loading')
             }
         }
     });

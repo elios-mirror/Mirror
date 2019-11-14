@@ -14,4 +14,3 @@ declare namespace NodeJS {
 declare var __static: string;
 
 declare module 'socket.io-client';
-declare module 'melanke-watchjs';

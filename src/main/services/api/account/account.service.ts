@@ -126,7 +126,7 @@ export default class AccountService {
                 this.isAuth.next(true);
                 this.save();
                 this.socketService.send('app.reload');
-                this.loadModules();
+                this.loadAndStartApps();
             }).catch(() => {
                 this.isAuth.next(false);
                 this.connected = connectedAs;
@@ -134,7 +134,7 @@ export default class AccountService {
         })
     }
 
-    loadModules() {
+    loadAndStartApps() {
         this.isReload = true;
         return new Promise((resolve, reject) => {
 
@@ -147,18 +147,18 @@ export default class AccountService {
                             repository: module.module.repository,
                             version: module.version,
                             installId: module.link.id,
+                            name: module.module.name,
                             settings: module.link.settings
                         });
                     }
-                    this.moduleService.loadAll().then(() => {
-                        this.isReload = false;
-                        resolve();
-                    });
+                    this.moduleService.loadAndStartAll();
+                    this.isReload = false;
+                    resolve();
                 }).catch(err => {
                     this.isReload = false;
                     this.isAuth.next(false);
                     reject(err);
-                });;
+                });
             }).catch((err) => {
                 console.error(err);
             })

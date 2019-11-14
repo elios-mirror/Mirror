@@ -1,19 +1,41 @@
-image: node:8
+image: node:12
+
+stages:
+  - test
+  - build
+  - deploy
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
   - node_modules/
 
-
-all_tests:
-  before_script:
-    - ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0
-    - ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libssl.so.1.0.1
-    - ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.0
-    - ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.1
+prepare tests:
+  stage: test
   script:
    - npm install
-   - npm run install:modules
+   - npm rebuild
+
+unit tests:
+  stage: test
+  script:
+  - echo "test"
+
+integration test:
+  stage: test
+  script:
+  - echo "test"
+
+build:
+  stage: build
+  script:
    - npm run build
-   
+
+deploy build:
+  stage: deploy
+  script:
+   - echo "Save artifacts"
+  artifacts:
+    paths:
+    - build/
+    expire_in: 1 week

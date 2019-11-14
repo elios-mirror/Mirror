@@ -28,6 +28,7 @@ export interface ModuleVersionDTO {
 
 export interface MirrorDTO {
     id: string;
+    short_id: string;
     name: string;
     model: string;
     modules: ModuleVersionDTO[];
@@ -37,6 +38,7 @@ export interface RegisterDTO {
     status: string;
     message: string;
     id: string;
+    short_id: string;
     access_token: string;
 }
 
@@ -61,6 +63,7 @@ export default class MirrorService {
 
     register(): Promise<RegisterDTO> {
         return this.apiService.post('/api/mirrors', {
+            name: 'My Awesome Mirror',
             model: this.configService.get().model
         });
     }

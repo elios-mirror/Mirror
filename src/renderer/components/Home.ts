@@ -1,5 +1,5 @@
 import Vue from "vue";
-import ModuleService, { IModule } from "../../main/services/module/module.service";
+import ModuleService, { IModuleRepository } from "../../main/services/module/module.service";
 import '@dattn/dnd-grid/dist/dnd-grid.css';
 import SocketService from '../../main/services/utils/socket.service';
 import Elios from "../../main/elios/elios.controller";
@@ -41,21 +41,27 @@ export default Vue.extend({
       maxRowCount: 37,
       bubbleUp: false,
       margin: 3,
-      widgetObservers: [] as any[],
+      widgetObservers: new Map<string, any>(),
       widgets: {} as any,
       layout: [] as WidgetBox[],
       oldLayout: new Map<string, WidgetBox>()
     };
   },
   mounted() {
+    
     const moduleService = this.$container.get<ModuleService>(ModuleService.name);
     const socketService = this.$container.get<SocketService>(SocketService.name);
     const elios = this.$container.get<Elios>(Elios.name);
+    const accountService = this.$container.get<AccountService>(AccountService.name);
+    
+    accountService.loadAndStartApps().catch((err) => {
+      console.error(err);
+    });    
     this.widgetsSubscribe = elios.getWidgetsSubject().subscribe((widget) => {
-      const module = moduleService.get(widget.id) as any;
+      let module = moduleService.get(widget.id);
       if (module && module.installId === widget.id && module.settings) {
         this.setBothLayout(module.installId, JSON.parse(module.settings));
-      } else {
+      } else if (module != undefined && module.installId === widget.id) {
         this.setBothLayout(module.installId, {
           hidden: false,
           id: widget.id,
@@ -63,26 +69,30 @@ export default Vue.extend({
           position: {
             x: 0,
             y: 0,
-            w: 8,
-            h: 6
+            w: 10,
+            h: 10
           }
         });
       }
       this.$set(this.widgets, widget.id, '')
-      this.widgetObservers.push(widget.html.subscribe((html: string) => {
+      this.widgetObservers.set(widget.id, widget.html.subscribe((html: string) => {
         this.$set(this.widgets, widget.id, html);
       }));
     });
-
-    const modules = moduleService.getAll();
-    for (let moduleInstallId in modules) {
-      const module = modules[moduleInstallId] as IModule;
-      module.start();
-    }
-
+    
     socketService.on('modules.install.end').subscribe((data: any) => {
       if (data.success) {
-        data.module.start();
+        console.log('New module from socket');
+      }
+    });
+
+    socketService.on('modules.uninstall.end').subscribe((data: any) => {
+      if (data.success) {
+        this.$delete(this.widgets, data.app.installId);
+        this.widgetObservers.get(data.app.installId).unsubscribe();
+        this.widgetObservers.delete(data.app.installId);
+        this.deleteBothLayout(data.app.installId);
+        console.log('Need to uninstall module here ' , data.app);
       }
     });
   },
@@ -114,19 +124,29 @@ export default Vue.extend({
 
     beforeDestroy() {
       this.widgetsSubscribe.unsubscribe();
-      this.widgetObservers.forEach(widgetOberver => widgetOberver.unsubscribe());
-      const moduleService = this.$container.get<ModuleService>(ModuleService.name);
-
-      const modules = moduleService.getAll();
-      for (let moduleInstallId in modules) {
-        const module = modules[moduleInstallId] as IModule;
-        module.stop();
-      }
+      this.widgetObservers.forEach(widgetObserver => widgetObserver.unsubscribe());
+      
+      // const moduleService = this.$container.get<ModuleService>(ModuleService.name);
+      // const modules = moduleService.getAll();
+      // for (let moduleInstallId in modules) {
+      //   const module = modules[moduleInstallId] as IModule;
+      //   module.stop();
+      // }
     },
 
     setBothLayout(id: string, wBox: WidgetBox) {
       this.layout.push(wBox);
       this.oldLayout.set(id, wBox);
+    },
+
+    deleteBothLayout(id: string) {;
+      this.oldLayout.delete(id);
+      for (var i = 0; i < this.layout.length; i++) {
+        if (this.layout[i].id === id) {
+          this.layout.splice(i, 1);
+          i--;
+        }
+      }
     }
   }
 });

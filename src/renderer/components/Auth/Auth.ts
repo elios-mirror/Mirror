@@ -13,6 +13,7 @@ export default Vue.extend({
     data() {
         return {
             mirrorId: '',
+            shortMirrorId: '',
             accounts: [] as AccountDTO[],
             accountService: this.$container.get<AccountService>(AccountService.name)
         }
@@ -29,12 +30,14 @@ export default Vue.extend({
         if (cookieService.has('id')) {
             this.mirrorId = cookieService.get('id')
         }
+        if (cookieService.has('short_id')) {
+            this.shortMirrorId = cookieService.get('short_id')
+        }
         this.accountService.getAccounts().forEach((account) => {
             this.accounts.push(account);
         });
         socketIoService.socket.on(`linked_${this.mirrorId}`, (data: LinkedDTO) => {
             this.accountService.add(data.user, data.access_token);
-            this.$router.push('/loading');
         });
     }
 
