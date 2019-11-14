@@ -1,17 +1,11 @@
-image: node:8
+image: node:12
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
   - node_modules/
 
-
 all_tests:
-  before_script:
-    - ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0
-    - ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libssl.so.1.0.1
-    - ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.0
-    - ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.1
   script:
    - npm install
    - npm run build
