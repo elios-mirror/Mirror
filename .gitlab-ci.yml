@@ -6,10 +6,22 @@ cache:
   - node_modules/
 
 install_dependencies:
+  stage: prepare_test
   script:
    - npm install
 
+unit_test:
+  stage: test
+  script:
+  - echo "test"
+
+integration_test:
+  stage: test
+  script:
+  - echo "test"
+
 build:
+  stage: build
   script:
    - npm run build
   artifacts:
