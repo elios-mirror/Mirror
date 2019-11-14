@@ -5,17 +5,18 @@ cache:
   paths:
   - node_modules/
 
-install_dependencies:
-  stage: prepare_test
+prepare tests:
+  stage: test
   script:
    - npm install
+   - npm rebuild
 
-unit_test:
+unit tests:
   stage: test
   script:
   - echo "test"
 
-integration_test:
+integration test:
   stage: test
   script:
   - echo "test"
@@ -24,6 +25,11 @@ build:
   stage: build
   script:
    - npm run build
+
+deploy build:
+  stage: deploy
+  script:
+   - echo "Save artifacts"
   artifacts:
     paths:
     - build/
