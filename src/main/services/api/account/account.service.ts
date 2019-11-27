@@ -16,7 +16,7 @@ export interface AccountDTO {
 
 @injectable()
 export default class AccountService {
-    private isAuth: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private isAuth: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private isReload: boolean = false;
 
     private accounts: Map<string, AccountDTO> = new Map<string, AccountDTO>();

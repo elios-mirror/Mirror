@@ -58,7 +58,7 @@
     "@xkeshi/vue-qrcode": "^1.0.0",
     "axios": "^0.18.1",
     "buefy": "^0.6.6",
-    "elios-protocol": "^1.0.0-beta-9",
+    "elios-protocol": "^1.0.0",
     "inversify": "^4.13.0",
     "js-yaml": "^3.13.1",
     "reflect-metadata": "^0.1.12",

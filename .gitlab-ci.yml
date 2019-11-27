@@ -9,10 +9,8 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
   - node_modules/
-
-prepare tests:
-  stage: test
-  script:
+  
+before_script:
    - npm install
    - npm rebuild
 

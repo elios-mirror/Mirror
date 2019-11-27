@@ -53,7 +53,7 @@ export default Vue.extend({
     const socketService = this.$container.get<SocketService>(SocketService.name);
     const elios = this.$container.get<Elios>(Elios.name);
     const accountService = this.$container.get<AccountService>(AccountService.name);
-    
+
     accountService.loadAndStartApps().catch((err) => {
       console.error(err);
     });    

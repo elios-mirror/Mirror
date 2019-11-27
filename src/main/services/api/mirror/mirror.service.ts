@@ -1,6 +1,7 @@
 import { injectable } from "inversify";
 import ApiService from "../api.service";
 import ConfigService from '../../utils/config.service';
+import CookieService from "../../utils/cookie.service";
 
 export interface ModuleDTO {
     id: string;
@@ -44,7 +45,11 @@ export interface RegisterDTO {
 
 @injectable()
 export default class MirrorService {
-    constructor(private apiService: ApiService, private configService: ConfigService, ) { }
+    constructor(
+        private apiService: ApiService,
+        private configService: ConfigService,
+        private cookieService: CookieService
+    ) { }
 
     get(): Promise<MirrorDTO> {
         return this.apiService.get<MirrorDTO>(`/api/mirror`, {}, true).catch((err) => {
@@ -58,7 +63,12 @@ export default class MirrorService {
     }
 
     setInstallConfig(userId: string, installId: string, settings: any): Promise<ModuleVersionDTO> {
-        return this.apiService.put<ModuleVersionDTO>(`/api/mirror/users/${userId}/modules/${installId}`, {settings: JSON.stringify(settings)}, true);        
+        return this.apiService.put<ModuleVersionDTO>(`/api/mirror/users/${userId}/modules/${installId}`, { settings: JSON.stringify(settings) }, true);
+    }
+
+    getModuleConfig(moduleId: string) {
+        const mirrorId = this.cookieService.get('id');
+        return this.apiService.get<any>(`/api/mirrors/${mirrorId}/${moduleId}/form`);
     }
 
     register(): Promise<RegisterDTO> {

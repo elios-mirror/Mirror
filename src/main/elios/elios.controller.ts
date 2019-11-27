@@ -2,6 +2,9 @@ import { injectable } from "inversify";
 import { Subject, BehaviorSubject } from "rxjs";
 import { IModuleRepository } from "../services/module/module.service";
 import SocketService from "../services/utils/socket.service";
+import MirrorService from "../services/api/mirror/mirror.service";
+import AccountService from "../services/api/account/account.service";
+import CookieService from "../services/utils/cookie.service";
 const { createConnection } = require('elios-protocol');
 
 export interface Widget {
@@ -16,10 +19,14 @@ export default class Elios {
   private _widgetsSubject = new Subject<Widget>();
   private _connection: any;
 
-  constructor(private socketService: SocketService) {
+  constructor(
+    private socketService: SocketService,
+    private cookieService: CookieService,
+    private mirrorService: MirrorService
+  ) {
     this._connection = createConnection(`/tmp/elios_mirror`, 'mirror');
 
-    this._connection.receive((message: string, sender_id: string, command_type: number) => {
+    this._connection.receive((message: string, sender_id: string, command_type: number, reply: (msg: string, cmd: number) => {}) => {
 
       let widget = this._widgets.find((widget) => widget.id === sender_id);
       switch (command_type) {
@@ -52,6 +59,19 @@ export default class Elios {
           }
           console.log('Delete module => ', sender_id);
           this.socketService.send('modules.uninstall.end', { success: true, app: { installId: sender_id } })
+          break;
+        case 4:
+          this.mirrorService.getModules(this.cookieService.get('connected')).then((modules) => {
+            modules.forEach((module) => {
+              if (module.module.name === sender_id) {
+                this.mirrorService.getModuleConfig(module.id).then((data) => {
+                  // console.log(data);
+                  reply("cc", 2);
+                  return;
+                });
+              }
+            })
+          });
           break;
       }
       console.log(`New protocol msg form ${sender_id} command_type=${command_type} => ${message} `);
@@ -89,15 +109,4 @@ export default class Elios {
   quit() {
     this._connection.close();
   }
-
-  // createWidget(args: any) {
-  //     const widget = {
-  //         html: new BehaviorSubject(''),
-  //         id: args.id
-  //     };
-  //     console.log(args);
-  //     this._widgets.push(widget);
-  //     this._widgetsSubject.next(widget)
-  //     return widget;
-  // }
 }
