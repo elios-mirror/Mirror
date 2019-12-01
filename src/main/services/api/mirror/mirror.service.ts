@@ -68,7 +68,7 @@ export default class MirrorService {
 
     getModuleConfig(moduleId: string) {
         const mirrorId = this.cookieService.get('id');
-        return this.apiService.get<any>(`/api/mirrors/${mirrorId}/${moduleId}/form`);
+        return this.apiService.get<any>(`/api/mirrors/${mirrorId}/${moduleId}/form?just_form=true`);
     }
 
     register(): Promise<RegisterDTO> {
