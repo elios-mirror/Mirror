@@ -65,8 +65,7 @@ export default class Elios {
             modules.forEach((module) => {
               if (module.module.name === sender_id) {
                 this.mirrorService.getModuleConfig(module.id).then((data) => {
-                  // console.log(data);
-                  reply("cc", 2);
+                  reply(JSON.stringify(data), 5);
                   return;
                 });
               }
