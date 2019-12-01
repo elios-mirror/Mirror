@@ -3,8 +3,8 @@ import { Subject, BehaviorSubject } from "rxjs";
 import { IModuleRepository } from "../services/module/module.service";
 import SocketService from "../services/utils/socket.service";
 import MirrorService from "../services/api/mirror/mirror.service";
-import AccountService from "../services/api/account/account.service";
 import CookieService from "../services/utils/cookie.service";
+import SocketIoService from "../services/utils/socket-io.service";
 const { createConnection } = require('elios-protocol');
 
 export interface Widget {
@@ -19,11 +19,14 @@ export default class Elios {
   private _widgetsSubject = new Subject<Widget>();
   private _connection: any;
 
+
   constructor(
     private socketService: SocketService,
+    private socketIoService: SocketIoService,
     private cookieService: CookieService,
     private mirrorService: MirrorService
   ) {
+
     this._connection = createConnection(`/tmp/elios_mirror`, 'mirror');
 
     this._connection.receive((message: string, sender_id: string, command_type: number, reply: (msg: string, cmd: number) => {}) => {
@@ -58,6 +61,8 @@ export default class Elios {
             }
           }
           console.log('Delete module => ', sender_id);
+          const mirrorId = cookieService.get('id');
+          this.socketIoService.socket.removeAllListeners(`module_config_updated_${sender_id}_${mirrorId}`);
           this.socketService.send('modules.uninstall.end', { success: true, app: { installId: sender_id } })
           break;
         case 4:
@@ -66,6 +71,11 @@ export default class Elios {
               if (module.module.name === sender_id) {
                 this.mirrorService.getModuleConfig(module.id).then((data) => {
                   reply(JSON.stringify(data), 5);
+                  const mirrorId = cookieService.get('id');
+                  this.socketIoService.socket.on(`module_config_updated_${sender_id}_${mirrorId}`, (socketData: any) => {
+                    reply(socketData.config, 5);
+                    console.log('changed module config', socketData.config);
+                  });
                   return;
                 });
               }
