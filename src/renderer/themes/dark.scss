@@ -42,5 +42,9 @@ $family-sans-serif: "Roboto";
   background: $middle-dark;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
