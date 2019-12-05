@@ -34,8 +34,8 @@ export default Vue.extend({
       modulesSubscribe: null as any,
       widgetsSubscribe: null as any,
       cellSize: {
-        w: 25,
-        h: 25
+        w: 300,
+        h: 200
       },
       maxColumnCount: 68,
       maxRowCount: 37,
